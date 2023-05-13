@@ -17,230 +17,298 @@ body {
     background-color: #1c1c1c;
 }
 
-/* estilo para telas com largura maior ou igual a 768 pixels */
-@media (min-width: 47.938em) {
-    .nav-content {
-        display: flex;
-        width: 100%;
-        height: 5.5em;
-        overflow: hidden;
-        background-color: #333;
-    }
+.nav-content {
+    display: flex;
+    width: 100%;
+    height: 5.5em;
+    overflow: hidden;
+    background-color: #3c3c3c;
+}
 
-    .logo {
-        padding-left: 1.3em;
-    }
+.logo {
+    padding-left: 1.3em;
+}
 
-    .search-bar {
-        width: 76em;
-        height: 100%;
-    }
+.search-bar {
+    width: 76em;
+    height: 100%;
+}
 
-    .search-input {
-        background-color: transparent;
-        width: 100%;
-        height: 100%;
-        padding: 2em;
-        text-align: center;
-        font-size: 1.5em;
-        border: none;
-        outline: none;
-        color: var(--white);
-    }
+.search-input {
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    padding: 2em;
+    text-align: center;
+    font-size: 1.5em;
+    border: none;
+    outline: none;
+    color: var(--white);
+}
 
-    .shopping-cart {
-        padding-left: 1em;
-        align-items: center;
-        display: flex;
-        
-    }
+.shopping-cart {
+    padding-left: 1em;
+    align-items: center;
+    display: flex;
 
-    .shopping-cart a{
-        display: flex;
-        width: 1.9em;
-        height: 1.9em;
-        align-items: center;
-        justify-content: center;
-        border-radius: 10em;
-        background-color: var(--white);
-    }
+}
 
-    .user {
-        padding-left: 1em;
-        align-items: center;
-        display: flex;
-    }
+.shopping-cart a {
+    display: flex;
+    width: 1.9em;
+    height: 1.9em;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10em;
+    background-color: var(--white);
+}
 
-    .user a{
-        display: flex;
-        width: 3.4em;
-        height: 3.4em;
-        align-items: center;
-        justify-content: center;
-        border-radius: 10em;
-        background-color: var(--white);
-    }
+.user {
+    padding-left: 1em;
+    align-items: center;
+    display: flex;
+}
 
-    .gallery {
-        max-height: 75vh;
-    }
+.user a {
+    display: flex;
+    width: 3.4em;
+    height: 3.4em;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10em;
+    background-color: var(--white);
+}
 
-    .item {
-        width: 80%;
-        height: 50vh;
-        margin: .5em;
-        margin-top: 5em;
-        opacity: .4;
-        border-radius: 1em;
-    }
-    
-    .item.is-selected {
-        border-radius: .5em;
-        margin-top: 1em;
-        height: 75vh;
-        opacity: 1;
-    }
+.gallery {
+    max-height: 75vh;
+}
 
-    .flickity-button {
-        background-color: transparent;
-        opacity: .3;
-        transition: .4s ease-in-out;
-    }
+.item {
+    width: 80%;
+    height: 50vh;
+    margin: .5em;
+    margin-top: 5em;
+    opacity: .4;
+    border-radius: 1em;
+}
 
-    .flickity-button:hover {
-        background-color: transparent;
-        opacity: 1;
-    }
+.item.is-selected {
+    border-radius: .5em;
+    margin-top: 1em;
+    height: 75vh;
+    opacity: 1;
+}
 
-    .flickity-prev-next-button {
-        width: 6.25em;
-        height: 6.25em;
-    }
+.flickity-button {
+    background-color: transparent;
+    opacity: .3;
+    transition: .4s ease-in-out;
+}
 
-    .flickity-button-icon {
-        fill: white;
-        background-color: transparent;
-    }
-    
-    .flickity-button:disabled {
-        display: none;
-    }
+.flickity-button:hover {
+    background-color: transparent;
+    opacity: 1;
+}
 
-    .flickity-page-dots {
-        bottom: 3em;
-    }
+.flickity-prev-next-button {
+    width: 6.25em;
+    height: 6.25em;
+}
 
-    .flickity-page-dots .dot {
-        height: 1em;
-        width: 1em;
-        border: 2.5px solid var(--white);
-        margin-left: 3em;
-        border-radius: 1em;
-    }
+.flickity-button-icon {
+    fill: white;
+    background-color: transparent;
+}
 
-    .flickity-page-dots .dot.is-selected {
-        background: var(--white);
-        transition: 1s;
-    }
+.flickity-button:disabled {
+    display: none;
+}
 
-    .carousel.is-fullscreen .carousel-cell {
-        height: 100%;
-    }
+.flickity-page-dots {
+    bottom: 3em;
+}
 
-    .recommendations {
-        overflow: hidden;
-        font-size: .8em;
-        margin: 0 auto;
-        max-width: 75em;
-        padding: 4.5em 0;
-    }
+.flickity-page-dots .dot {
+    height: 1em;
+    width: 1em;
+    border: 2.5px solid var(--white);
+    margin-left: 3em;
+    border-radius: 1em;
+}
 
-    h2 {
-        font-size: 26px;
-        font-weight: 300;
-        margin: 0 0 0 8px;
-        color: aliceblue;
-    }
-    
-    .recommendation-bar {
-        width: 100%;
-        height: 10em;
-        display: flex;
-        overflow: hidden;
-        align-items: center;
-    }
+.flickity-page-dots .dot.is-selected {
+    background: var(--white);
+    transition: 1s;
+}
 
-    .last-search {
-        align-items: baseline;
-        margin: 2em;
-        height: 7em;
-        width: 7em;
-        border-radius: 5em;
-        background-color: transparent;
-        opacity: .5;
-        overflow: hidden;
-        transition: .4s ease-in-out;
-    }
-    
-    .last-search a img { 
-        max-width: auto;
-        max-width: 100%;
-        object-fit: cover;
-    }
-    
-    .last-search:hover {
-        opacity: 1;
-        border: 1px inset var(--white);
-        height: 7.5em;
-        width: 7.5em;
-    }
+.carousel.is-fullscreen .carousel-cell {
+    height: 100%;
+}
 
-    .footer-content {
-        overflow: hidden;
-        height: 16.421em;
-        background-color: rgb(24, 24, 24);
-        padding-top: 4em;
-    }
-    
-    .nav-bounds {
-        display: flex;
-        padding: 0 6.875em;
-        justify-content: space-around;
-    }
-    
-    .nav-footer-access-col {
-        font-size: .8em;
-        display: inline-block;
-        vertical-align: top;
-        line-height: 1.6;
-        width: auto;
-        margin: 2.875em 0;
-    }
-    
-    .nav-footer-title {
-        font-weight: 600;
-        margin: 0 0 5px;
-        margin-bottom: .8em;
-        font-size: .8em;
-        color: #e6e6e6;
-    }
-    
-    .footer-content a, 
-    .footer-content a:visited, 
-    .footer-content a:active, 
-    .footer-content a:link {
-        font-family: "Proxima Nova",-apple-system,Roboto,Arial,sans-serif;
-        color: #999;
-        text-decoration: none;
-        font-size: .84em;
-    }
+.recommendations {
+    overflow: hidden;
+    font-size: .8em;
+    margin: 0 auto;
+    max-width: 75em;
+    padding: 4.5em 0;
+}
 
+h2 {
+    font-size: 26px;
+    font-weight: 300;
+    margin: 0 0 0 8px;
+    color: aliceblue;
+}
+
+.recommendation-bar {
+    width: 100%;
+    height: 10em;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+}
+
+.last-search {
+    align-items: baseline;
+    margin: 2em;
+    height: 7em;
+    width: 7em;
+    border-radius: 5em;
+    background-color: transparent;
+    opacity: .5;
+    overflow: hidden;
+    transition: .4s ease-in-out;
+}
+
+.last-search a img {
+    max-width: auto;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.last-search:hover {
+    opacity: 1;
+    border: 1px inset var(--white);
+    height: 7.5em;
+    width: 7.5em;
+}
+
+.footer-content {
+    overflow: hidden;
+    height: 16.421em;
+    background-color: rgb(24, 24, 24);
+    padding-top: 4em;
+}
+
+.nav-bounds {
+    display: flex;
+    padding: 0 6.875em;
+    justify-content: space-around;
+}
+
+.nav-footer-access-col {
+    font-size: .8em;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 1.6;
+    width: auto;
+    margin: 2.875em 0;
+}
+
+.nav-footer-title {
+    font-weight: 600;
+    margin: 0 0 5px;
+    margin-bottom: .8em;
+    font-size: .8em;
+    color: #e6e6e6;
+}
+
+.footer-content a,
+.footer-content a:visited,
+.footer-content a:active,
+.footer-content a:link {
+    font-family: "Proxima Nova", -apple-system, Roboto, Arial, sans-serif;
+    color: #999;
+    text-decoration: none;
+    font-size: .84em;
 }
 
 /* estilo para telas com largura menor que 768 pixels */
 @media (max-width: 47.938em) {
+    .nav-content {
+        flex-wrap: nowrap;
+        height: 5.5em;
+        padding: 0.5em;
+    }
+    
+    .logo {
+        display: none;
+    }
+    
+    .search-bar {
+        width: 100%;
+        padding: 0.5em;
+    }
+    
+    .search-input {
+        font-size: 1em;
+    }
 
+    .shopping-cart {
+        padding-left: 0.5em;
+    }
+
+    .shopping-cart a {
+        width: 1.6em;
+        height: 1.6em;
+    }
+
+    .user {
+        padding-left: 0.5em;
+    }
+
+    .user a {
+        width: 2.8em;
+        height: 2.8em;
+    }
+
+    .recommendations {
+        padding: 2em 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .recommendation-bar {
+        flex-wrap: nowrap;
+        justify-content: center;
+        height: auto;
+    }
+
+    .last-search {
+        margin: 1em;
+        height: 5em;
+        width: 5em;
+    }
+
+    .footer-content {
+        padding-top: 2em;
+        height: auto;
+    }
+
+    .nav-bounds {
+        flex-wrap: nowrap;
+        padding: 0 1em;
+    }
+
+    .nav-footer-access-col {
+        width: 100%;
+        margin: 1em 0;
+    }
+
+    .flickity-button {
+        display: none;
+    }
 }
-
-
-

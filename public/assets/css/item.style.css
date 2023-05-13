@@ -315,5 +315,24 @@ h2 {
         display: none;
     }
 }
+/*!**********************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/assets/css/buying-item.css ***!
+  \**********************************************************************************/
+* {
+    font-family: Nova,-apple-system,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
+}
 
-/*# sourceMappingURL=init.style.css.map*/
+.main-content {
+    margin: 4em 4em;
+    color: white;
+}
+
+.item-filter {
+    font-size: 14px;
+    color: #999;
+}
+
+.item-name {
+}
+
+/*# sourceMappingURL=item.style.css.map*/

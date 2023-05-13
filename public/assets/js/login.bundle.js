@@ -857,13 +857,13 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!**********************!*\
-  !*** ./src/login.js ***!
-  \**********************/
+/*!*************************!*\
+  !*** ./src/js/login.js ***!
+  \*************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _assets_css_login_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./assets/css/login.css */ "./src/assets/css/login.css");
+/* harmony import */ var _assets_css_login_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/css/login.css */ "./src/assets/css/login.css");
 
 
 })();

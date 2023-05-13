@@ -1,2 +1,2 @@
 import 'regenerator-runtime/runtime';
-import './assets/css/login.css';
+import '../assets/css/login.css';

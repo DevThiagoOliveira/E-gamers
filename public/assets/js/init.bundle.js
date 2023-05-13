@@ -1,10 +1,10 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/modules/Recomendation.js":
-/*!**************************************!*\
-  !*** ./src/modules/Recomendation.js ***!
-  \**************************************/
+/***/ "./src/modules/initialPage/Recomendation.js":
+/*!**************************************************!*\
+  !*** ./src/modules/initialPage/Recomendation.js ***!
+  \**************************************************/
 /***/ (() => {
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -56,6 +56,12 @@ var Recommendation = /*#__PURE__*/function () {
   return Recommendation;
 }();
 var p1 = new Recommendation('roda', 'rodaAro20', "https://source.unsplash.com/random/800x900/?game", '#');
+p1.create();
+p1.create();
+p1.create();
+p1.create();
+p1.create();
+p1.create();
 p1.create();
 
 /***/ }),
@@ -145,13 +151,13 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!************************!*\
-  !*** ./src/initial.js ***!
-  \************************/
+/*!***************************!*\
+  !*** ./src/js/initial.js ***!
+  \***************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _assets_css_init_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./assets/css/init.css */ "./src/assets/css/init.css");
-/* harmony import */ var _modules_Recomendation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/Recomendation */ "./src/modules/Recomendation.js");
-/* harmony import */ var _modules_Recomendation__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_modules_Recomendation__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _modules_initialPage_Recomendation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modules/initialPage/Recomendation */ "./src/modules/initialPage/Recomendation.js");
+/* harmony import */ var _modules_initialPage_Recomendation__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_modules_initialPage_Recomendation__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _assets_css_init_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/css/init.css */ "./src/assets/css/init.css");
 
 
 })();

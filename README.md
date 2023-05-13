@@ -1,4 +1,4 @@
-# E-gammers
+# E-gamers
 
 Site de um ecommerce voltado a categoria de jogos
 

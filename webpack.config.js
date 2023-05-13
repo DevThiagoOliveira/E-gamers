@@ -4,8 +4,10 @@ const miniCssWebpackPlugin = require("mini-css-extract-plugin");
 module.exports = {
   mode: "development", // modelo
   entry: {
-    login: "./src/login.js",
-    init: "./src/initial.js",
+    login: "./src/js/login.js",
+    init: "./src/js/initial.js",
+    search: "./src/js/search.js",
+    item: "./src/js/item.js",
   }, // o arquivo que eu quero que ele vai tomar como padrão
   output: {
     path: path.resolve(__dirname, "public", "assets", "js"), // _dirname: é referente a este arquivo

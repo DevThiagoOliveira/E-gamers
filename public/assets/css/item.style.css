@@ -1,3 +1,7 @@
+/*!**********************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/assets/css/buying-item.css ***!
+  \**********************************************************************************/
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap);
 /*!***************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/assets/css/init.css ***!
   \***************************************************************************/
@@ -315,24 +319,210 @@ h2 {
         display: none;
     }
 }
-/*!**********************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/assets/css/buying-item.css ***!
-  \**********************************************************************************/
+/*!**************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/assets/css/buying-item.css (1) ***!
+  \**************************************************************************************/
 * {
     font-family: Nova,-apple-system,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
 }
 
 .main-content {
-    margin: 4em 4em;
+    margin: 5em 6%;
     color: white;
+    background-color: rgb(24, 24, 24);;
+    padding: 1em;
 }
 
-.item-filter {
-    font-size: 14px;
-    color: #999;
+.head-content {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1em;
+    margin-top: 1em;
 }
 
 .item-name {
+    letter-spacing: 3px;
+    font-weight: 600;
+}
+
+.item-filter {
+    position: relative;
+    font-size: 14px;
+    color: #999;
+    margin-left: .5em;
+    width: 20em;
+}
+
+.buy-content {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.img-item {
+    width: 10em;
+    height: 35em;
+    overflow: hidden;
+}
+
+.img-content {
+    margin-left: 1em;
+    display: flex;
+    padding: 5px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 10em;
+    max-height: 35em;
+}
+
+.img-review {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    width: auto;
+    height: 5em;
+    margin-top: 1em;
+}
+
+.img-review img {
+    object-fit: cover;
+    padding: 5px;
+    width: 6em;
+    height: auto;
+}
+
+.img-review img:hover {
+    border: 1px solid #518a44;
+    border-radius: 5px;
+}
+
+.img {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    max-width: 50em;
+    max-height: 35em;
+    width: 50em;
+    height: 35em;
+}
+
+.img img {
+    margin-top: .5em;
+    width: 40em;
+    height: 27em;
+}
+
+.buy-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30em;
+    height: 35em;
+}
+
+.price {
+    margin-top: .7em;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 62px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.count {
+    margin-top: .5em;
+    letter-spacing: 2.5px;
+}
+
+.buy-layout div {
+    display: flex;
+    align-items: center;
+    margin-top: .5em;
+    width: 10em;
+    height: 4em;
+    border: white 3px solid;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.buy-layout div .add, 
+.buy-layout div .subtract  {
+    max-width: 3em;
+    max-height: 4.5em;
+    width: 1.5em;
+    height: 2em;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    cursor: pointer;
+    font-size: 30px;
+    transition: 300ms ease-in-out;
+}
+
+.buy-layout div .add:hover,
+.buy-layout div .subtract:hover,
+.buttom-buy:hover  {
+    color: black;
+    background-color: white;
+}
+
+.item-quant {
+    font-size: 30px;
+    margin-left: .81em;
+}
+
+.buttom-buy {
+    margin-top: 1.5em;
+    max-width: 10em;
+    max-height: 3.5em;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 15px;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.img-buy, .comment-sealler {
+    display: flex;
+    flex-direction: row;
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 60em;
+    max-height: 30em;
+    width: 100%;
+    height: 30em;
+    padding: 2em;
+}
+
+.descrision {
+    margin-left: 1em;
+    font-size: 30px;
+    align-self: flex-start;
+}
+
+.input-comment {
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-align: start;
+    margin-top: 1em;
+    height: 25em;
+    width: 65em;
+}
+
+.sealler {
+    width: 30em;
+    height: 10em;
+    border: solid 5px black;
 }
 
 /*# sourceMappingURL=item.style.css.map*/

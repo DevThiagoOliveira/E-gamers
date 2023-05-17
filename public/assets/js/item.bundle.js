@@ -62,7 +62,6 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_css_buying_item_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../assets/css/buying-item.css */ "./src/assets/css/buying-item.css");
 
-console.log('asssad');
 })();
 
 /******/ })()

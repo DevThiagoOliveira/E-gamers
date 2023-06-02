@@ -331,7 +331,6 @@ h2 {
     color: white;
     background-color: rgb(24, 24, 24);;
     padding: 1em;
-    height: 100em;
 }
 
 .head-content {
@@ -564,13 +563,13 @@ h2 {
     letter-spacing: 3px;
 }
 
-.footer-content {
+.footer-main-content {
     margin-top: 2em;
     display: flex;
     flex-direction: column;
 }
 
-.footer-content label{
+.footer-main-content label{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -596,6 +595,56 @@ h2 {
     border-radius: 5em;
     font-size: 50px;
     letter-spacing: 2px;
+}
+
+.feedback {
+    margin-left: 5em;
+    margin-top: 5em;
+    max-width: 85%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.user li {
+    position: relative;
+    padding: 2em;
+    display: flex;
+    margin-top: 1em;
+}
+
+.user li img {
+    border: 1px white solid;
+    width: 4.5em;
+    height: 4.5em;
+    border-radius: 10em;
+}
+
+.user li span {
+    position: absolute;
+    font-weight: 600;
+    left: 7.3em;
+    top: 2.5em;
+}
+
+.user li textarea {
+    margin-top: 3.7em;
+    margin-left: 1em;
+    background-color: transparent;
+    color: white;
+    padding: .8em 1.5em;
+    font-size: 15px;
+    border-radius: .3em;
+    min-width: 740px;
+    min-height: 49px;
+    max-height: 404px;
+    max-width: 740px;
+
 }
 
 /*# sourceMappingURL=item.style.css.map*/

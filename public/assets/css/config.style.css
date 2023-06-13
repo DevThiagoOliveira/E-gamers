@@ -1,0 +1,488 @@
+/*!***************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/assets/css/init.css ***!
+  \***************************************************************************/
+:root {
+    --white: white;
+}
+
+* {
+    box-sizing: border-box;
+    outline: 0;
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.5em;
+    text-decoration: none;
+    list-style-type: none;
+}
+
+body {
+    background-color: #1c1c1c;
+}
+
+.nav-content {
+    display: flex;
+    width: 100%;
+    height: 5.5em;
+    overflow: hidden;
+    background-color: #3c3c3c;
+}
+
+.logo {
+    padding-left: 1.3em;
+}
+
+.search-bar {
+    width: 76em;
+    height: 100%;
+}
+
+.search-input {
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    padding: 2em;
+    text-align: center;
+    font-size: 1.5em;
+    border: none;
+    outline: none;
+    color: var(--white);
+}
+
+.shopping-cart {
+    padding-left: 1em;
+    align-items: center;
+    display: flex;
+
+}
+
+.shopping-cart a {
+    display: flex;
+    width: 1.9em;
+    height: 1.9em;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10em;
+    background-color: var(--white);
+}
+
+.user {
+    padding-left: 1em;
+    align-items: center;
+    display: flex;
+}
+
+.user a {
+    display: flex;
+    width: 3.4em;
+    height: 3.4em;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10em;
+    background-color: var(--white);
+}
+
+.gallery {
+    max-height: 75vh;
+}
+
+.item {
+    width: 80%;
+    height: 50vh;
+    margin: .5em;
+    margin-top: 5em;
+    opacity: .4;
+    border-radius: 1em;
+}
+
+.item.is-selected {
+    border-radius: .5em;
+    margin-top: 1em;
+    height: 75vh;
+    opacity: 1;
+}
+
+.flickity-button {
+    background-color: transparent;
+    opacity: .3;
+    transition: .4s ease-in-out;
+}
+
+.flickity-button:hover {
+    background-color: transparent;
+    opacity: 1;
+}
+
+.flickity-prev-next-button {
+    width: 6.25em;
+    height: 6.25em;
+}
+
+.flickity-button-icon {
+    fill: white;
+    background-color: transparent;
+}
+
+.flickity-button:disabled {
+    display: none;
+}
+
+.flickity-page-dots {
+    bottom: 3em;
+}
+
+.flickity-page-dots .dot {
+    height: 1em;
+    width: 1em;
+    border: 2.5px solid var(--white);
+    margin-left: 3em;
+    border-radius: 1em;
+}
+
+.flickity-page-dots .dot.is-selected {
+    background: var(--white);
+    transition: 1s;
+}
+
+.carousel.is-fullscreen .carousel-cell {
+    height: 100%;
+}
+
+.recommendations {
+    overflow: hidden;
+    font-size: .8em;
+    margin: 0 auto;
+    max-width: 75em;
+    padding: 4.5em 0;
+}
+
+h2 {
+    font-size: 26px;
+    font-weight: 300;
+    margin: 0 0 0 8px;
+    color: aliceblue;
+}
+
+.recommendation-bar {
+    width: 100%;
+    height: 10em;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+}
+
+.last-search {
+    align-items: baseline;
+    margin: 2em;
+    height: 7em;
+    width: 7em;
+    border-radius: 5em;
+    background-color: transparent;
+    opacity: .5;
+    overflow: hidden;
+    transition: .4s ease-in-out;
+}
+
+.last-search a img {
+    max-width: auto;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.last-search:hover {
+    opacity: 1;
+    border: 1px inset var(--white);
+    height: 7.5em;
+    width: 7.5em;
+}
+
+.footer-content {
+    overflow: hidden;
+    height: 16.421em;
+    background-color: rgb(24, 24, 24);
+    padding-top: 4em;
+}
+
+.nav-bounds {
+    display: flex;
+    padding: 0 6.875em;
+    justify-content: space-around;
+}
+
+.nav-footer-access-col {
+    font-size: .8em;
+    display: inline-block;
+    vertical-align: top;
+    line-height: 1.6;
+    width: auto;
+    margin: 2.875em 0;
+}
+
+.nav-footer-title {
+    font-weight: 600;
+    margin: 0 0 5px;
+    margin-bottom: .8em;
+    font-size: .8em;
+    color: #e6e6e6;
+}
+
+.footer-content a,
+.footer-content a:visited,
+.footer-content a:active,
+.footer-content a:link {
+    font-family: "Proxima Nova", -apple-system, Roboto, Arial, sans-serif;
+    color: #999;
+    text-decoration: none;
+    font-size: .84em;
+}
+
+/* estilo para telas com largura menor que 768 pixels */
+@media (max-width: 47.938em) {
+    .nav-content {
+        flex-wrap: nowrap;
+        height: 5.5em;
+        padding: 0.5em;
+    }
+    
+    .logo {
+        display: none;
+    }
+    
+    .search-bar {
+        width: 100%;
+        padding: 0.5em;
+    }
+    
+    .search-input {
+        font-size: 1em;
+    }
+
+    .shopping-cart {
+        padding-left: 0.5em;
+    }
+
+    .shopping-cart a {
+        width: 1.6em;
+        height: 1.6em;
+    }
+
+    .user {
+        padding-left: 0.5em;
+    }
+
+    .user a {
+        width: 2.8em;
+        height: 2.8em;
+    }
+
+    .recommendations {
+        padding: 2em 0;
+    }
+
+    h2 {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .recommendation-bar {
+        flex-wrap: nowrap;
+        justify-content: center;
+        height: auto;
+    }
+
+    .last-search {
+        margin: 1em;
+        height: 5em;
+        width: 5em;
+    }
+
+    .footer-content {
+        padding-top: 2em;
+        height: auto;
+    }
+
+    .nav-bounds {
+        flex-wrap: nowrap;
+        padding: 0 1em;
+    }
+
+    .nav-footer-access-col {
+        width: 100%;
+        margin: 1em 0;
+    }
+
+    .flickity-button {
+        display: none;
+    }
+}
+/*!*****************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/assets/css/config.css ***!
+  \*****************************************************************************/
+:root {
+    --white: white;
+}
+
+body {
+    background-color: var(--white);
+}
+
+.main-content {
+    margin: 1em;
+    display: grid;
+    grid-template-columns: 27em 65.4em;
+}
+
+.config-content {
+    background-color: #1c1c1c;
+    border-radius: .8em;
+    max-height: 100%;
+    max-width: 100%;
+    height: 60em;
+    width: 27em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.perfil-img {
+    border-radius: 10em;
+    margin-top: 3em;
+    max-height: 100%;
+    max-width: 100%;
+    height: 9em;
+    width: 9em;
+    border: white 1px solid;
+}
+
+.perfil-name {
+    margin-top: .4em;
+    font-size: 1.5em;
+    color: var(--white);
+    font-weight: 600;
+    object-fit: cover;
+}
+
+.wallet {
+    margin-top: .3em;
+    font-size: 2em;
+    color: var(--white);
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+
+button {
+    margin-top: 1em;
+    height: 3em;
+    width: 13em;
+    border: 2px solid black;
+    font-size: 1.5em;
+    border-radius: .8em;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(139, 139, 139);
+}
+
+.exit {
+    margin-top: 9.7em;
+    justify-self: flex-end;
+    background-color: #ff3232;
+}
+
+.exit:hover {
+    background-color: #862323;
+}
+
+.consult-bar {
+    border: black 1.7px solid;
+    border-radius: .7em;
+    width: 15em;
+    height: 2.7em;
+    margin-top: 1em;
+    margin-left: 1em;
+    padding: 1em;
+    text-align: center;
+    transition: 500ms ease-in-out;
+}
+
+.consult-bar:focus {
+    width: 30em;
+}
+
+.second-grid {
+    display: flex;
+    max-height: 100em;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    margin-left: .5em;
+    overflow: hidden;
+}
+
+.item-layout .page-label {
+    display: flex;
+    font-size: 25.5px;
+    letter-spacing: 1.2px;
+    justify-content: center;
+    align-items: center;
+    height: 2em;
+    width: 96%;
+    margin-left: 1em;
+    border-bottom: #1c1c1c 2px solid;
+    font-weight: 600;
+}
+
+.itens {
+    padding: 1em;
+}
+
+.itens ul{
+    display: flex;
+    flex-direction: column;
+}
+
+.itens ul .layout-item {
+    display: flex;
+    margin: .5em;
+    padding: 1em;
+    max-width: 63em;
+    max-height: 10em;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    opacity: .85;
+}
+
+.itens ul .layout-item:hover {
+    border-radius: .5em;
+    background-color: rgba(223, 223, 223, 0.774);
+    opacity: 1;
+}
+
+.itens ul .layout-item .imagem-product {
+    max-width: 10em;
+    max-height: 10em;
+    height: 100%;
+    width: 100%;
+    border-radius: .8em;
+}
+
+.itens ul .layout-item .product-label {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    height: 100%;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.spacing {
+    display: flex;
+    margin-top: .5em;
+    margin-bottom: .5em;
+    width: 100%;
+    border-bottom: #1c1c1c 1.8px solid;
+}
+
+/*# sourceMappingURL=config.style.css.map*/

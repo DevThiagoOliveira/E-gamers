@@ -13,19 +13,20 @@
 <body>
     <main class="container">
         <img src="../../src/assets/img/Sprite-0001.png" alt="Logo">
-        <form  method="post" action="../src/modules/login.js">
+        <form id="formLogin">
             <h2>Login</h2>
 
-            <input type="text" placeholder="Usuário" id="usuario-input">
+            <input type="text" title="Login Usuário" placeholder="Usuário" id="usuario-input">
 
-            <input type="password" placeholder="Senha" id="senha-input">
+            <input type="password" title="Senha Usuário" placeholder="Senha" id="senha-input">
 
-            <button type="submit" class="enviar-button">Enviar</button>
+            <button type="submit" class="button-send">Enviar</button>
             
             <p>ainda não tem conta ?</p>
-            <a href="">Registrar</a>
+            <a href="register.html">Registrar</a>
         </form>
     </main>
+    
     <script src="../assets/js/login.bundle.js"></script>
 </body>
 </html>

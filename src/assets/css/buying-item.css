@@ -285,34 +285,34 @@
     overflow: hidden;
 }
 
-.user {
+.feedback-user {
     display: flex;
     flex-direction: column;
     align-items: start;
 }
 
-.user li {
+.feedback-user li {
     position: relative;
     padding: 2em;
     display: flex;
     margin-top: 1em;
 }
 
-.user li img {
+.feedback-user li img {
     border: 1px white solid;
     width: 4.5em;
     height: 4.5em;
     border-radius: 10em;
 }
 
-.user li span {
+.feedback-user li span {
     position: absolute;
     font-weight: 600;
     left: 7.3em;
     top: 2.5em;
 }
 
-.user li textarea {
+.feedback-user li textarea {
     margin-top: 3.7em;
     margin-left: 1em;
     background-color: transparent;

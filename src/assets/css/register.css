@@ -1,0 +1,68 @@
+@import 'login.css';
+
+input[type="email"],
+input[type="tel"] {
+    border-radius: 5px;
+    display: block;
+    margin: 1em auto;
+    padding: .8em;
+    width: 90%;
+    border: 1px solid rgb(105, 100, 100);
+}
+
+form {
+    max-width: 45em;
+    width: 100%;
+    padding: 1.5em;
+}
+
+label {
+    margin-top: 1.5em;
+}
+
+label {
+    margin-left: 2em;
+}
+
+label ~ label {
+    display: flex;
+    font-weight: bold;
+    margin-top: 1.5em;
+}
+
+.text-error {
+    display: flex;
+    margin-left: 3em;
+    font-size: 12px;
+    color: rgb(214, 11, 11);
+    margin-top: -1em;
+    padding: 5px;
+}
+/* estilo para telas com largura menor que 768 pixels */
+@media (max-width: 767px) {
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="tel"] {
+        border-radius: 5px;
+        display: block;
+        margin: 1em auto;
+        padding: .8em;
+        width: 90%;
+        border: 1px solid rgb(105, 100, 100);
+    }
+
+    .text-error {
+        display: flex;
+        margin-left: 3em;
+        font-size: 12px;
+        color: #b82b12;
+        margin-top: -1em;
+        padding: 5px;
+    }
+    
+    label {
+        margin-left: 2em;
+    }
+}

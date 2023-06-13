@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/register.style.css">
+    <title>E-Gamers</title>
+</head>
+<body>
+    <main class="container">
+        <img src="../../src/assets/img/Sprite-0001.png" alt="Logo">
+        <form id="formRegister">
+            <label for="firstName">Nome *</label>
+            <input type="text" class="firstName validate" placeholder="Marcos" id="firstName">
+
+            <label for="lastName">Sobrenome *</label>
+            <input type="text" class="lasName validate" placeholder="Oliveira" id="lastName"> 
+
+            <label for="cpf">CPF</label>
+            <input type="text" class="cpf" placeholder="123.456.789-11" id="cpf">
+
+            <label for="phone">Telefone</label>
+            <input type="tel" class="phone" placeholder="(xx) xxxxx-xxxx" id="phone">
+
+            <label for="email">Email *</label>
+            <input type="email" class="email validate" placeholder="fulano@gmail.com" id="email">
+
+            <label for="user">Usuário</label>
+            <input type="text" class="user" placeholder="Fulano" id="user">
+
+            <label for="password">Senha *</label>
+            <input type="password" class="password validate" placeholder="123456" id="password">
+
+            <label for="repet-password">Repetir Senha * </label>
+            <input type="password" class="repet-password validate" placeholder="123456" id="repet-password">
+            
+            <button type="submit">Enviar</button>
+        </form>
+        
+    </main>
+    
+    <script src="../assets/js/register.bundle.js"></script>
+</body>
+</html>

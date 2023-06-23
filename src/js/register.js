@@ -3,48 +3,41 @@ import '../assets/css/register.css';
 import { ValidarFormulario } from '../modules/loginRegister/validarFormulario';
 
 // html tags
-const formulario = document.querySelector('#formRegister');
-const important = document.querySelector('.important');
-
-let object = {
-    nome: 'Thiago',
-    sobrenome: 'Augusto',
-    idade: '22'
-}
+const registerForm = document.querySelector('#formRegister');
 
 // validação
-const formValidation = new ValidarFormulario(formulario);
-console.log(formulario);
+const formValidation = new ValidarFormulario(registerForm);
 
-// conexão com Banco de dados | PHP
-formulario.addEventListener('submit', (element) => {
-    element.preventDefault();
+// integração com PHP
+registerForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-    const formData = new FormData(this); // envia todos os parametros do formulario
-    const searchParams = new URLSearchParams();
+    const formData = new FormData(registerForm);
+    const jsonData = {};
 
-
-    
-    for (const param of searchParams) {
-        searchParams.append(param[0], param[1]);
-        console.log(param[0], param[1]);
+    for (const [name, value] of formData.entries()) {
+        jsonData[name] = value;
     }
 
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(jsonData)
+    };
 
-    // fetch('register.php', {
-    //     method: 'POST',
-    //     body: {data: object},
-    // })
+    try {
+        const response = await fetch('../../src/php/register.php', requestOptions);
     
-    // fetch('../php/register.php', {
-    //     method: 'POST',
-    //     body: formData
-    // })
-    // .then(response => {
-    //     return console.log('dados gravados com sucesso');
-    //     // return window.location.href('../../public/html/index.html');
-    // })
-    // .catch(error => {
-    //     console.log(error);
-    // });
+        if (!response.ok) {
+            throw new Error('Erro na solicitação. Código de status: ' + response.status);
+        }
+    
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error);
+    }
+    
 });

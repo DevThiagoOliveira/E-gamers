@@ -8,38 +8,39 @@
     <title>E-Gamers</title>
 </head>
 <body>
+    
     <main class="container">
         <img src="../../src/assets/img/Sprite-0001.png" alt="Logo">
-        <form id="formRegister">
+        <form action="../../src/php/register.php" id="formRegister">
             <label for="firstName">Nome *</label>
-            <input type="text" class="firstName validate" placeholder="Marcos" id="firstName">
+            <input name="firstName" type="text" class="firstName validate" placeholder="Marcos" id="firstName" value="Thiago">
 
             <label for="lastName">Sobrenome *</label>
-            <input type="text" class="lasName validate" placeholder="Oliveira" id="lastName"> 
+            <input name="lastName" type="text" class="lasName validate" placeholder="Oliveira" id="lastName" value="Augusto">
 
             <label for="cpf">CPF</label>
-            <input type="text" class="cpf" placeholder="123.456.789-11" id="cpf">
+            <input name="cpf" type="text" class="cpf" placeholder="123.456.789-11" id="cpf">
 
             <label for="phone">Telefone</label>
-            <input type="tel" class="phone" placeholder="(xx) xxxxx-xxxx" id="phone">
+            <input name="phone" type="tel" class="phone" placeholder="(xx) xxxxx-xxxx" id="phone">
 
             <label for="email">Email *</label>
-            <input type="email" class="email validate" placeholder="fulano@gmail.com" id="email">
+            <input name="email" type="email" class="email validate" placeholder="fulano@gmail.com" id="email" value="fulano@gmail.com">
 
             <label for="user">Usuário</label>
-            <input type="text" class="user" placeholder="Fulano" id="user">
+            <input name="user" type="text" class="user" placeholder="Fulano"  id="user">
 
             <label for="password">Senha *</label>
-            <input type="password" class="password validate" placeholder="123456" id="password">
+            <input name="password" type="password" class="password validate" placeholder="123456" id="password" value="123456">
 
             <label for="repet-password">Repetir Senha * </label>
-            <input type="password" class="repet-password validate" placeholder="123456" id="repet-password">
+            <input name="repet-password" type="password" class="repet-password validate" placeholder="123456" id="repet-password" value="123456">
             
             <button type="submit">Enviar</button>
         </form>
-        
     </main>
     
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="../assets/js/register.bundle.js"></script>
 </body>
 </html>

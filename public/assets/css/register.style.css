@@ -53,7 +53,7 @@
 
     button[type="submit"] {
         background-color: #12b886;
-        border: .5px solid black;
+        border: .5px solid #064935;
         border-radius: .6rem;
         color: white;
         display: block;
@@ -131,7 +131,7 @@
 
     button[type="submit"] {
         background-color: #12b886;
-        border: 1px solid black;
+        border: 1px solid #064935;
         border-radius: .6rem;
         color: black;
         display: block;

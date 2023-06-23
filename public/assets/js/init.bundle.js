@@ -57,12 +57,6 @@ var Recommendation = /*#__PURE__*/function () {
 }();
 var p1 = new Recommendation('roda', 'rodaAro20', "https://source.unsplash.com/random/800x900/?game", '#');
 p1.create();
-p1.create();
-p1.create();
-p1.create();
-p1.create();
-p1.create();
-p1.create();
 
 /***/ }),
 

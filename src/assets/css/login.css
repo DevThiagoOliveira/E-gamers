@@ -72,6 +72,14 @@
         color: #558b0d;
     }
 }
+.text-error {
+    display: flex;
+    margin-left: 3em;
+    font-size: 12px;
+    color: rgb(214, 11, 11);
+    margin-top: -1em;
+    padding: 5px;
+}
 
 /* estilo para telas com largura maior ou igual a 768 pixels */
 @media (min-width: 768px) {
@@ -154,5 +162,14 @@
 
     a:visited {
         color: #558b0d;
+    }
+    
+    .text-error {
+        display: flex;
+        margin-left: 3em;
+        font-size: 12px;
+        color: rgb(214, 11, 11);
+        margin-top: -1em;
+        padding: 5px;
     }
 }

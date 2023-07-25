@@ -19,10 +19,7 @@
                     <input type="text" class="search-input" placeholder="Pesquisar...">
                 </div>
                 <div class="shopping-cart">
-                    <a href=""><i class="fa-regular fa-cart-shopping fa-xs" style="color: #000000;"></i></a>
-                </div>
-                <div class="user">
-                    <a href=""><i class="fa-solid fa-user fa-lg" style="color: #000000;"></i></a>
+                    <a href=""><i class="fa-regular fa-cart-shopping fa-xs" style="color: #fff;"></i></a>
                 </div>
             </div>
         </nav>
@@ -31,18 +28,43 @@
     <main>
         <div class="main-content">
             <div class="config-content">
-                <img class="perfil-img" src="https://source.unsplash.com/random/800x600/?perfil">
-                <span class="perfil-name">Thiago</span>
-                <span class="wallet">R$20,00</span>
+                <div class="perfil-img">
+                    
+                </div>
+                <span class="perfil-name"></span>
+                <span class="wallet">R$ 00,00</span>
                 <button class="selling">Venda</button>
                 <button class="buy">Compra</button>
                 <button class="config">Configuração</button>
                 <button class="exit">Sair</button>
             </div>
             <div class="second-grid">
-                <input class="consult-bar" type="text" placeholder="pesquisa">
+                <div class="first-colum">
+                    <input class="consult-bar" type="text" placeholder="pesquisa">
+                    <button class="button-add">Adicionar</button>
+                </div>
+
+                <div class="popup-container" id="popup">
+                    <div class="popup">
+                        <form action="">
+                            <h2 class="layout-h2">Adicionar Produto</h2>
+                            <label class="picture" tabindex="0">
+                                <input type="file" accept="image/*" class="picture__input">
+                                <span class="picture__image"></span>
+                            </label>
+                            <input class="nome" type="text" placeholder="Nome">
+                            <input class="categoria" type="text" placeholder="Categoria">
+                            <input class="preco" type="number" placeholder="Preço">
+                            <input class="quantidade" type="number" placeholder="Quantidade">
+                            <textarea class="Descricao" placeholder="Descrição"></textarea>
+                            <button class="add-product">Adicionar</button>
+                            <button class="close-popup">Cancelar</button>
+                        </form>
+                    </div>
+                </div>
+
                 <div class="item-layout">
-                    <span class="page-label">Minhas Vendas</span>
+                    <span class="page-label">Minha Conta</span>
                 </div>
                 <div class="itens">
                     <table>

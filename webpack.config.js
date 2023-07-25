@@ -1,11 +1,12 @@
 const path = require("path"); // variavel necessaria para poder utilizar o path.resolve(); | esté estilo é padrão do node const constante = require(); | e o nome da constante é igual ao nome do modulo que você precisa
 const miniCssWebpackPlugin = require("mini-css-extract-plugin");
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
   mode: "development", // modelo
   entry: {
+    home: "./src/js/home.js",
     login: "./src/js/login.js",
-    init: "./src/js/initial.js",
     search: "./src/js/search.js",
     item: "./src/js/item.js",
     config:  "./src/js/config.js",
@@ -44,6 +45,12 @@ module.exports = {
     new miniCssWebpackPlugin({
       filename: "../css/[name].style.css",
     }),
+    new BrowserSyncPlugin({
+      host: 'localhost',
+      port: 3000,
+      files: ['./public/html/*.html', './public/assets/css/*.style.css', './src/php/*.php'],
+      proxy: 'http://localhost/E-gamers/'
+    })
   ],
   devtool: "source-map", // ele informa aonde no seu arquivo aconteceu o erro, se você não colocar ele vai apontar o erro no arquivo bundle exemplo tenho 35 arquivo deu um erro em um deles chamado pessoa, ele vai apontar o erro no bundle linha 6981, então vai ter que fazer conta para saber qual dos seus aarquivo que ocorreu o erro
 };

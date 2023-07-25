@@ -1,5 +1,5 @@
 /*!***************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/assets/css/init.css ***!
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/assets/css/home.css ***!
   \***************************************************************************/
 :root {
     --white: white;
@@ -30,6 +30,7 @@ body {
 
 .logo {
     padding-left: 1.3em;
+    cursor: pointer;
 }
 
 .search-bar {
@@ -63,16 +64,29 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 10em;
-    background-color: var(--white);
+    background-color: transparent;
+    border: 2px solid var(--white);
+    transition: background-color 0.3s ease;
+}
+
+.shopping-cart a:hover {
+    border: 2px solid black;
+    background-color: black
+}
+
+.shopping-cart a:hover {
+    color: black;
 }
 
 .user {
-    padding-left: 1em;
-    align-items: center;
     display: flex;
+    justify-content: center;
+    align-items: space-around;
+    justify-content: center;
+    padding: 0.5em;
 }
 
-.user a {
+.user .profile-icon {
     display: flex;
     width: 3.4em;
     height: 3.4em;
@@ -236,6 +250,62 @@ h2 {
     font-size: .84em;
 }
 
+.profile-icon {
+    justify-content: center;
+    max-width: 1.9em;
+    max-height: 1.9em;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #FFF;
+    color: #000000;
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
+}
+
+.initials {
+    display: block;
+    font-size: 23px;
+    text-align: center;
+}
+
+.user {
+    align-items: center;
+    margin-left: .5em;
+}
+
+.user button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em .7em;
+    margin-right: 1em;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    border: 2px solid #fff;
+    border-radius: .3em;
+    max-height: 2.9em;
+    max-width: 6em;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+    
+}
+
+.user button.login:hover {
+    border: 2px solid #77b02a;
+    background-color: #77b02a;
+}
+
+.user button.register:hover { 
+    border: 2px solid #3c6608;
+    background-color: #3c6608;
+}
+
 /* estilo para telas com largura menor que 768 pixels */
 @media (max-width: 47.938em) {
     .nav-content {
@@ -270,7 +340,7 @@ h2 {
         padding-left: 0.5em;
     }
 
-    .user a {
+    .user .profile-icon {
         width: 2.8em;
         height: 2.8em;
     }

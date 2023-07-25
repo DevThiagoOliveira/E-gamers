@@ -36,6 +36,3 @@ class Recommendation {
         return ul.appendChild(li);
     }
 }
-
-const p1 = new Recommendation('roda', 'rodaAro20', "https://source.unsplash.com/random/800x900/?game", '#');
-p1.create();

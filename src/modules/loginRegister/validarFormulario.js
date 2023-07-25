@@ -1,8 +1,9 @@
-import { CPF } from "./cpfValidatorClasse";
+import { CPF } from './cpfValidatorClasse';
+import erro from '../ferramentas/tools';
 
 export class ValidarFormulario {
-    constructor() {
-        this.form = document.querySelector('#formRegister');
+    constructor(formulario) {
+        this.form = document.querySelector(formulario);
         this.events();
     }
 
@@ -13,13 +14,15 @@ export class ValidarFormulario {
     }
 
     handleSubmit(submitButton) {
-        submitButton.preventDefault();
+        let retorno = false;
         const formValido = this.camposValidos();
         const senhasValidas = this.senhasValidas();
-
-        if(formValido && senhasValidas) {
-            // this.form.submit();
+        
+        if(formValido === true && senhasValidas === true) {
+            retorno = true;
         }
+        
+        return retorno;
     }
 
     camposValidos() {
@@ -34,7 +37,7 @@ export class ValidarFormulario {
             const label = input.previousElementSibling.innerText;
 
             if(!input.value) {
-                this.criaErro(input, `Campo "${label}" não pode estar em branco`);
+                erro(input, `Campo "${label}" não pode estar em branco`);
                 valid = false;
             }
 
@@ -57,13 +60,13 @@ export class ValidarFormulario {
         const repetirSenha = this.form.querySelector('.repet-password');
 
         if(senha.value.length < 6 || senha.value.length > 12) {
-            this.criaErro(senha, 'A senha deverá ter entre 6 a 12 caracteres');
+            erro(senha, 'A senha deverá ter entre 6 a 12 caracteres');
             valid = false;
         }
 
         if(senha.value !== repetirSenha.value) {
-            this.criaErro(senha, 'As senhas precisam ser iguais');
-            this.criaErro(repetirSenha, 'As senhas precisam ser iguais');
+            erro(senha, 'As senhas precisam ser iguais');
+            erro(repetirSenha, 'As senhas precisam ser iguais');
             valid = false;
         }
 
@@ -74,7 +77,7 @@ export class ValidarFormulario {
         const cpf = new CPF(inputCPF.value);
         
         if(!cpf.validator()) {
-            this.criaErro(inputCPF, 'CPF Inválido')
+            erro(inputCPF, 'CPF Inválido')
             return false;
         }
 
@@ -85,22 +88,15 @@ export class ValidarFormulario {
         const usuario = inputUsuario.value;
 
         if(usuario.length > 12 || usuario.length < 3) {
-            this.criaErro(inputUsuario, 'O usuário deverá ter entre 3 a 12 caracteres');
+            erro(inputUsuario, 'O usuário deverá ter entre 3 a 12 caracteres');
             return false
         };
 
         if(!usuario.match(/^[a-zA-Z0-9]+$/g)) { // /^[a-zA-Z0-9]$/g) faz com que ele pegue tudo que eu informo dentro do [] o + ele faz repetidas vezes invez de 1
-            this.criaErro(inputUsuario, 'Nome do usuário deverá conter somente letras e/ou números ');
+            erro(inputUsuario, 'Nome do usuário deverá conter somente letras e/ou números ');
             return false;
         }
 
         return true;
-    }
-
-    criaErro(input, mensagem) {
-        const div = document.createElement('div');
-        div.innerText = mensagem;
-        div.classList.add('text-error');
-        input.insertAdjacentElement('afterend', div);
     }
 }

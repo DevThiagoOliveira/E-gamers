@@ -10,7 +10,7 @@ module.exports = {
     search: "./src/js/search.js",
     item: "./src/js/item.js",
     config:  "./src/js/config.js",
-    register: "./src/js/register.js",
+    register: "./src/js/register.js"
   }, // o arquivo que eu quero que ele vai tomar como padrão
   output: {
     path: path.resolve(__dirname, "public", "assets", "js"), // _dirname: é referente a este arquivo

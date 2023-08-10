@@ -12,6 +12,10 @@
     text-decoration: none;
 }
 
+.logo {
+    cursor: pointer;
+}
+
 /* estilo para telas com largura menor que 768 pixels */
 @media (max-width: 767px) {
     h2 {

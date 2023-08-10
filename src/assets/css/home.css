@@ -208,10 +208,15 @@ h2 {
 }
 
 .footer-content {
+    position: relative; /* Use relative para o elemento pai envolvente */
+    clear: both; /* Limpa floats para garantir o posicionamento correto do footer */
+    margin-top: 12.95em; /* Adicione margem para separar o conteúdo da parte inferior da página */
+
     overflow: hidden;
-    height: 16.421em;
     background-color: rgb(24, 24, 24);
-    padding-top: 4em;
+    padding: 4em 0;
+    text-align: center;
+    color: white;
 }
 
 .nav-bounds {

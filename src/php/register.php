@@ -6,7 +6,7 @@ include_once("conexao.php");
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jsonData = json_decode(file_get_contents('php://input'), true);
 
-    // Aqui você pode acessar os dados enviados pelo JavaScript
+    // Dados enviados pelo JavaScript
     $nome_usuario = strtolower($jsonData['firstName'] . $jsonData['lastName']);
     
     $cpf = $jsonData['cpf'];

@@ -8,4 +8,3 @@ $stmt = $connection->query($query);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 echo json_encode(array('usuarios' => $result));
-?>

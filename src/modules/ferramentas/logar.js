@@ -21,7 +21,7 @@ export default class Login {
 
     this.loginForm.addEventListener("submit", (element) => {
       element.preventDefault();
-
+      
       for (const errorText of this.loginForm.querySelectorAll(".text-error")) {
         errorText.remove();
       }
@@ -40,10 +40,6 @@ export default class Login {
         .login()
         .then((logado) => {
             if (logado) {
-                // Salvar os dados no Local Storage
-                sessionStorage.setItem('username', this.username.value);
-                sessionStorage.setItem('status', true);
-
                 window.location.href = "http://localhost:3000/E-gamers/public/html";
                 return;
             }

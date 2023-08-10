@@ -211,10 +211,15 @@ h2 {
 }
 
 .footer-content {
+    position: relative; /* Use relative para o elemento pai envolvente */
+    clear: both; /* Limpa floats para garantir o posicionamento correto do footer */
+    margin-top: 12.95em; /* Adicione margem para separar o conteúdo da parte inferior da página */
+
     overflow: hidden;
-    height: 16.421em;
     background-color: rgb(24, 24, 24);
-    padding-top: 4em;
+    padding: 4em 0;
+    text-align: center;
+    color: white;
 }
 
 .nav-bounds {
@@ -533,11 +538,29 @@ button:hover {
 .itens ul{
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap; /* Impede que os itens quebrem para a próxima linha */
+    overflow-x: none;
+    overflow-y: auto;
+    max-width: 100%;
+    max-height: 42em;
+}
+
+.itens ul::-webkit-scrollbar {
+    width: .6em;
+}
+  
+.itens ul::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+}
+  
+.itens ul::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
 }
 
 .itens ul .layout-item {
     display: flex;
-    margin: .5em;
+    margin: .1em .0;
     padding: 1em;
     max-width: 100%;
     max-height: 10em;
@@ -568,14 +591,6 @@ button:hover {
     height: 100%;
     font-size: 20px;
     font-weight: 600;
-}
-
-.spacing {
-    display: flex;
-    margin-top: .5em;
-    margin-bottom: .5em;
-    width: 100%;
-    border-bottom: #1c1c1c 1.8px solid;
 }
 
 .first-colum {
@@ -853,7 +868,7 @@ button:hover {
         max-width: 7em;
         text-align: center; /* Centralize o texto */
         margin-top: 0.5em; /* Adicione espaço acima do texto */
-      }
-  }
+    }
+}
 
 /*# sourceMappingURL=config.style.css.map*/

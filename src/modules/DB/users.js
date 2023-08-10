@@ -8,7 +8,7 @@ export default class User {
 
   login() {
     try {
-      return fetch('http://localhost:3000/E-gamers/src/php/usuários.php')
+      return fetch('http://localhost:3000/E-gamers/src/php/usuarios.php')
         .then(response => response.json())
         .then(data => {
           const result = [];
@@ -38,7 +38,10 @@ export default class User {
       usuarios.forEach(element => {
 
         for (const index of element) {
-          if ((index.login === this.username.value) && (index.senha === this.password.value)) {
+          if ((index.login === this.username.value.toLowerCase()) && (index.senha === this.password.value.toLowerCase())) {
+            sessionStorage.setItem('id_usuario', index.id_usuario);
+            sessionStorage.setItem('username', index.login);
+            sessionStorage.setItem('status', true);
             valid = true;
           } else {
             erro(this.username, "Usuário ou senha errados");
@@ -52,16 +55,5 @@ export default class User {
     }
 
     return valid;
-  }
-
-  perfil() {
-    try {
-      if(!this.login()) {
-        
-
-      }
-    } catch (error) {
-      
-    }
   }
 }

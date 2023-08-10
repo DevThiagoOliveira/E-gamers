@@ -38,6 +38,11 @@ label ~ label {
     margin-top: -1em;
     padding: 5px;
 }
+
+.logo {
+    cursor: pointer;
+}
+
 /* estilo para telas com largura menor que 768 pixels */
 @media (max-width: 767px) {
 

@@ -11,20 +11,7 @@
     <title>E-Gamers</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="nav-content">
-                <img class="logo" src="../../src/assets/img/Sprite-0001.png" alt="Logo">
-                <div class="search-bar">
-                    <input type="text" class="search-input" placeholder="Pesquisar...">
-                </div>
-                <div class="shopping-cart">
-                    <a href=""><i class="fa-regular fa-cart-shopping fa-xs" style="color: #fff;"></i></a>
-                </div>
-            </div>
-        </nav>
-    </header>
-
+    
     <main>
         <div class="main-content">
             <div class="config-content">
@@ -46,36 +33,28 @@
 
                 <div class="popup-container" id="popup">
                     <div class="popup">
-                        <form action="">
+                        <form id="addProduct">
                             <h2 class="layout-h2">Adicionar Produto</h2>
                             <label class="picture" tabindex="0">
-                                <input type="file" accept="image/*" class="picture__input">
+                                <input name="image" type="file" accept="image/*" class="picture__input">
                                 <span class="picture__image"></span>
                             </label>
-                            <input class="nome" type="text" placeholder="Nome">
-                            <input class="categoria" type="text" placeholder="Categoria">
-                            <input class="preco" type="number" placeholder="Preço">
-                            <input class="quantidade" type="number" placeholder="Quantidade">
-                            <textarea class="Descricao" placeholder="Descrição"></textarea>
-                            <button class="add-product">Adicionar</button>
-                            <button class="close-popup">Cancelar</button>
+                            <input name="name" class="nome" type="text" placeholder="Nome">
+                            <input name="category" class="categoria" type="text" placeholder="Categoria">
+                            <input name="price" class="preco" type="number" placeholder="Preço">
+                            <input name="amount" class="quantidade" type="number" placeholder="Quantidade">
+                            <textarea name="description" class="Descricao" placeholder="Descrição"></textarea>
+                            <button class="add-product" type="submit">Adicionar</button>
+                            <button class="close-popup" type="button">Cancelar</button>
                         </form>
                     </div>
                 </div>
 
                 <div class="item-layout">
-                    <span class="page-label">Minha Conta</span>
+                    <span class="page-label"></span>
                 </div>
                 <div class="itens">
-                    <table>
-                        <ul>
-                            <li class="layout-item">
-                                <img class="imagem-product" src="https://source.unsplash.com/random/800x600/?produto" alt="">
-                                <label class="product-label" for="">Produto 1</label>
-                            </li>
-                            <li class="spacing"></li>
-                        </ul>
-                    </table>
+                    <ul></ul>
                 </div>
             </div>
         </div>

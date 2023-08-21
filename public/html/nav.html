@@ -2,14 +2,20 @@
     <nav>
         <div class="nav-content">
             <img class="logo" src="../../src/assets/img/logo/Sprite-0001.png" alt="Logo">
-            <form action="search.html" method="get">
-                <div class="search-bar">
-                    <input type="text" class="search-input" placeholder="Pesquisar..." name="searchQuery">
-                    <button type="submit">Pesquisar</button>
-                </div>
-            </form>
+            <form action="search.html" method="get" class="search-bar">
+                <input type="text" class="search-input" placeholder="Pesquisar..." name="searchQuery">
+                <button class="none" type="submit">Pesquisar</button>
+            </form>+++
             <div class="shopping-cart">
                 <a href=""><i class="fa-regular fa-cart-shopping fa-xs" style="color: #fff;"></i></a>
+            </div>
+            <div class="user">
+                <!-- Se o usuário não estiver logado -->
+                <button class="login">Logar</button>
+                <button class="register">Registrar</button>
+    
+                <!-- Se o usuário estiver logado -->
+                <!-- Inserir aqui o ícone gerado pela classe Icon -->
             </div>
         </div>
     </nav>

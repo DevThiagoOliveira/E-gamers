@@ -25,35 +25,11 @@ export default class navBarConfigs {
             this.navBar.appendChild(perfil.icone);
             icone.colorChange(perfil.profile);
 
-            document.addEventListener('click', element => {
-                if (element.target.classList.contains('profile-icon') || element.target.classList.contains('initials') && urlAtual != "http://localhost:3000/E-gamers/public/html/config.html") {
-                    window.location.href = "http://localhost:3000/E-gamers/public/html/config.html";
-                }
-            });
-        } else {
-
-            // Criação dos botões de login e registro
-            const userDiv = document.createElement('div');
-            userDiv.classList.add('user');
-
-            const loginButton = document.createElement('button');
-            loginButton.textContent = 'Logar';
-            loginButton.setAttribute('class', 'login');
-            loginButton.addEventListener('click', () => {
-                window.location.href = "http://localhost:3000/E-gamers/public/html/login.html";
-            });
-
-            const registerButton = document.createElement('button');
-            registerButton.textContent = 'Registrar';
-            registerButton.setAttribute('class', 'register');
-            registerButton.addEventListener('click', () => {
-                window.location.href = "http://localhost:3000/E-gamers/public/html/register.html";
-            });
-
-            userDiv.appendChild(loginButton);
-            userDiv.appendChild(registerButton);
-
-            this.navBar.appendChild(userDiv);
+            // document.addEventListener('click', element => {
+            //     if (element.target.classList.contains('profile-icon') || element.target.classList.contains('initials') && urlAtual != "http://localhost:3000/E-gamers/public/html/config.html") {
+            //         window.location.href = "http://localhost:3000/E-gamers/public/html/config.html";
+            //     }
+            // });
         }
     }
 }

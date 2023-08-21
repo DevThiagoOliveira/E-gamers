@@ -65,6 +65,8 @@ export default class SearchResultBuilder {
         const breadcrumbTitle = document.querySelector(".ui-search-breadcrumb__title");
         const resultsContainer = document.querySelector(".ui-search-layout");
 
+        console.log(this.items[0].searchTerm);
+
         breadcrumbTitle.innerText = this.items[0].searchTerm;
 
         resultsContainer.innerHTML = "";

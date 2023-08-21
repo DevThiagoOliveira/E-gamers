@@ -1,7 +1,7 @@
 class Recommendation {
-    constructor(search, itemSeraching, imagem, urlItem) {
+    constructor(search, itemSearching, imagem, urlItem) {
         this.search = search;
-        this.itemSeraching = itemSeraching;
+        this.itemSearching = itemSearching;
         this.imagem = imagem;
         this.urlItem = urlItem;
     }
@@ -31,7 +31,7 @@ class Recommendation {
     ulApend(li) {
         const ul = document.querySelector('.recommendation-bar');
         li.setAttribute('class', 'last-search');
-        li.setAttribute('title', this.itemSeraching);
+        li.setAttribute('title', this.itemSearching);
 
         return ul.appendChild(li);
     }

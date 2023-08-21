@@ -22,6 +22,8 @@ body {
 
 .nav-content {
     display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     width: 100%;
     height: 5.5em;
     overflow: hidden;
@@ -33,12 +35,12 @@ body {
     cursor: pointer;
 }
 
-.search-bar {
-    width: 76em;
-    height: 100%;
+form .search-bar {
+    flex-grow: 1;
+    margin: 0 1em; /* Adicione margem para espaçamento */
 }
 
-.search-input {
+form .search-input {
     background-color: transparent;
     width: 100%;
     height: 100%;
@@ -50,11 +52,15 @@ body {
     color: var(--white);
 }
 
-.shopping-cart {
-    padding-left: 1em;
-    align-items: center;
-    display: flex;
+form .none {
+    display: none;
+}
 
+.shopping-cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 1.3em; /* Alinhe à direita */
 }
 
 .shopping-cart a {
@@ -80,10 +86,8 @@ body {
 
 .user {
     display: flex;
-    justify-content: center;
-    align-items: space-around;
-    justify-content: center;
-    padding: 0.5em;
+    align-items: center;
+    gap: 1em; /* Adicione espaçamento entre os botões */
 }
 
 .user .profile-icon {
@@ -256,6 +260,7 @@ h2 {
 }
 
 .profile-icon {
+    order: 1;
     justify-content: center;
     max-width: 1.9em;
     max-height: 1.9em;
@@ -329,6 +334,8 @@ h2 {
     }
     
     .search-input {
+        max-width: 28em;
+        width: 28em;
         font-size: 1em;
     }
 
@@ -402,7 +409,6 @@ body {
 }
 
 .main-content {
-    margin: 1em;
     display: grid;
     grid-template-columns: 27em 65.4em;
 }
@@ -410,7 +416,6 @@ body {
 .config-content {
     position: relative;
     background-color: #1c1c1c;
-    border-radius: .8em;
     max-height: 100%;
     max-width: 100%;
     height: 100vh;
@@ -509,6 +514,7 @@ button:hover {
 }
 
 .second-grid {
+    padding: .4em;
     display: flex;
     max-height: 100em;
     width: 100%;
@@ -636,7 +642,7 @@ button:hover {
     z-index: 999;
 }
 
-.popup, form {
+.popup, .popup form {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -662,10 +668,68 @@ button:hover {
 .nome { grid-area: 2 / 2 / 3 / 4; }
 .categoria { grid-area: 3 / 2 / 4 / 4; } /* Aumentamos a altura da categoria para 1 linha */
 .preco { grid-area: 4 / 2 / 5 / 4; } /* Aumentamos a altura do preço para 1 linha */
-.quantidade { grid-area: 5 / 2 / 6 / 4; } /* Aumentamos a altura da quantidade para 1 linha */
+.quantidade { grid-area: 5 / 2 / 6 / 3; } /* Aumentamos a altura da quantidade para 1 linha */
 .Descricao { grid-area: 6 / 1 / 9 / 4; } /* Aumentamos a altura da descrição para 3 linhas */
 .add-product { grid-area: 9 / 1 / 10 / 2; } /* Adicionamos o botão Adicionar na última linha */
 .close-popup { grid-area: 9 / 3 / 10 / 4; } /* Adicionamos o botão Cancelar na última linha */
+
+/* switch toogle */
+
+.switch-label {
+    grid-area: 5 / 3 / 6 / 4; /* Posiciona o switch de frete grátis */
+    display: flex;
+    padding-bottom: .5em;
+}
+
+.switch {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    cursor: pointer;
+    padding: 0.3em;
+    background-color: #2b2a2a;
+    color: white;
+    border: none;
+    transition: all .5s ease-in-out;
+    border-radius: .2em;
+}
+
+.slider {
+    position: relative;
+    background-color: rgb(39, 39, 39);
+    width: 4.17em;
+    height: 1.9em;
+    border: 3px solid #363636;
+    border-radius: 1.25em;
+}
+
+#toggle-input {
+    display: none;
+}
+
+.pointer {
+    background-color: #3d3c3c;
+    border: none;
+    width: .8em;
+    height: .8em;
+    border-radius: 50%;
+    pointer-events: none;
+    position: absolute;
+    left: .1em;
+    bottom: .111em;
+    transition: all 300ms ease-in-out;
+}
+
+#toggle-input:checked ~ .slider {
+    background-color: #77b02a;
+}
+
+#toggle-input:checked ~ .slider > .pointer {
+    background-color: rgb(39, 39, 39);
+    left: 1.62em;
+}
 
 .popup h2 {
     margin-bottom: 20px;
@@ -682,7 +746,7 @@ button:hover {
     border-radius: .3em;
     width: 100%;
     margin-bottom: 10px;
-    padding: .7em;
+    padding: 0.5em;
     justify-content: center;
 }
 

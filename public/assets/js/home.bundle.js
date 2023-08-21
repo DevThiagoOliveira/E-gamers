@@ -14,10 +14,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 var Recommendation = /*#__PURE__*/function () {
-  function Recommendation(search, itemSeraching, imagem, urlItem) {
+  function Recommendation(search, itemSearching, imagem, urlItem) {
     _classCallCheck(this, Recommendation);
     this.search = search;
-    this.itemSeraching = itemSeraching;
+    this.itemSearching = itemSearching;
     this.imagem = imagem;
     this.urlItem = urlItem;
   }
@@ -49,7 +49,7 @@ var Recommendation = /*#__PURE__*/function () {
     value: function ulApend(li) {
       var ul = document.querySelector('.recommendation-bar');
       li.setAttribute('class', 'last-search');
-      li.setAttribute('title', this.itemSeraching);
+      li.setAttribute('title', this.itemSearching);
       return ul.appendChild(li);
     }
   }]);
@@ -398,10 +398,10 @@ var __webpack_exports__ = {};
   \************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_css_home_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../assets/css/home.css */ "./src/assets/css/home.css");
-/* harmony import */ var _modules_ferramentas_Recomendation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modules/ferramentas/Recomendation */ "./src/modules/ferramentas/Recomendation.js");
-/* harmony import */ var _modules_ferramentas_Recomendation__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_modules_ferramentas_Recomendation__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modules/ferramentas/navBarImport */ "./src/modules/ferramentas/navBarImport.js");
-/* harmony import */ var _modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modules/ferramentas/navBarImport */ "./src/modules/ferramentas/navBarImport.js");
+/* harmony import */ var _modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _modules_ferramentas_Recomendation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modules/ferramentas/Recomendation */ "./src/modules/ferramentas/Recomendation.js");
+/* harmony import */ var _modules_ferramentas_Recomendation__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_modules_ferramentas_Recomendation__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
@@ -409,8 +409,14 @@ document.addEventListener("DOMContentLoaded", function () {
   var urlParams = new URLSearchParams(window.location.search);
   var searchQuery = urlParams.get("searchQuery");
   var searchBar = document.querySelector(".search-input");
+  var clickedItemJSON = sessionStorage.getItem("clickedItem");
   if (searchQuery) {
     searchBar.value = searchQuery;
+  }
+  if (clickedItemJSON) {
+    var clickedItem = JSON.parse(clickedItemJSON);
+    var recommend = new (_modules_ferramentas_Recomendation__WEBPACK_IMPORTED_MODULE_2___default())(clickedItem.searchTerm, clickedItem.name, clickedItem.img, clickedItem.urlItem);
+    recommend.create();
   }
 });
 })();

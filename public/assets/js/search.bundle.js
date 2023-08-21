@@ -161,6 +161,7 @@ var SearchResultBuilder = /*#__PURE__*/function () {
       var _this = this;
       var breadcrumbTitle = document.querySelector(".ui-search-breadcrumb__title");
       var resultsContainer = document.querySelector(".ui-search-layout");
+      console.log(this.items[0].searchTerm);
       breadcrumbTitle.innerText = this.items[0].searchTerm;
       resultsContainer.innerHTML = "";
       this.items.forEach(function (item) {
@@ -558,17 +559,17 @@ var product = new _modules_DB_products__WEBPACK_IMPORTED_MODULE_2__["default"](u
 var searchItems = []; // Inicialize um array vazio
 
 document.addEventListener("DOMContentLoaded", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-  var urlParams, searchQuery, responseData, _searchItems, _urlParams, _searchQuery, filteredItems, search, searchBar;
+  var responseData, urlParams, searchQuery, _searchItems, filteredItems, search, searchBar, searchResults;
   return _regeneratorRuntime().wrap(function _callee$(_context) {
     while (1) switch (_context.prev = _context.next) {
       case 0:
+        _context.prev = 0;
+        _context.next = 3;
+        return product.product('http://localhost:3000/E-gamers/src/php/getProduct.php');
+      case 3:
+        responseData = _context.sent;
         urlParams = new URLSearchParams(window.location.search);
         searchQuery = urlParams.get("searchQuery");
-        _context.prev = 2;
-        _context.next = 5;
-        return product.product('http://localhost:3000/E-gamers/src/php/getProduct.php');
-      case 5:
-        responseData = _context.sent;
         _searchItems = responseData.products.map(function (item) {
           var hasShipping = item.frete !== null && item.frete !== "0";
           return {
@@ -576,31 +577,50 @@ document.addEventListener("DOMContentLoaded", /*#__PURE__*/_asyncToGenerator( /*
             img: "../../src/assets/img/product/".concat(item.imagem),
             price: "R$ ".concat(item.preco),
             hasShipping: hasShipping,
-            searchTerm: "" // Defina a propriedade searchTerm como uma string vazia
+            searchTerm: searchQuery,
+            category: item.categoria,
+            buying_id: item.comprador_id,
+            descricao: item.descricao,
+            id_product: item.id_product,
+            amount: item.quantidade,
+            sealer_id: item.vendedor_id,
+            sealer_name: item.vendedor_nome,
+            date_register: item.data_cadastro
           };
-        });
-        _urlParams = new URLSearchParams(window.location.search);
-        _searchQuery = _urlParams.get("searchQuery"); // Filtrar os itens com base no searchTerm
+        }); // Filtrar os itens com base no searchTerm
         filteredItems = _searchItems.filter(function (item) {
-          return item.name.toLowerCase().includes(_searchQuery.toLowerCase());
+          return item.name.toLowerCase().includes(searchQuery.toLowerCase());
         }); // Crie a instância do SearchResultBuilder com os novos searchItems filtrados
         search = new _modules_ferramentas_SearchResultBuilder__WEBPACK_IMPORTED_MODULE_3__["default"](filteredItems);
         searchBar = document.querySelector(".search-input");
-        if (_searchQuery) {
-          searchBar.value = _searchQuery;
+        if (searchQuery) {
+          searchBar.value = searchQuery;
         }
         search.buildResults();
+        searchResults = document.querySelectorAll(".ui-search-layout__item");
+        searchResults.forEach(function (result) {
+          result.addEventListener("click", function () {
+            var itemName = result.querySelector(".ui-search-result-content label").innerText;
+            var itemData = _searchItems.find(function (item) {
+              return item.name === itemName;
+            });
+            if (itemData) {
+              sessionStorage.setItem("clickedItem", JSON.stringify(itemData));
+              window.location.href = "http://localhost:3000/E-gamers/public/html/item.html?item=".concat(encodeURIComponent(itemName));
+            }
+          });
+        });
         _context.next = 19;
         break;
       case 16:
         _context.prev = 16;
-        _context.t0 = _context["catch"](2);
+        _context.t0 = _context["catch"](0);
         console.log(_context.t0);
       case 19:
       case "end":
         return _context.stop();
     }
-  }, _callee, null, [[2, 16]]);
+  }, _callee, null, [[0, 16]]);
 })));
 })();
 

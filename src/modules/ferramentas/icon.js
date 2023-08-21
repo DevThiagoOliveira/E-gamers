@@ -55,11 +55,5 @@ export default class Icon {
             
 
         });
-
-        if(this.image != '') {
-            // ele coloca o nome do usuário dentro do perfil
-        }
     }
-
-    
 }

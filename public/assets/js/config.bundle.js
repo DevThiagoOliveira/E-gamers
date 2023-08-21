@@ -165,9 +165,6 @@ var Icon = /*#__PURE__*/function () {
 
         div.style.backgroundColor = randomColor;
       });
-      if (this.image != '') {
-        // ele coloca o nome do usuário dentro do perfil
-      }
     }
   }]);
   return Icon;
@@ -723,6 +720,14 @@ function closePopup() {
 }
 
 // ----------------------------------------------------- Lógica para adicionar o produto
+
+var toggleInput = document.getElementById('toggle-input');
+var sendData = document.getElementById('send-data'); // Adicione um id ao botão que envia os dados
+
+var freteGratis = false;
+toggleInput.addEventListener('change', function () {
+  freteGratis = !freteGratis;
+});
 function addProduct() {
   var formData = new FormData(productForm);
   var jsonData = {};
@@ -742,6 +747,9 @@ function addProduct() {
   }
   jsonData['seller_id'] = userId;
   jsonData['seller_name'] = username;
+  sendData.addEventListener('click', function () {
+    jsonData['frete_gratis'] = freteGratis ? 1 : 0;
+  });
 
   // Verificar se o dado do formData é uma imagem
   if (formData.get("image") instanceof File) {

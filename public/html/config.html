@@ -22,7 +22,6 @@
                 <span class="wallet">R$ 00,00</span>
                 <button class="selling">Venda</button>
                 <button class="buy">Compra</button>
-                <button class="config">Configuração</button>
                 <button class="exit">Sair</button>
             </div>
             <div class="second-grid">
@@ -43,6 +42,15 @@
                             <input name="category" class="categoria" type="text" placeholder="Categoria">
                             <input name="price" class="preco" type="number" placeholder="Preço">
                             <input name="amount" class="quantidade" type="number" placeholder="Quantidade">
+                            <label class="switch-label" for="toggle-input">
+                                <div class="switch">
+                                    Frete grátis
+                                    <input type="checkbox" id="toggle-input">
+                                    <div class="slider">
+                                        <button id="send-data" class="pointer"></button>
+                                    </div>
+                                </div>
+                            </label>
                             <textarea name="description" class="Descricao" placeholder="Descrição"></textarea>
                             <button class="add-product" type="submit">Adicionar</button>
                             <button class="close-popup" type="button">Cancelar</button>

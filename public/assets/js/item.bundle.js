@@ -1,6 +1,90 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/modules/ferramentas/icon.js":
+/*!*****************************************!*\
+  !*** ./src/modules/ferramentas/icon.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Icon)
+/* harmony export */ });
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var Icon = /*#__PURE__*/function () {
+  function Icon(name) {
+    var image = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+    _classCallCheck(this, Icon);
+    this.name = name;
+    this.image = image;
+  }
+  _createClass(Icon, [{
+    key: "create",
+    value: function create() {
+      var profile = this.createProfileIcon();
+      var span = this.createSpan();
+      var divUser = this.createDiv();
+      profile.appendChild(span);
+      divUser.appendChild(profile);
+      return {
+        icone: divUser,
+        profile: profile,
+        span: span
+      };
+    }
+  }, {
+    key: "createDiv",
+    value: function createDiv() {
+      var div = document.createElement('div');
+      div.setAttribute('class', 'user');
+      return div;
+    }
+  }, {
+    key: "createProfileIcon",
+    value: function createProfileIcon() {
+      var div = document.createElement('div');
+      div.setAttribute('class', 'profile-icon');
+      return div;
+    }
+  }, {
+    key: "createSpan",
+    value: function createSpan() {
+      var span = document.createElement('span');
+      span.setAttribute('class', 'initials');
+      span.innerText = this.name.charAt(0);
+      return span;
+    }
+  }, {
+    key: "colorChange",
+    value: function colorChange(div) {
+      var letters = '0123456789ABCDEF';
+      var color = '#';
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      window.addEventListener('DOMContentLoaded', function () {
+        // Gerar uma cor aleatória
+        var randomColor = color;
+
+        // Definir a cor de fundo do ícone de perfil
+
+        div.style.backgroundColor = randomColor;
+      });
+    }
+  }]);
+  return Icon;
+}();
+
+
+/***/ }),
+
 /***/ "./src/modules/ferramentas/navBarImport.js":
 /*!*************************************************!*\
   !*** ./src/modules/ferramentas/navBarImport.js ***!
@@ -341,10 +425,88 @@ var __webpack_exports__ = {};
   \************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_css_buying_item_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../assets/css/buying-item.css */ "./src/assets/css/buying-item.css");
-/* harmony import */ var _modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modules/ferramentas/navBarImport */ "./src/modules/ferramentas/navBarImport.js");
-/* harmony import */ var _modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _modules_ferramentas_icon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modules/ferramentas/icon */ "./src/modules/ferramentas/icon.js");
+/* harmony import */ var _modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modules/ferramentas/navBarImport */ "./src/modules/ferramentas/navBarImport.js");
+/* harmony import */ var _modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_2__);
 
 
+
+var itemName = document.querySelector('.item-name');
+var filter = document.querySelector('.item-filter');
+var price = document.querySelector('.price');
+var count = document.querySelector('.item-quant');
+var addButton = document.querySelector('.add');
+var subtractButton = document.querySelector('.subtract');
+var imgContent = document.querySelector('.img-content');
+var imgDiv = document.querySelector('.img');
+var img = document.querySelector('#main-image');
+var descriptionInput = document.querySelector('.input-comment'); // Referência ao campo de descrição
+var seallerName = document.querySelector('.sealler-name');
+var data = JSON.parse(sessionStorage.getItem("clickedItem"));
+console.log(data);
+itemName.innerText = data.name;
+filter.innerText = data.category;
+price.innerText = data.price.replace(/\s/g, '');
+descriptionInput.value = data.descricao; // Preencher o campo de descrição
+
+var seallerIcon = new _modules_ferramentas_icon__WEBPACK_IMPORTED_MODULE_1__["default"](data.sealer_name); // Criar o ícone com o nome do vendedor
+var _seallerIcon$create = seallerIcon.create(),
+  icone = _seallerIcon$create.icone;
+seallerName.appendChild(icone);
+var h2 = document.createElement('h2');
+h2.innerText = data.sealer_name;
+seallerName.appendChild(h2);
+var incrementInterval;
+var decrementInterval;
+var incrementCount = function incrementCount() {
+  if (parseInt(count.innerText) < data.amount) {
+    count.innerText = parseInt(count.innerText) + 1;
+  }
+};
+var decrementCount = function decrementCount() {
+  if (parseInt(count.innerText) > 0) {
+    count.innerText = parseInt(count.innerText) - 1;
+  }
+};
+addButton.addEventListener('mousedown', function () {
+  incrementInterval = setInterval(incrementCount, 100);
+});
+subtractButton.addEventListener('mousedown', function () {
+  decrementInterval = setInterval(decrementCount, 100);
+});
+document.addEventListener('mouseup', function () {
+  clearInterval(incrementInterval);
+  clearInterval(decrementInterval);
+});
+document.addEventListener('mouseleave', function () {
+  clearInterval(incrementInterval);
+  clearInterval(decrementInterval);
+});
+
+// Função para criar uma imagem e adicioná-la ao elemento especificado
+function createAndAppendImage(element, src) {
+  var img = document.createElement('img');
+  img.src = src;
+  var imgReview = document.createElement('li');
+  imgReview.className = 'img-review';
+  imgReview.appendChild(img);
+  element.appendChild(imgReview);
+}
+
+// Criar as imagens dentro da lista ul.img-content
+createAndAppendImage(imgContent, data.img); // A imagem padrão
+
+img.src = data.img; // adicionar um imagem como padrão
+
+// Adicionar evento de clique nas imagens para exibi-las no div.img
+imgContent.addEventListener('click', function (event) {
+  if (event.target.tagName === 'IMG') {
+    imgDiv.innerHTML = ''; // Limpar o div.img
+    var clickedImage = document.createElement('img');
+    clickedImage.src = event.target.src;
+    imgDiv.appendChild(clickedImage);
+  }
+});
 })();
 
 /******/ })()

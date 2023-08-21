@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $preco = $jsonData['price'];
     $quantidade = $jsonData['amount'];
     $descricao = $jsonData['description'];
-
+    $frete = $jsonData['frete_gratis'];
 
     $directory = '../assets/img/product/';
     if (!is_dir($directory)) {
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Preparar a query de inserção
-        $query = "INSERT INTO product (vendedor_id, vendedor_nome, comprador_id, nome_produto, categoria, imagem, preco, quantidade, descricao) VALUES (:vendedor_id, :vendedor_nome, :comprador_id, :nome, :categoria, :imagem, :preco, :quantidade, :descricao)";
+        $query = "INSERT INTO product (vendedor_id, vendedor_nome, comprador_id, nome_produto, categoria, imagem, frete, preco, quantidade, descricao) VALUES (:vendedor_id, :vendedor_nome, :comprador_id, :nome, :categoria, :imagem, :frete, :preco, :quantidade, :descricao)";
         $stmt = $connection->prepare($query);
         
         $stmt->bindParam(':vendedor_id', $vendedor_id);
@@ -42,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':comprador_id', $comprador_id);
         $stmt->bindParam(':nome', $nome);
         $stmt->bindParam(':categoria', $categoria);
+        $stmt->bindParam(':frete', $frete);
         $stmt->bindParam(':imagem', $nome_imagem);
         $stmt->bindParam(':preco', $preco);
         $stmt->bindParam(':quantidade', $quantidade);
@@ -68,4 +69,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $response = array('success' => false, 'message' => 'Método não permitido');
     echo json_encode($response, JSON_UNESCAPED_UNICODE);
 }
-

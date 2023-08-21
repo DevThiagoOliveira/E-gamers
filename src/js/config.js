@@ -139,9 +139,18 @@ function closePopup() {
 }
 
 // ----------------------------------------------------- Lógica para adicionar o produto
+
+const toggleInput = document.getElementById('toggle-input');
+const sendData = document.getElementById('send-data'); // Adicione um id ao botão que envia os dados
+
+let freteGratis = false;
+
+toggleInput.addEventListener('change', () => {
+  freteGratis = !freteGratis;
+});
+
 function addProduct() {
     const formData = new FormData(productForm);
-
     const jsonData = {};
 
     for (const [name, value] of formData.entries()) {
@@ -150,6 +159,10 @@ function addProduct() {
 
     jsonData['seller_id'] = userId;
     jsonData['seller_name'] = username;
+
+    sendData.addEventListener('click', () => {
+      jsonData['frete_gratis'] = freteGratis ? 1 : 0;
+    });
 
     // Verificar se o dado do formData é uma imagem
     if (formData.get("image") instanceof File) {
@@ -165,7 +178,7 @@ function addProduct() {
         const send = sendDataToPHP(jsonData);
       };
       
-      fileReader.readAsDataURL(formData.get("image"));      
+      fileReader.readAsDataURL(formData.get("image"));  
       
     } else {
       sendDataToPHP(jsonData); // Se não for uma imagem, enviar os dados normalmente
@@ -251,7 +264,6 @@ function clearProductList() {
   const productList = document.querySelector('ul');
   productList.innerHTML = '';
 }
-
 
 // ----------------------------------------------------- Barra de pesquisa 
 const consultBar = document.querySelector('.consult-bar');

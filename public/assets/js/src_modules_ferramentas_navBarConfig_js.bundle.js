@@ -124,12 +124,74 @@ var navBarConfigs = /*#__PURE__*/function () {
         var perfil = icone.create();
         this.navBar.appendChild(perfil.icone);
         icone.colorChange(perfil.profile);
+        document.addEventListener('click', function (event) {
+          var clickedElement = event.target;
+          if (clickedElement.classList.contains('profile-icon') || clickedElement.classList.contains('initials') && urlAtual != "http://localhost:3000/E-gamers/public/html/config.html") {
+            var navContentAncestor = clickedElement.closest('.nav-content');
+            if (navContentAncestor) {
+              var dropdownMenu = navContentAncestor.querySelector('.dropdown-menu');
+              dropdownMenu.classList.toggle('active');
+            }
 
-        // document.addEventListener('click', element => {
-        //     if (element.target.classList.contains('profile-icon') || element.target.classList.contains('initials') && urlAtual != "http://localhost:3000/E-gamers/public/html/config.html") {
-        //         window.location.href = "http://localhost:3000/E-gamers/public/html/config.html";
-        //     }
-        // });
+            // Obtém os elementos de ícone do menu
+            var cogIcon = document.querySelector('.fa-cog');
+            var userLargeIcon = document.querySelector('.fa-user-large');
+            var signOutIcon = document.querySelector('.fa-sign-out-alt');
+
+            // Evento de clique para o ícone de configuração (cog)
+            cogIcon.addEventListener('click', function () {
+              window.location.href = "http://localhost:3000/E-gamers/public/html/config.html";
+            });
+
+            // Evento de clique para o ícone de perfil (user-large)
+            userLargeIcon.addEventListener('click', function () {
+              window.location.href = "http://localhost:3000/E-gamers/public/html/config.html";
+            });
+
+            // Evento de clique para o ícone de sair (sign-out)
+            signOutIcon.addEventListener('click', function () {
+              var exit = false;
+              sessionStorage.setItem("status", exit);
+              window.location.href = "http://localhost:3000/E-gamers/public/html/index.html";
+            });
+          } else {
+            // Se clicar fora do menu, feche-o
+            var dropdownMenus = document.querySelectorAll('.dropdown-menu');
+            dropdownMenus.forEach(function (menu) {
+              menu.classList.remove('active');
+            });
+          }
+        });
+      }
+
+      // Criação dos botões de login e registro
+      var navContent = document.querySelector('.nav-content');
+      var userDiv = document.createElement('div');
+      userDiv.classList.add('user');
+      var loginButton = document.createElement('button');
+      loginButton.textContent = 'Logar';
+      loginButton.setAttribute('class', 'login');
+      loginButton.addEventListener('click', function () {
+        window.location.href = "http://localhost:3000/E-gamers/public/html/login.html";
+      });
+      var registerButton = document.createElement('button');
+      registerButton.textContent = 'Registrar';
+      registerButton.setAttribute('class', 'register');
+      registerButton.addEventListener('click', function () {
+        window.location.href = "http://localhost:3000/E-gamers/public/html/register.html";
+      });
+      userDiv.appendChild(loginButton);
+      userDiv.appendChild(registerButton);
+      navContent.appendChild(userDiv);
+
+      // Selecionar o elemento de input de busca
+      var searchInput = document.querySelector('.search-input');
+
+      // Verificar se o usuário está logado
+      if (sessionStorage.getItem('status') === 'true') {
+        searchInput.style.width = '49.5em';
+        registerButton.style.display = 'none';
+        loginButton.style.display = 'none';
       }
     }
   }]);

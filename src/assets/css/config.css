@@ -10,7 +10,7 @@ body {
 
 .main-content {
     display: grid;
-    grid-template-columns: 27em 65.4em;
+    grid-template-columns: 27em 69.4em;
 }
 
 .config-content {
@@ -120,7 +120,7 @@ button:hover {
     width: 100%;
     height: 100%;
     flex-direction: column;
-    margin-left: .5em;
+    margin-right: .5em;
     overflow: hidden;
 }
 
@@ -439,98 +439,113 @@ button:hover {
     background-color: #862323;
 }
 
-@media (max-width: 767px) {
-    .main-content {
-      grid-template-columns: 1fr; /* Altere para uma única coluna */
-      gap: 1em;
-      margin: 0;
-    }
-  
-    .config-content {
-      width: 100%;
-      max-width: none;
-      height: auto; /* Ajuste a altura conforme necessário */
-      padding-bottom: 3em;
-      border-radius: 0;
-    }
-  
-    .perfil-img {
-      margin-top: 2em;
-      border: none;
-    }
-  
-    .perfil-img .user {
-      height: 7em;
-      width: 7em;
-    }
-  
-    .perfil-img .user .profile-icon .initials {
-      font-size: 30px;
-    }
-  
-    .perfil-name {
-      font-size: 1.2em;
-    }
-  
-    .wallet {
-      font-size: 1.5em;
-    }
-  
-    button {
-      width: 40%;
-      height: 2.5em;
-    }
+/* config user css */
 
-    .exit {
-        position: relative;
-        bottom: auto;
-        right: auto;
-        margin-top: 10vh;
-      }
-  
-    .consult-bar {
-        margin: 1em auto;
-        margin-bottom: 1.5em;
-    }
-    
-    .second-grid {
-        padding-left: 0;
-        margin-left: 0.5em; /* Restaure a margem à esquerda */
-        display: grid;
-        max-width: 98.9%;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Use grid para organizar os itens em colunas responsivas */
-        grid-gap: 1em; /* Adicione um espaço entre os itens */
-    }
-  
-    .item-layout .page-label {
-      font-size: 20px;
-      width: 93%;
-    }
+.user-configs .perfil-user-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6em;
+    height: 6em;
+    border-radius: 50%;
+    border: solid 1px black;
+}
 
-    .itens{
-        padding: 0;
-    }
+.user-configs .perfil-user-img i {
+    color: #4e4d4d;
+}
 
-    .first-colum {
-        display: flex;
-        align-items: center;
-        justify-content: space-between; 
-    }
-  
-    .itens ul .layout-item .imagem-product {
-      max-width: 7em;
-      max-height: 7em;
-      border-radius: 5px;
-    }
-    
-    .itens ul .layout-item {
-        max-width: 45.5em;
-    }
-  
-    .itens ul .layout-item .product-label {
-        font-size: 16px;
-        max-width: 7em;
-        text-align: center; /* Centralize o texto */
-        margin-top: 0.5em; /* Adicione espaço acima do texto */
-    }
+.user-configs .perfil-user-img:hover {
+    background-color: #dadada;
+}
+
+.account-config {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.user-configs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    padding: 2em;
+}
+
+.change-user-config {
+    width: 100%;
+    height: 100%;
+}
+
+.perfil-user-img {
+    display: block;
+    margin: 0 auto 1em;
+    cursor: pointer;
+}
+
+.nickname, .telefone, .cpf, .email, .senha {
+    display: block;
+    text-align: center;
+    width: 100%;
+    letter-spacing: 1.5px;
+    margin: 0.5em 0;
+    padding: .8em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.confirmar-senha {
+    display: none;
+}
+
+.save-buttom, .change-password {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    width: 10em;
+    height: 2em;
+    padding: .5em .5em;
+    background-color: #77b02a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1em;
+}
+
+.save-buttom:hover {
+    background-color: #5d863b;
+}
+
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+}
+
+.popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 70em;
+    max-height: 45em;
+    width: 100%;
+    padding: 2em;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
 }

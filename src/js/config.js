@@ -3,6 +3,7 @@ import Icon from "../modules/ferramentas/icon";
 import Product from "../modules/DB/products";
 import layoutItem from "../modules/ferramentas/layoutItem";
 import "../modules/ferramentas/navBarImport";
+import User from "../modules/DB/users";
 
 if (sessionStorage.getItem("status") != "true") {
   window.location.href = "http://localhost:3000/E-gamers/public/html/index.html";
@@ -19,6 +20,13 @@ const label = document.querySelector(".page-label");
 const buttonAdd = document.querySelector(".button-add");
 const inputFile = document.querySelector(".picture__input");
 const pictureImage = document.querySelector(".picture__image");
+const secondGrid = document.querySelector('.second-grid');
+const accountConfig = document.querySelector('.account-config');
+
+const inputNickname = document.querySelector('.nickname');
+const inputPhone = document.querySelector('.telefone');
+const inputCpf = document.querySelector('.cpf');
+const inputEmail = document.querySelector('.email');
 
 // ----------------------------------------------------- object
 const products = new Product(userId, username);
@@ -32,8 +40,6 @@ const leftPerfil = iconPerfil.create();
 
 perfilIcon.appendChild(leftPerfil.icone);
 icon.colorChange(leftPerfil.profile);
-
-perfilName.innerText = username;
 
 //Input Popup Picture
 pictureImage.innerText = "Escolha uma imagem";
@@ -65,6 +71,8 @@ inputFile.addEventListener("change", (element) => {
 // ----------------------------------------------------- Configurations
 document.addEventListener("click", (element) => {
   if (element.target.classList.contains("selling")) {
+    secondGrid.style.display = "flex";
+    accountConfig.style.display = "none";
     localStorage.setItem("lastView", "selling");
     label.innerText = "Minhas Vendas";
     buttonAdd.style.display = "inline-block";
@@ -73,6 +81,8 @@ document.addEventListener("click", (element) => {
   }
 
   if (element.target.classList.contains("buy")) {
+    secondGrid.style.display = "flex";
+    accountConfig.style.display = "none";
     localStorage.setItem("lastView", "buy");
     label.innerText = "Minhas Compras";
     buttonAdd.style.display = "none";
@@ -93,9 +103,9 @@ document.addEventListener("click", (element) => {
   }
 
   if (element.target.classList.contains("config")) {
-    label.innerText = "Minha Conta";
-    buttonAdd.style.display = "none";
-    /* puxar via xhm de outro arquivo as config do usuário */
+    secondGrid.style.display = "none";
+    accountConfig.style.display = "flex";
+    
   }
 
   if (element.target.classList.contains("exit")) {
@@ -302,4 +312,67 @@ function showAllItems() {
   items.forEach(item => {
       item.style.display = 'flex';
   });
+}
+
+// ----------------------------------------------------- Account Config
+
+// Função para formatar o CPF
+function maskCpf(cpf) {
+  const visibleDigits = cpf.substring(0, cpf.length - 2);
+  const maskedDigits = '*'.repeat(2);
+  return `${visibleDigits}${maskedDigits}`;
+}
+
+// Função para formatar o email
+function formatEmail(email) {
+  const atIndex = email.indexOf('@');
+  const maskedEmail = email.split('').map((char, index) => {
+    if (index >= atIndex) {
+      return char;
+    } else {
+      return '*';
+    }
+  });
+  return maskedEmail.join('');
+}
+
+function maskPhoneNumber(phoneNumber) {
+  // Remove todos os caracteres não numéricos do número de telefone
+  const numericPhone = phoneNumber.replace(/\D/g, '');
+
+  if (numericPhone.length === 11) {
+    // Para números com DDD, aplica a máscara (##) #####-####
+    const maskedPhone = numericPhone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    return maskedPhone;
+  } else {
+    // Para outros números, retorna (00) 00000-0000
+    return '(00) 00000-0000';
+  }
+}
+
+const userObject = new User();
+
+try {
+  const userResponseData = userObject.userData();
+
+  userResponseData
+  .then(response => {
+    
+    const userData = response.user[0];
+    
+    perfilName.innerText = userData.nome_usuario;
+    
+    // Preencher campos de entrada com os dados obtidos
+    inputNickname.value = userData.nome_usuario;
+    inputPhone.value = maskPhoneNumber(userData.telefone);
+    inputCpf.value = formatCpf(userData.cpf);
+    inputEmail.value = formatEmail(userData.email);
+
+  })
+  .catch(error => {
+      console.error('Erro ao obter os dados do usuário:', error);
+    });
+
+} catch (error) {
+  console.error('Erro ao processar os dados:', error);
 }

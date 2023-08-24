@@ -6,6 +6,38 @@ export default class User {
     this.password = password;
   }
 
+  async userData() {
+
+    const userId = parseInt(sessionStorage.getItem('id_usuario'));
+    const username = sessionStorage.getItem("username");
+
+    try {
+      const data = {
+        user_id: userId,
+        user_name: username
+      };
+      
+      const response = await fetch('http://localhost:3000/E-gamers/src/php/getUserData.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      
+      if (!response.ok) {
+        throw new Error('Erro na solicitação. Código de status: ' + response.status);
+      }
+      
+      const responseData = await response.json();
+
+      return responseData;
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   login() {
     try {
       return fetch('http://localhost:3000/E-gamers/src/php/usuarios.php')
@@ -36,7 +68,7 @@ export default class User {
     let valid = false;
     try {
       usuarios.forEach(element => {
-
+        
         for (const index of element) {
           if ((index.login === this.username.value.toLowerCase()) && (index.senha === this.password.value.toLowerCase())) {
             sessionStorage.setItem('id_usuario', index.id_usuario);

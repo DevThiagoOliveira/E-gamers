@@ -9,6 +9,7 @@
     <link href="../../src/assets/fontawesome/css/solid.css" rel="stylesheet">
     <link rel="stylesheet" href="../../public/assets/css/">
     <link rel="stylesheet" href="../assets/css/item.style.css">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <title>E-Gamers</title>
 </head>
 <body>
@@ -41,8 +42,8 @@
                 </div>
                 <div class="comment-sealler">
                     <div class="comment">
-                        <h1 class="descrision">Descrição</h1>
-                        <input class="input-comment" type="textarea" readonly>
+                        <h1 class="description">Descrição</h1>
+                        <div class="input-comment" readonly></div>
                     </div>
                     <div class="sealler">
                         <h2>Vendedor</h2>
@@ -53,7 +54,7 @@
                 </div>
                 <div class="footer-main-content">
                     <label>
-                        <h2 class="feedback-poont-text">Opiniões do produto</h2>
+                        <h2 class="feedback-point-text">Opiniões do produto</h2>
                         <div class="feedback-point">
                             <span>4.0</span>
                         </div>
@@ -61,18 +62,25 @@
                     <div class="feedback">
                         <ul class="feedback-user">
                             <li>
-                                <img src="https://source.unsplash.com/random/1200x720/?anime" alt="">
-                                <span for="">Jusefino Pinto de Ferro</span>
-                                <textarea class="user-comment" cols="80" rows="3" ></textarea>
-                            </li>
-                            <li>
-                                <img src="https://source.unsplash.com/random/1200x720/?dragonball" alt="">
-                                <span for="">Jose Bomba Forte</span>
-                                <textarea class="user-comment" cols="80" rows="3" ></textarea>
+                                <div class="user-profile">
+                                    
+                                </div>
+                                <div class="user-comment">
+                                    <div class="star-rating">
+                                        <!-- Sistema de votação de estrelas -->
+                                        <span class="star" data-value="1">&#9733;</span>
+                                        <span class="star" data-value="2">&#9733;</span>
+                                        <span class="star" data-value="3">&#9733;</span>
+                                        <span class="star" data-value="4">&#9733;</span>
+                                        <span class="star" data-value="5">&#9733;</span>
+                                    </div>
+                                    <textarea class="comment-text" cols="80" rows="3" placeholder="Deixe um comentário"></textarea>
+                                    <button class="submit-comment">Enviar</button>
+                                </div>
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div>                           
             </div>
         </div>
     </main>
@@ -111,7 +119,7 @@
             </div>
         </div>
     </footer>
-
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script src="../assets/js/item.bundle.js"></script>
 </body>
 </html>

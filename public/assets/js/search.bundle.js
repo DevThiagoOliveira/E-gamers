@@ -22,10 +22,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
 function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 var productSearch = /*#__PURE__*/function () {
-  function productSearch(idUser, username) {
+  function productSearch(idUser) {
     _classCallCheck(this, productSearch);
     this.idUser = idUser;
-    this.username = username;
     this.product();
   }
   _createClass(productSearch, [{
@@ -43,8 +42,7 @@ var productSearch = /*#__PURE__*/function () {
               url = _args.length > 0 && _args[0] !== undefined ? _args[0] : '';
               _context.prev = 1;
               data = {
-                id_user: this.idUser,
-                user_name: this.username
+                id_user: this.idUser
               };
               _context.next = 5;
               return fetch(url, {

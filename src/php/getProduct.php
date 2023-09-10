@@ -7,15 +7,13 @@ try {
     $jsonData = json_decode(file_get_contents('php://input'), true);
     
     $vendedor_id = $jsonData['id_user'];
-    $nome_produto = $jsonData['user_name'];
 
     // Consulta SQL
     if($vendedor_id != '00') {
-        $query = "SELECT * FROM product WHERE vendedor_id = :vendedor_id AND vendedor_nome = :nome_produto";
+        $query = "SELECT * FROM product WHERE vendedor_id = :vendedor_id";
 
         $stmt = $connection->prepare($query);
         $stmt->bindParam(':vendedor_id', $vendedor_id);
-        $stmt->bindParam(':nome_produto', $nome_produto);
         $stmt->execute();
     }
     

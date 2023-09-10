@@ -161,7 +161,7 @@ button:hover {
 }
   
 .itens ul::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
+    background-color: transparent;
 }
 
 .itens ul .layout-item {
@@ -197,6 +197,54 @@ button:hover {
     height: 100%;
     font-size: 20px;
     font-weight: 600;
+}
+
+.div-button {
+    display: flex;
+    width: 4em;
+    height: 3em;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    border-radius: .3em;
+    opacity: .5;
+}
+
+.button-layout {
+    margin-top: 0;
+    width: 2em;
+    height: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+}
+
+.div-button:hover {
+    background-color: #4e4d4d;
+    opacity: 1;
+}
+
+.div-button i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.delete:hover {
+    background-color: #c00202;
+    opacity: 1;
+}
+
+.div-button i:hover {
+    color: var(--white);
+}
+
+.button-layout:hover {
+    background-color: transparent;
 }
 
 .first-colum {
@@ -269,9 +317,20 @@ button:hover {
 .categoria { grid-area: 3 / 2 / 4 / 4; } /* Aumentamos a altura da categoria para 1 linha */
 .preco { grid-area: 4 / 2 / 5 / 4; } /* Aumentamos a altura do preço para 1 linha */
 .quantidade { grid-area: 5 / 2 / 6 / 3; } /* Aumentamos a altura da quantidade para 1 linha */
-.Descricao { grid-area: 6 / 1 / 9 / 4; } /* Aumentamos a altura da descrição para 3 linhas */
-.add-product { grid-area: 9 / 1 / 10 / 2; } /* Adicionamos o botão Adicionar na última linha */
+.add-product, .edit-product { grid-area: 9 / 1 / 10 / 2;} /* Adicionamos o botão Adicionar na última linha */
 .close-popup { grid-area: 9 / 3 / 10 / 4; } /* Adicionamos o botão Cancelar na última linha */
+
+.popup .add-product,
+.popup .edit-product {
+    display: none;
+}
+
+.text-edit {
+    display: flex;
+    flex-direction: column;
+    grid-area: 6 / 1 / 9 / 4;
+    max-height: 75%;
+}
 
 /* switch toogle */
 
@@ -363,6 +422,7 @@ button:hover {
 }
 
 .popup form .add-product,
+.popup form .edit-product,
 .popup form .close-popup {
     margin-left: 2.55em;
     margin-bottom: .5em;
@@ -371,6 +431,7 @@ button:hover {
     background-color: #77b02a;
     color: white;
     border: none;
+    border-radius: .2em;
 }
 
 /* Input [type="file"] */
@@ -427,7 +488,8 @@ button:hover {
     border: 2px dashed #3f5c28;
 }
 
-.popup form .add-product:hover {
+.popup form .add-product:hover,
+.popup form .edit-product:hover {
     background-color: #5d863b;
 }
 

@@ -1,15 +1,13 @@
 export default class productSearch {
-    constructor(idUser, username) {
+    constructor(idUser) {
         this.idUser = idUser;
-        this.username = username;
         this.product();
     }
 
     async product(url = '') {
         try {
             const data = {
-                id_user: this.idUser,
-                user_name: this.username
+                id_user: this.idUser
             };
             
             const response = await fetch(url, {

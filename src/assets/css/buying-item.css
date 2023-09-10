@@ -101,10 +101,10 @@
     height: 35em;
 }
 
-.price {
+.buy-layout .price {
     margin-top: .7em;
     font-family: 'Roboto Mono', monospace;
-    font-size: 62px;
+    font-size: 50px;
     font-weight: bold;
     letter-spacing: 2px;
 }
@@ -180,7 +180,7 @@
 
 .comment {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
     max-width: 60em;
@@ -190,7 +190,7 @@
     padding: 2em;
 }
 
-.descrision {
+.description {
     margin-left: 1em;
     font-size: 30px;
     align-self: flex-start;
@@ -203,9 +203,10 @@
     border: none;
     color: #818181;
     margin-top: 1em;
-    height: 25em;
+    height: 15em;
     width: 65em;
     overflow: hidden;
+    overflow-y: auto;
 }
 
 .sealler {
@@ -313,5 +314,18 @@
     min-height: 49px;
     max-height: 404px;
     max-width: 740px;
+}
 
+/* barra de rolagem do Quill */
+.input-comment::-webkit-scrollbar {
+    width: 0.6em;
+}
+
+.input-comment::-webkit-scrollbar-thumb {
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+.input-comment::-webkit-scrollbar-track {
+    background-color: transparent;
 }

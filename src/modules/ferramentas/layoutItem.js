@@ -10,9 +10,13 @@ export default class layoutItem {
 
         const img = this.createImg();
         const span = this.createSpan();
+        const buttonEdit = this.buttonEdit();
+        const buttonDelete = this.buttonDelete();
 
         li.appendChild(img);
         li.appendChild(span);
+        li.appendChild(buttonEdit);
+        li.appendChild(buttonDelete);
 
         return li;
     }
@@ -50,5 +54,35 @@ export default class layoutItem {
         span.innerText = this.name;
 
         return span;
+    }
+
+    buttonEdit() {
+        const buttonEdit = document.createElement('div');
+        const button = document.createElement('button');
+        const i = document.createElement('i');
+        
+        buttonEdit.setAttribute('class', 'div-button');
+        button.setAttribute('class', 'button-layout');
+        i.setAttribute('class', 'fa-solid fa-gear');
+
+        buttonEdit.appendChild(button);
+        button.appendChild(i);
+
+        return buttonEdit;
+    }
+    
+    buttonDelete() {
+        const buttonDelete = document.createElement('div');
+        const button = document.createElement('button');
+        const i = document.createElement('i');
+        
+        buttonDelete.setAttribute('class', 'div-button delete');
+        button.setAttribute('class', 'button-layout');
+        i.setAttribute('class', 'fa-solid fa-trash');
+
+        buttonDelete.appendChild(button);
+        button.appendChild(i);
+
+        return buttonDelete;
     }
 }

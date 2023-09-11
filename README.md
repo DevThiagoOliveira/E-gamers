@@ -2,4 +2,4 @@
 
 Site de um ecommerce voltado a categoria de jogos
 
-![image](https://github.com/DevThiagoOliveira/E-gammers/assets/65518533/d816799e-e5e4-4026-946e-77e9f96602c2)
+![Screenshot_2](https://github.com/DevThiagoOliveira/E-gammers/assets/65518533/29e12729-aebd-4647-80b9-721f81662364)

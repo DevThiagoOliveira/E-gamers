@@ -85,6 +85,147 @@ var Icon = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./src/modules/ferramentas/navBarConfig.js":
+/*!*************************************************!*\
+  !*** ./src/modules/ferramentas/navBarConfig.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ navBarConfigs)
+/* harmony export */ });
+/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./icon */ "./src/modules/ferramentas/icon.js");
+/* harmony import */ var _ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ferramentas/tools */ "./src/modules/ferramentas/tools.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+
+
+var navBarConfigs = /*#__PURE__*/function () {
+  function navBarConfigs() {
+    var navBar = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+    var username = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+    var status = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
+    _classCallCheck(this, navBarConfigs);
+    this.username = username;
+    this.status = status;
+    this.navBar = navBar;
+    this.indexConfig();
+  }
+  _createClass(navBarConfigs, [{
+    key: "indexConfig",
+    value: function indexConfig() {
+      var baseUrl = window.location.origin;
+      var urlAtual = window.location.href;
+      document.addEventListener('click', function (element) {
+        if (element.target.classList.contains('logo') && urlAtual != "".concat(baseUrl, "/E-gamers/public/html/")) {
+          window.location.href = "".concat(baseUrl, "/E-gamers/public/html");
+        }
+      });
+      if (this.status === 'true') {
+        var icone = new _icon__WEBPACK_IMPORTED_MODULE_0__["default"](this.username);
+        var perfil = icone.create();
+        this.navBar.appendChild(perfil.icone);
+        icone.colorChange(perfil.profile);
+        document.addEventListener('click', function (event) {
+          var clickedElement = event.target;
+          if (clickedElement.classList.contains('profile-icon') || clickedElement.classList.contains('initials') && urlAtual != "".concat(baseUrl, "/E-gamers/public/html/config.html")) {
+            var navContentAncestor = clickedElement.closest('.nav-content');
+            if (navContentAncestor) {
+              var dropdownMenu = navContentAncestor.querySelector('.dropdown-menu');
+              dropdownMenu.classList.toggle('active');
+            }
+
+            // Obtém os elementos de ícone do menu
+            var cogIcon = document.querySelector('.fa-cog');
+            var signOutIcon = document.querySelector('.fa-sign-out-alt');
+
+            // Evento de clique para o ícone de configuração (cog)
+            cogIcon.addEventListener('click', function () {
+              window.location.href = "".concat(baseUrl, "/E-gamers/public/html/config.html");
+            });
+
+            // Evento de clique para o ícone de sair (sign-out)
+            signOutIcon.addEventListener('click', function () {
+              var exit = false;
+              sessionStorage.setItem("status", exit);
+              window.location.href = "".concat(baseUrl, "/E-gamers/public/html/index.html");
+            });
+          } else {
+            // Se clicar fora do menu, feche-o
+            var dropdownMenus = document.querySelectorAll('.dropdown-menu');
+            dropdownMenus.forEach(function (menu) {
+              menu.classList.remove('active');
+            });
+          }
+        });
+      }
+
+      // Criação dos botões de login e registro
+      var navContent = document.querySelector('.nav-content');
+      var userDiv = document.createElement('div');
+      userDiv.classList.add('user');
+      var loginButton = document.createElement('button');
+      loginButton.textContent = 'Entrar';
+      loginButton.setAttribute('class', 'login');
+      loginButton.addEventListener('click', function () {
+        window.location.href = "".concat(baseUrl, "/E-gamers/public/html/login.html");
+      });
+      var registerButton = document.createElement('button');
+      registerButton.textContent = 'Registrar';
+      registerButton.setAttribute('class', 'register');
+      registerButton.addEventListener('click', function () {
+        window.location.href = "".concat(baseUrl, "/E-gamers/public/html/register.html");
+      });
+      userDiv.appendChild(loginButton);
+      userDiv.appendChild(registerButton);
+      navContent.appendChild(userDiv);
+
+      // Selecionar o elemento de input de busca
+      var searchInput = document.querySelector('.search-input');
+
+      // Verificar se o usuário está logado
+      if (sessionStorage.getItem('status') === 'true') {
+        searchInput.style.width = '49.5em';
+        registerButton.style.display = 'none';
+        loginButton.style.display = 'none';
+      }
+
+      // Carrinho de compra
+
+      var shopCartButton = document.querySelector('.cart-icon');
+      var closeButton = document.getElementById("close-button");
+      var removeProduct = document.querySelector('.item-remove');
+      var cartItems = document.querySelectorAll('.cart-item');
+      shopCartButton.addEventListener("click", function () {
+        cart.classList.add("open");
+      });
+      closeButton.addEventListener("click", function () {
+        cart.classList.remove("open");
+      });
+      var list = new _ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__["default"]();
+      list.loadCartFromLocalStorage();
+      list.saveCartToLocalStorage();
+      cartItems.forEach(function (cartItem) {
+        var itemId = cartItem.dataset.item; // Obtenha o itemIdentification do atributo data-item
+        removeProduct.addEventListener('click', function () {
+          // Remova o item clicado
+          list.removeCartItem(itemId);
+        });
+      });
+    }
+  }]);
+  return navBarConfigs;
+}();
+
+
+/***/ }),
+
 /***/ "./src/modules/ferramentas/navBarImport.js":
 /*!*************************************************!*\
   !*** ./src/modules/ferramentas/navBarImport.js ***!
@@ -131,6 +272,220 @@ function _importModules() {
   }));
   return _importModules.apply(this, arguments);
 }
+
+/***/ }),
+
+/***/ "./src/modules/ferramentas/tools.js":
+/*!******************************************!*\
+  !*** ./src/modules/ferramentas/tools.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ tools)
+/* harmony export */ });
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var tools = /*#__PURE__*/function () {
+  function tools() {
+    _classCallCheck(this, tools);
+  }
+  _createClass(tools, [{
+    key: "addItemToCart",
+    value: function addItemToCart(itemName, itemPrice, itemImageSrc) {
+      var _this = this;
+      var quantity = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+      var itemIdentification = arguments.length > 4 ? arguments[4] : undefined;
+      // Selecione a lista de compra
+      var cartItems = document.getElementById('cart-items');
+
+      // Verifique se o item já está no carrinho
+      var existingCartItem = this.findCartItem(itemName);
+      if (existingCartItem) {
+        var quantityElement = existingCartItem.querySelector('.input-quantity');
+        var currentQuantity = parseInt(quantityElement.value);
+        quantityElement.value = currentQuantity + 1;
+      } else {
+        // Se o item não estiver no carrinho, crie um novo item
+        var cartItem = document.createElement('li');
+        cartItem.className = 'cart-item';
+
+        // Crie a imagem do item
+        var itemImage = document.createElement('img');
+        itemImage.src = itemImageSrc;
+        itemImage.alt = 'Item';
+
+        // Crie as informações do item
+        var itemInfo = document.createElement('div');
+        itemInfo.className = 'item-info';
+        var itemNameElement = document.createElement('h3');
+        itemNameElement.innerText = itemName;
+        var itemPriceElement = document.createElement('p');
+        itemPriceElement.innerText = "Pre\xE7o: R$ ".concat(itemPrice.toFixed(2)); // Formate o preço para 2 casas decimais
+
+        // Crie o elemento de quantidade
+        var itemQuantityElement = document.createElement('input');
+        itemQuantityElement.setAttribute('class', 'input-quantity');
+        itemQuantityElement.value = quantity;
+
+        // Crie os botões de aumento e diminuição
+        var increaseButton = document.createElement('button');
+        increaseButton.innerText = '+';
+        increaseButton.className = 'quantity-control increase';
+        var decreaseButton = document.createElement('button');
+        decreaseButton.innerText = '-';
+        decreaseButton.className = 'quantity-control decrease';
+
+        // Crie o botão de remoção
+        var itemRemoveButton = document.createElement('button');
+        itemRemoveButton.className = 'item-remove';
+        itemRemoveButton.innerHTML = '<i class="fa-solid fa-x"></i>';
+
+        // Defina o atributo data-item com o itemIdentification (nome ou ID)
+        cartItem.dataset.item = itemIdentification;
+
+        // Adicione um evento de clique para remover o item
+        itemRemoveButton.addEventListener('click', function () {
+          _this.removeCartItem(cartItem);
+        });
+
+        // Adicione os botões de quantidade ao item da lista
+        itemInfo.appendChild(itemNameElement);
+        itemInfo.appendChild(itemPriceElement);
+        itemInfo.appendChild(itemQuantityElement);
+        itemInfo.appendChild(decreaseButton); // Botão de diminuição
+        itemInfo.appendChild(increaseButton); // Botão de aumento
+        cartItem.appendChild(itemImage);
+        cartItem.appendChild(itemInfo);
+        cartItem.appendChild(itemRemoveButton);
+
+        // Adicione o item à lista de compra
+        cartItems.appendChild(cartItem);
+      }
+
+      // Atualize o total do carrinho
+      this.updateCartTotal();
+    }
+  }, {
+    key: "findCartItem",
+    value: function findCartItem(itemIdentification) {
+      // Selecione todos os itens no carrinho
+      var cartItems = document.querySelectorAll('.cart-item');
+
+      // Percorra os itens para encontrar o item com base no itemIdentification (nome ou ID)
+      var _iterator = _createForOfIteratorHelper(cartItems),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var cartItem = _step.value;
+          var itemNameElement = cartItem.querySelector('h3');
+          var itemID = cartItem.dataset.itemId; // Adicione um atributo "data-item-id" aos elementos do carrinho com o ID do item
+
+          if (itemNameElement.innerText === itemIdentification || itemID === itemIdentification) {
+            return {
+              cartItem: cartItem,
+              quantityElement: cartItem.querySelector('.item-info p.quantity') // Elemento que exibe a quantidade
+            };
+          }
+        }
+
+        // Se não encontrar o item, retorne null
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      return null;
+    }
+  }, {
+    key: "updateCartTotal",
+    value: function updateCartTotal() {
+      // Implemente a lógica para calcular e atualizar o total do carrinho
+      // Percorra todos os itens no carrinho e some seus preços
+      var cartItems = document.querySelectorAll('.cart-item');
+      var total = 0;
+      cartItems.forEach(function (cartItem) {
+        var priceElement = cartItem.querySelector('.item-info p');
+        var itemPrice = parseFloat(priceElement.innerText.replace('Preço: R$ ', ''));
+        total += itemPrice;
+      });
+
+      // Atualize o elemento de exibição do total
+      var cartTotalElement = document.getElementById('cart-total');
+      cartTotalElement.innerText = "R$ ".concat(total.toFixed(2));
+    }
+  }, {
+    key: "saveCartToLocalStorage",
+    value: function saveCartToLocalStorage() {
+      var cartItems = document.querySelectorAll('.cart-item');
+      var cartData = [];
+      cartItems.forEach(function (cartItem) {
+        var itemNameElement = cartItem.querySelector('h3');
+        var itemPriceElement = cartItem.querySelector('.item-info p');
+        var itemQuantityElement = cartItem.querySelector('.item-quantity input');
+        var itemName = itemNameElement.innerText;
+        var itemPrice = parseFloat(itemPriceElement.innerText.replace('Preço: R$ ', ''));
+        var itemQuantity = parseInt(itemQuantityElement.value);
+        cartData.push({
+          name: itemName,
+          price: itemPrice,
+          quantity: itemQuantity
+        });
+      });
+      localStorage.setItem('cartData', JSON.stringify(cartData));
+    }
+  }, {
+    key: "removeCartItem",
+    value: function removeCartItem(cartItem) {
+      // Encontre o elemento pai do item do carrinho para removê-lo
+      var cartItems = document.getElementById('cart-items');
+      cartItems.removeChild(cartItem);
+
+      // Depois de remover o item, salve o carrinho atualizado no localStorage
+      this.saveCartToLocalStorage();
+    }
+  }, {
+    key: "loadCartFromLocalStorage",
+    value: function loadCartFromLocalStorage() {
+      var _this2 = this;
+      var cartData = localStorage.getItem('cartData');
+      if (cartData) {
+        var parsedData = JSON.parse(cartData);
+        parsedData.forEach(function (item) {
+          _this2.addItemToCart(item.name, item.price, item.quantity);
+        });
+      }
+    }
+  }, {
+    key: "criaErro",
+    value: function criaErro(input, mensagem) {
+      // Verifique se já existe uma mensagem de erro para este campo
+      var erroExistente = input.nextElementSibling;
+
+      // Se não houver uma mensagem de erro, crie uma
+      if (!erroExistente || !erroExistente.classList.contains('text-error')) {
+        var div = document.createElement('div');
+        div.innerText = mensagem;
+        div.classList.add('text-error');
+        input.insertAdjacentElement('afterend', div);
+      } else {
+        // Se já houver uma mensagem de erro, atualize seu texto
+        erroExistente.innerText = mensagem;
+      }
+    }
+  }]);
+  return tools;
+}();
+
 
 /***/ }),
 
@@ -11994,8 +12349,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_ferramentas_icon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modules/ferramentas/icon */ "./src/modules/ferramentas/icon.js");
 /* harmony import */ var quill__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! quill */ "./node_modules/quill/dist/quill.js");
 /* harmony import */ var quill__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(quill__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modules/ferramentas/navBarImport */ "./src/modules/ferramentas/navBarImport.js");
-/* harmony import */ var _modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _modules_ferramentas_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modules/ferramentas/tools */ "./src/modules/ferramentas/tools.js");
+/* harmony import */ var _modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modules/ferramentas/navBarImport */ "./src/modules/ferramentas/navBarImport.js");
+/* harmony import */ var _modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_modules_ferramentas_navBarImport__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _modules_ferramentas_navBarConfig__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../modules/ferramentas/navBarConfig */ "./src/modules/ferramentas/navBarConfig.js");
+
+
 
 
 
@@ -12004,12 +12363,8 @@ var username = sessionStorage.getItem("username");
 var itemName = document.querySelector('.item-name');
 var filter = document.querySelector('.item-filter');
 var price = document.querySelector('.price');
-var count = document.querySelector('.item-quant');
-var addButton = document.querySelector('.add');
-var subtractButton = document.querySelector('.subtract');
 var imgContent = document.querySelector('.img-content');
 var imgDiv = document.querySelector('.img');
-var img = document.querySelector('#main-image');
 var descriptionContainer = document.querySelector('.input-comment');
 var seallerName = document.querySelector('.sealler-name');
 var data = JSON.parse(sessionStorage.getItem("clickedItem"));
@@ -12020,6 +12375,8 @@ var formattedPrice = numericPrice.toLocaleString('pt-BR', {
   style: 'currency',
   currency: 'BRL'
 });
+
+// ----------------------------------------- descrição
 
 // Criar o editor Quill e definir o conteúdo como somente leitura
 var quill = new (quill__WEBPACK_IMPORTED_MODULE_2___default())(descriptionContainer, {
@@ -12040,64 +12397,122 @@ itemName.innerText = data.name;
 filter.innerText = data.category;
 price.innerText = formattedPrice;
 
-// Função para criar uma estrela
-function createStar(value, isActive) {
-  var star = document.createElement('span');
-  star.classList.add('star');
-  star.innerHTML = '&#9733;';
-  if (isActive) {
-    star.classList.add('active');
+// ----------------------------------------- botões
+
+// Selecionar o elemento input e os botões de incremento e decremento
+var countInput = document.querySelector('.item-quant');
+var addButton = document.querySelector('.add');
+var subtractButton = document.querySelector('.subtract');
+
+// Definir o valor padrão e o valor máximo
+countInput.value = 0;
+countInput.max = 9999;
+var incrementInterval;
+var decrementInterval;
+var incrementCount = function incrementCount() {
+  var currentValue = parseInt(countInput.value);
+  if (currentValue < parseInt(data.amount)) {
+    countInput.value = currentValue + 1;
   }
-  star.dataset.value = value;
-  return star;
+};
+var decrementCount = function decrementCount() {
+  var currentValue = parseInt(countInput.value);
+  if (currentValue > 0) {
+    countInput.value = currentValue - 1;
+  }
+};
+
+// Adicionar manipuladores de eventos para os botões de incremento e decremento
+addButton.addEventListener('mousedown', function () {
+  incrementInterval = setInterval(incrementCount, 100);
+});
+subtractButton.addEventListener('mousedown', function () {
+  decrementInterval = setInterval(decrementCount, 100);
+});
+
+// Adicionar manipuladores de eventos de "parar" ao soltar ou sair do elemento
+var stopInterval = function stopInterval() {
+  clearInterval(incrementInterval);
+  clearInterval(decrementInterval);
+};
+addButton.addEventListener('mouseup', stopInterval);
+subtractButton.addEventListener('mouseup', stopInterval);
+addButton.addEventListener('mouseleave', stopInterval);
+subtractButton.addEventListener('mouseleave', stopInterval);
+addButton.addEventListener('touchstart', function () {
+  incrementInterval = setInterval(incrementCount, 100);
+});
+subtractButton.addEventListener('touchstart', function () {
+  decrementInterval = setInterval(decrementCount, 100);
+});
+addButton.addEventListener('touchend', stopInterval);
+subtractButton.addEventListener('touchend', stopInterval);
+
+// ----------------------------------------- imagem
+
+// Função para criar uma imagem e adicioná-la ao elemento especificado
+function createAndAppendImage(element, src) {
+  var img = document.createElement('img');
+  img.src = src ? 'https://via.placeholder.com/150x150?text=Produto' : '';
+  var imgReview = document.createElement('li');
+  imgReview.className = 'img-review';
+  imgReview.appendChild(img);
+  element.appendChild(imgReview);
 }
 
-// Função para adicionar um novo comentário/opinião
-function addComment(comment) {
-  var feedbackList = document.querySelector('.feedback-user');
-  var li = document.createElement('li');
-  li.innerHTML = "\n        <div class=\"user-profile\">\n            <img src=\"".concat(comment.userImage, "\" alt=\"User Image\">\n            <span>").concat(comment.userName, "</span>\n        </div>\n        <div class=\"user-comment\">\n            <div class=\"star-rating\"></div>\n            <textarea class=\"comment-text\" cols=\"80\" rows=\"3\" placeholder=\"Deixe um coment\xE1rio\"></textarea>\n            <button class=\"submit-comment\">Enviar</button>\n        </div>\n    ");
-  var starRating = li.querySelector('.star-rating');
-  for (var i = 1; i <= 5; i++) {
-    var isActive = i <= comment.rating;
-    var star = createStar(i, isActive);
-    starRating.appendChild(star);
-  }
-  feedbackList.appendChild(li);
-}
+// Criar as imagens dentro da lista ul.img-content
+createAndAppendImage(imgContent, data.img); // A primeira imagem de data.img
 
-// Event listener para clicar nas estrelas de classificação
-document.addEventListener('click', function (event) {
-  if (event.target.classList.contains('star')) {
-    var stars = event.target.parentNode.querySelectorAll('.star');
-    var clickedValue = parseInt(event.target.dataset.value);
-    stars.forEach(function (star) {
-      var value = parseInt(star.dataset.value);
-      star.classList.toggle('active', value <= clickedValue);
+// Adicionar evento de clique nas imagens para exibi-las no div.img
+imgContent.addEventListener('click', function (event) {
+  if (event.target.tagName === 'IMG') {
+    imgDiv.innerHTML = ''; // Limpar o div.img
+    var clickedImage = document.createElement('img');
+    clickedImage.src = event.target.src ? 'https://via.placeholder.com/800x600?text=Produto' : '';
+    imgDiv.appendChild(clickedImage);
+  }
+});
+
+// ----------------------------------------- carrinho de compra
+var buyButton = document.querySelector('.buttom-buy');
+var list = new _modules_ferramentas_tools__WEBPACK_IMPORTED_MODULE_3__["default"]();
+var itemQuantityAvailable = data.amount;
+function checkCountValue() {
+  if (itemQuantityAvailable <= 0) {
+    buyButton.disabled = true;
+    buyButton.style.border = "3px solid #77b02a";
+    buyButton.style.color = "#77b02a";
+    buyButton.innerText = 'Sem estoque';
+    buyButton.addEventListener('mouseover', function () {
+      buyButton.style.color = "#181818";
+      buyButton.style.background = "#3c6608";
+      buyButton.style.border = "3px solid #3c6608";
+    });
+    buyButton.addEventListener('mouseout', function () {
+      buyButton.style.border = "3px solid #77b02a";
+      buyButton.style.color = "#77b02a";
+      buyButton.style.background = "transparent";
     });
   }
-});
-
-// Event listener para enviar o comentário
-document.addEventListener('click', function (event) {
-  if (event.target.classList.contains('submit-comment')) {
-    var commentText = event.target.previousElementSibling;
-    var stars = event.target.previousElementSibling.previousElementSibling.querySelectorAll('.star.active');
-    var userName = username; // Obter o nome de usuário do usuário logado
-    // const userImage = 'https://source.unsplash.com/random/1200x720/?anime'; // Obter a imagem do usuário logado
-    var rating = stars.length;
-    var comment = {
-      userName: userName,
-      // userImage,
-      rating: rating,
-      commentText: commentText.value
+}
+if (itemQuantityAvailable > 0 && countInput != 0) {
+  buyButton.addEventListener('click', function () {
+    var itemName = data.name;
+    var itemImageSrc = data.img ? 'https://via.placeholder.com/800x600?text=Produto' : '';
+    var itemId = data.id_product;
+    var item = {
+      name: itemName,
+      price: numericPrice,
+      image: itemImageSrc,
+      id: itemId
     };
-    addComment(comment);
-
-    // Limpar o campo de comentário
-    commentText.value = '';
-  }
-});
+    var itemJSON = JSON.stringify(item);
+    var itemKey = "item_".concat(itemName, "_").concat(itemId);
+    localStorage.setItem(itemKey, itemJSON);
+    list.addItemToCart(itemName, numericPrice, itemImageSrc, countInput.value, itemId);
+  });
+}
+checkCountValue();
 })();
 
 /******/ })()

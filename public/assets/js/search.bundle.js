@@ -554,6 +554,7 @@ var navBar = document.querySelector('.nav-content');
 var username = sessionStorage.getItem('username');
 var userId = '00';
 var product = new _modules_DB_products__WEBPACK_IMPORTED_MODULE_2__["default"](userId, username);
+var baseUrl = window.location.origin;
 var searchItems = []; // Inicialize um array vazio
 
 document.addEventListener("DOMContentLoaded", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -563,7 +564,7 @@ document.addEventListener("DOMContentLoaded", /*#__PURE__*/_asyncToGenerator( /*
       case 0:
         _context.prev = 0;
         _context.next = 3;
-        return product.product('http://localhost:3000/E-gamers/src/php/getProduct.php');
+        return product.product("".concat(baseUrl, "/E-gamers/src/php/getProduct.php"));
       case 3:
         responseData = _context.sent;
         urlParams = new URLSearchParams(window.location.search);
@@ -604,7 +605,7 @@ document.addEventListener("DOMContentLoaded", /*#__PURE__*/_asyncToGenerator( /*
             });
             if (itemData) {
               sessionStorage.setItem("clickedItem", JSON.stringify(itemData));
-              window.location.href = "http://localhost:3000/E-gamers/public/html/item.html?item=".concat(encodeURIComponent(itemName));
+              window.location.href = "".concat(baseUrl, "/E-gamers/public/html/item.html?item=").concat(encodeURIComponent(itemName));
             }
           });
         });

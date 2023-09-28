@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 
     try {
         // Preparar a query de atualização
-        $query = "UPDATE product SET nome_produto = :nome_produto, categoria = :categoria, preco = :preco, quantidade = :quantidade, frete = :frete, descricao = :descricao WHERE id_product = :id_product";
+        $query = "UPDATE p  roduct SET nome_produto = :nome_produto, categoria = :categoria, preco = :preco, quantidade = :quantidade, frete = :frete, descricao = :descricao WHERE id_product = :id_product";
         $stmt = $connection->prepare($query);
 
         $stmt->bindParam(':id_product', $productId);

@@ -6,7 +6,7 @@ export default class Login {
     this.loginForm = loginForm;
     this.username = username;
     this.password = password;
-    this.user = new User(this.username, this.password);
+    this.user = new User(this.username, this.password, this.loginForm);
 
     document.addEventListener("DOMContentLoaded", () => {
       this.handleSubmit(); // Chamada ao método handleSubmit após o carregamento do DOM
@@ -14,6 +14,8 @@ export default class Login {
   }
 
   handleSubmit() {
+    const baseUrl = window.location.origin;
+
     if (!this.loginForm || !this.username || !this.password) {
       console.error("Elementos do DOM não foram encontrados.");
       return;
@@ -22,10 +24,6 @@ export default class Login {
     this.loginForm.addEventListener("submit", (element) => {
       element.preventDefault();
       
-      for (const errorText of this.loginForm.querySelectorAll(".text-error")) {
-        errorText.remove();
-      }
-
       if (this.username.value === "") {
         erro(this.username, "Campo usuário está vazio");
         return;
@@ -40,7 +38,7 @@ export default class Login {
         .login()
         .then((logado) => {
             if (logado) {
-                window.location.href = "http://localhost:3000/E-gamers/public/html";
+                window.location.href = `${baseUrl}/E-gamers/public/html`;
                 return;
             }
         })

@@ -7,6 +7,7 @@ const navBar = document.querySelector('.nav-content');
 const username = sessionStorage.getItem('username');
 const userId = '00';
 const product = new productSearch(userId, username);
+const baseUrl = window.location.origin;
 
 const searchItems = []; // Inicialize um array vazio
 
@@ -14,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
         // Obtenha os dados da resposta responseData
-        const responseData = await product.product('http://localhost:3000/E-gamers/src/php/getProduct.php');
+        const responseData = await product.product(`${baseUrl}/E-gamers/src/php/getProduct.php`);
 
         const urlParams = new URLSearchParams(window.location.search);
         const searchQuery = urlParams.get("searchQuery");
@@ -62,7 +63,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 if (itemData) {
                     sessionStorage.setItem("clickedItem", JSON.stringify(itemData));
-                    window.location.href = `http://localhost:3000/E-gamers/public/html/item.html?item=${encodeURIComponent(itemName)}`;
+                    window.location.href = `${baseUrl}/E-gamers/public/html/item.html?item=${encodeURIComponent(itemName)}`;
                 }
             });
         });

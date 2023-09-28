@@ -119,6 +119,7 @@ var User = /*#__PURE__*/function () {
     _classCallCheck(this, User);
     this.username = username;
     this.password = password;
+    this.baseUrl = window.location.origin;
   }
   _createClass(User, [{
     key: "userData",
@@ -136,7 +137,7 @@ var User = /*#__PURE__*/function () {
                 user_name: username
               };
               _context.next = 6;
-              return fetch('http://localhost:3000/E-gamers/src/php/getUserData.php', {
+              return fetch("".concat(this.baseUrl, "/E-gamers/src/php/getUserData.php"), {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json'
@@ -164,7 +165,7 @@ var User = /*#__PURE__*/function () {
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[2, 15]]);
+        }, _callee, this, [[2, 15]]);
       }));
       function userData() {
         return _userData.apply(this, arguments);
@@ -176,7 +177,7 @@ var User = /*#__PURE__*/function () {
     value: function login() {
       var _this = this;
       try {
-        return fetch('http://localhost:3000/E-gamers/src/php/usuarios.php').then(function (response) {
+        return fetch("".concat(this.baseUrl, "/E-gamers/src/php/usuarios.php")).then(function (response) {
           return response.json();
         }).then(function (data) {
           var result = [];
@@ -210,9 +211,12 @@ var User = /*#__PURE__*/function () {
                 sessionStorage.setItem('username', index.login);
                 sessionStorage.setItem('status', true);
                 valid = true;
-              } else {
-                (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_0__["default"])(_this2.username, "Usuário ou senha errados");
-                (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_0__["default"])(_this2.password, "Usuário ou senha errados");
+              }
+              if (index.login != _this2.username.value.toLowerCase()) {
+                (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_0__["default"])(_this2.username, "Usuário inválido ou errado");
+              }
+              if (index.senha != _this2.password.value.toLowerCase()) {
+                (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_0__["default"])(_this2.password, "Senha inválida ou errada");
               }
             }
           } catch (err) {
@@ -476,14 +480,208 @@ function _importModules() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ criaErro)
+/* harmony export */   "default": () => (/* binding */ tools)
 /* harmony export */ });
-function criaErro(input, mensagem) {
-  var div = document.createElement('div');
-  div.innerText = mensagem;
-  div.classList.add('text-error');
-  input.insertAdjacentElement('afterend', div);
-}
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var tools = /*#__PURE__*/function () {
+  function tools() {
+    _classCallCheck(this, tools);
+  }
+  _createClass(tools, [{
+    key: "addItemToCart",
+    value: function addItemToCart(itemName, itemPrice, itemImageSrc) {
+      var _this = this;
+      var quantity = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+      var itemIdentification = arguments.length > 4 ? arguments[4] : undefined;
+      // Selecione a lista de compra
+      var cartItems = document.getElementById('cart-items');
+
+      // Verifique se o item já está no carrinho
+      var existingCartItem = this.findCartItem(itemName);
+      if (existingCartItem) {
+        var quantityElement = existingCartItem.querySelector('.input-quantity');
+        var currentQuantity = parseInt(quantityElement.value);
+        quantityElement.value = currentQuantity + 1;
+      } else {
+        // Se o item não estiver no carrinho, crie um novo item
+        var cartItem = document.createElement('li');
+        cartItem.className = 'cart-item';
+
+        // Crie a imagem do item
+        var itemImage = document.createElement('img');
+        itemImage.src = itemImageSrc;
+        itemImage.alt = 'Item';
+
+        // Crie as informações do item
+        var itemInfo = document.createElement('div');
+        itemInfo.className = 'item-info';
+        var itemNameElement = document.createElement('h3');
+        itemNameElement.innerText = itemName;
+        var itemPriceElement = document.createElement('p');
+        itemPriceElement.innerText = "Pre\xE7o: R$ ".concat(itemPrice.toFixed(2)); // Formate o preço para 2 casas decimais
+
+        // Crie o elemento de quantidade
+        var itemQuantityElement = document.createElement('input');
+        itemQuantityElement.setAttribute('class', 'input-quantity');
+        itemQuantityElement.value = quantity;
+
+        // Crie os botões de aumento e diminuição
+        var increaseButton = document.createElement('button');
+        increaseButton.innerText = '+';
+        increaseButton.className = 'quantity-control increase';
+        var decreaseButton = document.createElement('button');
+        decreaseButton.innerText = '-';
+        decreaseButton.className = 'quantity-control decrease';
+
+        // Crie o botão de remoção
+        var itemRemoveButton = document.createElement('button');
+        itemRemoveButton.className = 'item-remove';
+        itemRemoveButton.innerHTML = '<i class="fa-solid fa-x"></i>';
+
+        // Defina o atributo data-item com o itemIdentification (nome ou ID)
+        cartItem.dataset.item = itemIdentification;
+
+        // Adicione um evento de clique para remover o item
+        itemRemoveButton.addEventListener('click', function () {
+          _this.removeCartItem(cartItem);
+        });
+
+        // Adicione os botões de quantidade ao item da lista
+        itemInfo.appendChild(itemNameElement);
+        itemInfo.appendChild(itemPriceElement);
+        itemInfo.appendChild(itemQuantityElement);
+        itemInfo.appendChild(decreaseButton); // Botão de diminuição
+        itemInfo.appendChild(increaseButton); // Botão de aumento
+        cartItem.appendChild(itemImage);
+        cartItem.appendChild(itemInfo);
+        cartItem.appendChild(itemRemoveButton);
+
+        // Adicione o item à lista de compra
+        cartItems.appendChild(cartItem);
+      }
+
+      // Atualize o total do carrinho
+      this.updateCartTotal();
+    }
+  }, {
+    key: "findCartItem",
+    value: function findCartItem(itemIdentification) {
+      // Selecione todos os itens no carrinho
+      var cartItems = document.querySelectorAll('.cart-item');
+
+      // Percorra os itens para encontrar o item com base no itemIdentification (nome ou ID)
+      var _iterator = _createForOfIteratorHelper(cartItems),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var cartItem = _step.value;
+          var itemNameElement = cartItem.querySelector('h3');
+          var itemID = cartItem.dataset.itemId; // Adicione um atributo "data-item-id" aos elementos do carrinho com o ID do item
+
+          if (itemNameElement.innerText === itemIdentification || itemID === itemIdentification) {
+            return {
+              cartItem: cartItem,
+              quantityElement: cartItem.querySelector('.item-info p.quantity') // Elemento que exibe a quantidade
+            };
+          }
+        }
+
+        // Se não encontrar o item, retorne null
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      return null;
+    }
+  }, {
+    key: "updateCartTotal",
+    value: function updateCartTotal() {
+      // Implemente a lógica para calcular e atualizar o total do carrinho
+      // Percorra todos os itens no carrinho e some seus preços
+      var cartItems = document.querySelectorAll('.cart-item');
+      var total = 0;
+      cartItems.forEach(function (cartItem) {
+        var priceElement = cartItem.querySelector('.item-info p');
+        var itemPrice = parseFloat(priceElement.innerText.replace('Preço: R$ ', ''));
+        total += itemPrice;
+      });
+
+      // Atualize o elemento de exibição do total
+      var cartTotalElement = document.getElementById('cart-total');
+      cartTotalElement.innerText = "R$ ".concat(total.toFixed(2));
+    }
+  }, {
+    key: "saveCartToLocalStorage",
+    value: function saveCartToLocalStorage() {
+      var cartItems = document.querySelectorAll('.cart-item');
+      var cartData = [];
+      cartItems.forEach(function (cartItem) {
+        var itemNameElement = cartItem.querySelector('h3');
+        var itemPriceElement = cartItem.querySelector('.item-info p');
+        var itemQuantityElement = cartItem.querySelector('.item-quantity input');
+        var itemName = itemNameElement.innerText;
+        var itemPrice = parseFloat(itemPriceElement.innerText.replace('Preço: R$ ', ''));
+        var itemQuantity = parseInt(itemQuantityElement.value);
+        cartData.push({
+          name: itemName,
+          price: itemPrice,
+          quantity: itemQuantity
+        });
+      });
+      localStorage.setItem('cartData', JSON.stringify(cartData));
+    }
+  }, {
+    key: "removeCartItem",
+    value: function removeCartItem(cartItem) {
+      // Encontre o elemento pai do item do carrinho para removê-lo
+      var cartItems = document.getElementById('cart-items');
+      cartItems.removeChild(cartItem);
+
+      // Depois de remover o item, salve o carrinho atualizado no localStorage
+      this.saveCartToLocalStorage();
+    }
+  }, {
+    key: "loadCartFromLocalStorage",
+    value: function loadCartFromLocalStorage() {
+      var _this2 = this;
+      var cartData = localStorage.getItem('cartData');
+      if (cartData) {
+        var parsedData = JSON.parse(cartData);
+        parsedData.forEach(function (item) {
+          _this2.addItemToCart(item.name, item.price, item.quantity);
+        });
+      }
+    }
+  }, {
+    key: "criaErro",
+    value: function criaErro(input, mensagem) {
+      // Verifique se já existe uma mensagem de erro para este campo
+      var erroExistente = input.nextElementSibling;
+
+      // Se não houver uma mensagem de erro, crie uma
+      if (!erroExistente || !erroExistente.classList.contains('text-error')) {
+        var div = document.createElement('div');
+        div.innerText = mensagem;
+        div.classList.add('text-error');
+        input.insertAdjacentElement('afterend', div);
+      } else {
+        // Se já houver uma mensagem de erro, atualize seu texto
+        erroExistente.innerText = mensagem;
+      }
+    }
+  }]);
+  return tools;
+}();
+
 
 /***/ }),
 
@@ -12371,11 +12569,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 if (sessionStorage.getItem("status") != "true") {
-  window.location.href = "http://localhost:3000/E-gamers/public/html/index.html";
+  window.location.href = "".concat(baseUrl, "/E-gamers/public/html/index.html");
 }
 
-// ----------------------------------------------------- Const
-var userId = parseInt(sessionStorage.getItem('id_usuario'));
+// ----------------------------------------------------- Const and var
+var userId = parseInt(sessionStorage.getItem("id_usuario"));
 var username = sessionStorage.getItem("username");
 var productForm = document.querySelector("#addProduct");
 var perfilName = document.querySelector(".perfil-name");
@@ -12384,13 +12582,15 @@ var label = document.querySelector(".page-label");
 var buttonAdd = document.querySelector(".button-add");
 var inputFile = document.querySelector(".picture__input");
 var pictureImage = document.querySelector(".picture__image");
-var secondGrid = document.querySelector('.second-grid');
-var accountConfig = document.querySelector('.account-config');
-var itens = document.querySelector('.itens');
-var inputNickname = document.querySelector('.nickname');
-var inputPhone = document.querySelector('.telefone');
-var inputCpf = document.querySelector('.cpf');
-var inputEmail = document.querySelector('.email');
+var secondGrid = document.querySelector(".second-grid");
+var accountConfig = document.querySelector(".account-config");
+var itens = document.querySelector(".itens");
+var baseUrl = window.location.origin;
+var inputNickname = document.querySelector(".nickname");
+var inputPhone = document.querySelector(".telefone");
+var inputCpf = document.querySelector(".cpf");
+var inputEmail = document.querySelector(".email");
+var isEditMode = false;
 
 // ----------------------------------------------------- object
 var products = new _modules_DB_products__WEBPACK_IMPORTED_MODULE_2__["default"](userId);
@@ -12443,12 +12643,17 @@ document.addEventListener("click", function (element) {
     showMyPurchases(); // Exibir produtos comprados pelo usuário
   }
 
-  if (event.target.classList.contains("button-add")) {
-    openAddPopup(); // Nova função para abrir o popup de adição
+  if (element.target.classList.contains("button-add") && !isEditMode) {
+    openAddPopup();
   }
-
   if (element.target.classList.contains("close-popup")) {
     closePopup();
+    isEditMode = false;
+    var saveButton = document.querySelector(".popup .edit-product");
+    var popupTitle = document.querySelector(".popup h2.layout-h2");
+    saveButton.style.display = "none"; // Defina o estilo do botão para "block"
+
+    popupTitle.innerText = "Adicionar Produto";
   }
   if (element.target.classList.contains("add-product")) {
     addProduct();
@@ -12460,7 +12665,7 @@ document.addEventListener("click", function (element) {
   if (element.target.classList.contains("exit")) {
     var exit = false;
     sessionStorage.setItem("status", exit);
-    window.location.href = "http://localhost:3000/E-gamers/public/html/index.html";
+    window.location.href = "".concat(baseUrl, "/E-gamers/public/html/index.html");
   }
 });
 window.addEventListener("load", function () {
@@ -12482,30 +12687,26 @@ function clearPopupFields() {
   var productNameInput = document.querySelector('.popup input[name="name"]');
   var productPriceInput = document.querySelector('.popup input[name="price"]');
   var productCategoryInput = document.querySelector('.popup input[name="category"]');
-  var productPortableToggleInput = document.querySelector('.popup .switch-label .switch #toggle-input');
-  var productDescriptionInput = document.querySelector('.popup #editor .ql-editor');
+  var productPortableToggleInput = document.querySelector(".popup .switch-label .switch #toggle-input");
+  var productDescriptionInput = document.querySelector(".popup #editor .ql-editor");
   var productAmoutInput = document.querySelector('.popup input[name="amount"]');
-  productNameInput.value = '';
-  productPriceInput.value = '';
-  productCategoryInput.value = '';
+  productNameInput.value = "";
+  productPriceInput.value = "";
+  productCategoryInput.value = "";
   productPortableToggleInput.checked = false;
-  productDescriptionInput.innerHTML = '';
-  productAmoutInput.value = '';
+  productDescriptionInput.innerHTML = "";
+  productAmoutInput.value = "";
 }
 
 // Abrir Popup
 function openAddPopup() {
-  var popupTitle = document.querySelector(".popup h2.layout-h2");
   var saveButton = document.querySelector(".popup .add-product");
-  saveButton.style.display = "block"; // Defina o estilo do botão para "flex"
-  saveButton.innerText = "Adicionar"; // Altere o texto do botão para "Adicionar Produto"
+  saveButton.style.display = "block";
+  var editButton = document.querySelector(".popup .edit-product");
+  editButton.style.display = "none";
 
   // Limpe os campos do popup
   clearPopupFields();
-  popupTitle.innerText = "Adicionar Novo Produto";
-  openPopup();
-}
-function openPopup() {
   var pop = document.querySelector("#popup").style.display = "block";
 }
 
@@ -12513,9 +12714,9 @@ function openPopup() {
 function closePopup() {
   var popup = document.querySelector("#popup");
   popup.style.display = "none";
-  var inputFields = productForm.querySelectorAll('input, textarea');
+  var inputFields = productForm.querySelectorAll("input, textarea");
   inputFields.forEach(function (input) {
-    input.value = '';
+    input.value = "";
   });
 }
 
@@ -12524,67 +12725,67 @@ function closePopup() {
 var quillOptions = {
   modules: {
     toolbar: [[{
-      'font': []
+      font: []
     }], [{
-      'header': [1, 2, 3, 4, 5, 6, false]
+      header: [1, 2, 3, 4, 5, 6, false]
     }], [{
-      'size': ['small', false, 'large', 'huge']
+      size: ["small", false, "large", "huge"]
     }],
     // custom dropdown
 
-    ['bold', 'italic', 'underline', 'strike'],
+    ["bold", "italic", "underline", "strike"],
     // toggled buttons
-    ['blockquote', 'code-block'], [{
-      'header': 1
+    ["blockquote", "code-block"], [{
+      header: 1
     }, {
-      'header': 2
+      header: 2
     }],
     // custom button values
     [{
-      'list': 'ordered'
+      list: "ordered"
     }, {
-      'list': 'bullet'
+      list: "bullet"
     }], [{
-      'script': 'sub'
+      script: "sub"
     }, {
-      'script': 'super'
+      script: "super"
     }],
     // superscript/subscript
     [{
-      'indent': '-1'
+      indent: "-1"
     }, {
-      'indent': '+1'
+      indent: "+1"
     }],
     // outdent/indent
     [{
-      'direction': 'rtl'
+      direction: "rtl"
     }],
     // text direction
 
     [{
-      'color': []
+      color: []
     }, {
-      'background': []
+      background: []
     }],
     // dropdown with defaults from theme
     [{
-      'align': []
-    }], ['clean'] // remove formatting button
+      align: []
+    }], ["clean"] // remove formatting button
     ]
   },
 
-  placeholder: 'Descrição',
-  theme: 'snow'
+  placeholder: "Descrição",
+  theme: "snow"
 };
-var quill = new (quill__WEBPACK_IMPORTED_MODULE_6___default())('#editor', quillOptions);
+var quill = new (quill__WEBPACK_IMPORTED_MODULE_6___default())("#editor", quillOptions);
 
 // ----------------------------------------------------- Lógica para adicionar o produto
 
-var toggleInput = document.getElementById('toggle-input');
-var sendData = document.getElementById('send-data'); // Adicione um id ao botão que envia os dados
+var toggleInput = document.getElementById("toggle-input");
+var sendData = document.getElementById("send-data"); // Adicione um id ao botão que envia os dados
 
 var freteGratis = false;
-toggleInput.addEventListener('change', function () {
+toggleInput.addEventListener("change", function () {
   freteGratis = !freteGratis;
 });
 function addProduct() {
@@ -12610,16 +12811,15 @@ function _addProduct() {
           } finally {
             _iterator.f();
           }
-          jsonData['seller_id'] = userId;
-          jsonData['seller_name'] = username;
-          jsonData['description'] = description;
-          jsonData['frete_gratis'] = freteGratis ? 1 : 0;
+          jsonData["seller_id"] = userId;
+          jsonData["seller_name"] = username;
+          jsonData["description"] = description;
+          jsonData["frete_gratis"] = freteGratis ? 1 : 0;
 
           // Verificar se o dado do formData é uma imagem
           if (formData.get("image") instanceof File) {
             // Salvar a imagem no cache do navegador
             fileReader = new FileReader();
-            console.log(jsonData);
             fileReader.onload = function (event) {
               var base64Image = event.target.result;
               jsonData["image"] = base64Image;
@@ -12637,7 +12837,6 @@ function _addProduct() {
   }));
   return _addProduct.apply(this, arguments);
 }
-;
 function sendDataToPHP(_x) {
   return _sendDataToPHP.apply(this, arguments);
 } // ----------------------------------------------------- Get Produtos
@@ -12649,7 +12848,7 @@ function _sendDataToPHP() {
         case 0:
           _context3.prev = 0;
           _context3.next = 3;
-          return fetch("http://localhost:3000/E-gamers/src/php/enviarProduto.php", {
+          return fetch("".concat(baseUrl, "/E-gamers/src/php/enviarProduto.php"), {
             method: "POST",
             body: JSON.stringify(jsonData),
             headers: {
@@ -12669,21 +12868,22 @@ function _sendDataToPHP() {
         case 8:
           data = _context3.sent;
           console.log(data);
-          if (data.message.includes("Produto adicionado com sucesso")) {
-            closePopup();
-            updateProductList(); // Atualizar a lista de produtos
-          }
-          _context3.next = 16;
+
+          // if(data.message.includes("Produto adicionado com sucesso")) {
+          //   closePopup();
+          //   updateProductList(); // Atualizar a lista de produtos
+          // }
+          _context3.next = 15;
           break;
-        case 13:
-          _context3.prev = 13;
+        case 12:
+          _context3.prev = 12;
           _context3.t0 = _context3["catch"](0);
           console.error(_context3.t0);
-        case 16:
+        case 15:
         case "end":
           return _context3.stop();
       }
-    }, _callee3, null, [[0, 13]]);
+    }, _callee3, null, [[0, 12]]);
   }));
   return _sendDataToPHP.apply(this, arguments);
 }
@@ -12696,14 +12896,14 @@ function _createProductList() {
     return _regeneratorRuntime().wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
-          itemList = document.querySelector('.itens ul');
-          itemList.innerHTML = '';
+          itemList = document.querySelector(".itens ul");
+          itemList.innerHTML = "";
           for (_i2 = 0, _Object$entries = Object.entries(responseData.products); _i2 < _Object$entries.length; _i2++) {
             _Object$entries$_i = _slicedToArray(_Object$entries[_i2], 2), id = _Object$entries$_i[0], dado = _Object$entries$_i[1];
             productId = parseInt(id) + 1;
             item = new _modules_ferramentas_layoutItem__WEBPACK_IMPORTED_MODULE_3__["default"](dado.nome_produto, dado.imagem);
             liElement = item.createLi();
-            liElement.setAttribute('data-id', dado.id_product);
+            liElement.setAttribute("data-id", dado.id_product);
             itemList.appendChild(liElement);
           }
         case 3:
@@ -12726,7 +12926,7 @@ function _showMyProducts() {
           _context5.prev = 0;
           clearProductList();
           _context5.next = 4;
-          return products.product('http://localhost:3000/E-gamers/src/php/getProduct.php');
+          return products.product("".concat(baseUrl, "/E-gamers/src/php/getProduct.php"));
         case 4:
           responseData = _context5.sent;
           createProductList(responseData);
@@ -12756,7 +12956,7 @@ function _showMyPurchases() {
           _context6.prev = 0;
           clearProductList();
           _context6.next = 4;
-          return products.product('http://localhost:3000/E-gamers/src/php/getPurchasedProduct.php');
+          return products.product("".concat(baseUrl, "/E-gamers/src/php/getPurchasedProduct.php"));
         case 4:
           responseData = _context6.sent;
           createProductList(responseData);
@@ -12785,7 +12985,7 @@ function _updateProductList() {
         case 0:
           _context7.prev = 0;
           _context7.next = 3;
-          return products.product('http://localhost:3000/E-gamers/src/php/getProduct.php');
+          return products.product("".concat(baseUrl, "/E-gamers/src/php/getProduct.php"));
         case 3:
           responseData = _context7.sent;
           createProductList(responseData);
@@ -12804,19 +13004,21 @@ function _updateProductList() {
   return _updateProductList.apply(this, arguments);
 }
 function clearProductList() {
-  var productList = document.querySelector('ul');
-  productList.innerHTML = '';
+  var productList = document.querySelector("ul");
+  productList.innerHTML = "";
 }
 
 // ----------------------------------------------------- Edit
 
-document.addEventListener('click', function (event) {
-  if (event.target.classList.contains('fa-gear')) {
-    var productId = event.target.closest('li').getAttribute('data-id');
+document.addEventListener("click", function (event) {
+  if (event.target.classList.contains("fa-gear")) {
+    var productId = event.target.closest("li").getAttribute("data-id");
+    isEditMode = true;
+    var pop = document.querySelector("#popup").style.display = "block";
     openEditPopup(productId);
   }
-  if (event.target.classList.contains('fa-trash')) {
-    var _productId = event.target.closest('li').getAttribute('data-id');
+  if (event.target.classList.contains("fa-trash")) {
+    var _productId = event.target.closest("li").getAttribute("data-id");
     deleteProduct(_productId);
   }
 });
@@ -12825,7 +13027,6 @@ document.addEventListener('click', function (event) {
 function openEditPopup(productId) {
   var popupTitle = document.querySelector(".popup h2.layout-h2");
   var saveButton = document.querySelector(".popup .edit-product");
-  saveButton.innerText = "Salvar Alteração"; // Mantenha o texto do botão como "Salvar Alteração"
   saveButton.style.display = "block"; // Defina o estilo do botão para "block"
   saveButton.setAttribute("data-product-id", productId); // Defina o atributo data-product-id
 
@@ -12835,8 +13036,8 @@ function openEditPopup(productId) {
     var productNameInput = document.querySelector('.popup input[name="name"]');
     var productPriceInput = document.querySelector('.popup input[name="price"]');
     var productCategoryInput = document.querySelector('.popup input[name="category"]');
-    var productPortableToggleInput = document.querySelector('.popup .switch-label .switch #toggle-input');
-    var productDescriptionInput = document.querySelector('.popup #editor .ql-editor');
+    var productPortableToggleInput = document.querySelector(".popup .switch-label .switch #toggle-input");
+    var productDescriptionInput = document.querySelector(".popup #editor .ql-editor");
     var productAmoutInput = document.querySelector('.popup input[name="amount"]');
     popupTitle.innerText = "Editar Produto - ".concat(productDetails.product.nome_produto);
     productNameInput.value = productDetails.product.nome_produto;
@@ -12844,8 +13045,8 @@ function openEditPopup(productId) {
     productPriceInput.value = parseInt(productDetails.product.preco);
     productAmoutInput.value = parseInt(productDetails.product.quantidade);
     productDescriptionInput.innerHTML = productDetails.product.descricao;
-    productPortableToggleInput.checked = productDetails.product.frete === '1';
-    saveButton.addEventListener('click', /*#__PURE__*/function () {
+    productPortableToggleInput.checked = productDetails.product.frete === "1";
+    saveButton.addEventListener("click", /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(event) {
         var productId, productNameInput, productPriceInput, productCategoryInput, productAmoutInput, productPortableToggleInput, productDescriptionInput, updatedProduct, response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -12854,13 +13055,13 @@ function openEditPopup(productId) {
               event.preventDefault();
 
               // Obter os campos do popup
-              productId = saveButton.getAttribute('data-product-id');
+              productId = saveButton.getAttribute("data-product-id");
               productNameInput = document.querySelector('.popup input[name="name"]');
               productPriceInput = document.querySelector('.popup input[name="price"]');
               productCategoryInput = document.querySelector('.popup input[name="category"]');
               productAmoutInput = document.querySelector('.popup input[name="amount"]');
-              productPortableToggleInput = document.querySelector('.popup .switch-label .switch #toggle-input');
-              productDescriptionInput = document.querySelector('.popup #editor .ql-editor');
+              productPortableToggleInput = document.querySelector(".popup .switch-label .switch #toggle-input");
+              productDescriptionInput = document.querySelector(".popup #editor .ql-editor");
               updatedProduct = {
                 id_product: productId,
                 // Adicione o ID do produto aqui
@@ -12879,8 +13080,11 @@ function openEditPopup(productId) {
               if (response.ok) {
                 closePopup(); // Feche o popup após a atualização
                 updateProductList(); // Atualize a lista de produtos
+                isEditMode = false;
+                saveButton.style.display = "none";
+                popupTitle.innerText = "Adicionar Produto";
               } else {
-                console.error('Erro ao atualizar o produto');
+                console.error("Erro ao atualizar o produto");
               }
               _context.next = 19;
               break;
@@ -12898,7 +13102,6 @@ function openEditPopup(productId) {
         return _ref.apply(this, arguments);
       };
     }());
-    openPopup(); // Exiba o popup de edição
   })["catch"](function (err) {
     console.log(err);
   });
@@ -12916,7 +13119,7 @@ function _getProductDetails() {
         case 0:
           _context8.prev = 0;
           _context8.next = 3;
-          return fetch("http://localhost:3000/E-gamers/src/php/getProductDetail.php?id_product=".concat(productId));
+          return fetch("".concat(baseUrl, "/E-gamers/src/php/getProductDetail.php?id_product=").concat(productId));
         case 3:
           response = _context8.sent;
           if (!response.ok) {
@@ -12929,7 +13132,7 @@ function _getProductDetails() {
           productDetails = _context8.sent;
           return _context8.abrupt("return", productDetails);
         case 11:
-          throw new Error('Erro ao obter detalhes do produto');
+          throw new Error("Erro ao obter detalhes do produto");
         case 12:
           _context8.next = 17;
           break;
@@ -12956,12 +13159,11 @@ function _updateProductDetails() {
         case 0:
           _context9.prev = 0;
           _context9.next = 3;
-          return fetch('http://localhost:3000/E-gamers/src/php/putProduct.php', {
-            method: 'PUT',
-            // Use o método HTTP PUT para atualização
+          return fetch("".concat(baseUrl, "/E-gamers/src/php/putProduct.php"), {
+            method: "PUT",
             body: JSON.stringify(updatedProduct),
             headers: {
-              'Content-Type': 'application/json'
+              "Content-Type": "application/json"
             }
           });
         case 3:
@@ -12981,7 +13183,7 @@ function _updateProductDetails() {
 }
 function deleteProduct(_x6) {
   return _deleteProduct.apply(this, arguments);
-} // ----------------------------------------------------- Barra de pesquisa 
+} // ----------------------------------------------------- Barra de pesquisa
 function _deleteProduct() {
   _deleteProduct = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10(productId) {
     var response;
@@ -12990,7 +13192,7 @@ function _deleteProduct() {
         case 0:
           _context10.prev = 0;
           _context10.next = 3;
-          return fetch("http://localhost:3000/E-gamers/src/php/deleteProduct.php?id_product=".concat(productId), {
+          return fetch("".concat(baseUrl, "/E-gamers/src/php/deleteProduct.php?id_product=").concat(productId), {
             method: "DELETE"
           });
         case 3:
@@ -13015,36 +13217,36 @@ function _deleteProduct() {
   }));
   return _deleteProduct.apply(this, arguments);
 }
-var consultBar = document.querySelector('.consult-bar');
-consultBar.addEventListener('input', function () {
+var consultBar = document.querySelector(".consult-bar");
+consultBar.addEventListener("input", function () {
   var searchTerm = consultBar.value.toLowerCase();
   filterItems(searchTerm);
 });
 function filterItems(searchTerm) {
-  var itemList = document.querySelector('.itens ul');
-  var items = itemList.querySelectorAll('.layout-item');
+  var itemList = document.querySelector(".itens ul");
+  var items = itemList.querySelectorAll(".layout-item");
   items.forEach(function (item) {
-    var itemName = item.querySelector('.product-label').innerText.toLowerCase();
+    var itemName = item.querySelector(".product-label").innerText.toLowerCase();
     if (itemName.includes(searchTerm)) {
-      item.style.display = 'flex';
+      item.style.display = "flex";
     } else {
-      item.style.display = 'none';
+      item.style.display = "none";
     }
   });
 }
-consultBar.addEventListener('input', function () {
+consultBar.addEventListener("input", function () {
   var searchTerm = consultBar.value.toLowerCase();
-  if (searchTerm === '') {
+  if (searchTerm === "") {
     showAllItems();
   } else {
     filterItems(searchTerm);
   }
 });
 function showAllItems() {
-  var itemList = document.querySelector('.itens ul');
-  var items = itemList.querySelectorAll('.layout-item');
+  var itemList = document.querySelector(".itens ul");
+  var items = itemList.querySelectorAll(".layout-item");
   items.forEach(function (item) {
-    item.style.display = 'flex';
+    item.style.display = "flex";
   });
 }
 
@@ -13054,33 +13256,33 @@ function showAllItems() {
 function maskCpf(cpf) {
   var visibleDigits = cpf.substring(0, cpf.length - 2);
   var lastDigits = cpf.slice(-2);
-  var maskedDigits = '*'.repeat(3); // Total de dígitos visíveis
+  var maskedDigits = "*".repeat(3); // Total de dígitos visíveis
 
   return "".concat(maskedDigits, ".").concat(maskedDigits, ".").concat(maskedDigits, "-").concat(lastDigits);
 }
 
 // Função para formatar o email
 function formatEmail(email) {
-  var atIndex = email.indexOf('@');
-  var maskedEmail = email.split('').map(function (_char, index) {
+  var atIndex = email.indexOf("@");
+  var maskedEmail = email.split("").map(function (_char, index) {
     if (index >= 3 && index < atIndex) {
-      return '*';
+      return "*";
     } else {
       return _char;
     }
   });
-  return maskedEmail.join('');
+  return maskedEmail.join("");
 }
 function maskPhoneNumber(phoneNumber) {
   // Remove todos os caracteres não numéricos do número de telefone
-  var numericPhone = phoneNumber.replace(/\D/g, '');
+  var numericPhone = phoneNumber.replace(/\D/g, "");
   if (numericPhone.length === 11) {
     // Para números com DDD, aplica a máscara (##) #####-####
-    var maskedPhone = numericPhone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    var maskedPhone = numericPhone.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
     return maskedPhone;
   } else {
     // Para outros números, retorna (00) 00000-0000
-    return '(00) 00000-0000';
+    return "(00) 00000-0000";
   }
 }
 var userObject = new _modules_DB_users__WEBPACK_IMPORTED_MODULE_5__["default"]();
@@ -13096,10 +13298,10 @@ try {
     inputCpf.value = maskCpf(userData.cpf);
     inputEmail.value = formatEmail(userData.email);
   })["catch"](function (error) {
-    console.error('Erro ao obter os dados do usuário:', error);
+    console.error("Erro ao obter os dados do usuário:", error);
   });
 } catch (error) {
-  console.error('Erro ao processar os dados:', error);
+  console.error("Erro ao processar os dados:", error);
 }
 })();
 

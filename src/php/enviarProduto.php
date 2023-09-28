@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Decodificar a imagem em base64 e salvar no servidor
-    if ($imagemJson != 'data:') {
+    if ($imagemJson != 'data:application/octet-stream;base64,') {
         $imagemBase64 = explode(',', $imagemJson);
         $imagemDecodificada = base64_decode($imagemBase64[1]);
 

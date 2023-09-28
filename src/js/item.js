@@ -1,19 +1,17 @@
 import "../assets/css/buying-item.css";
 import Icon from "../modules/ferramentas/icon";
 import Quill from "quill";
+import tool from "../modules/ferramentas/tools";
 import "../modules/ferramentas/navBarImport";
+import navBarConfigs from "../modules/ferramentas/navBarConfig";
 
 const username = sessionStorage.getItem("username");
 
 const itemName = document.querySelector('.item-name');
 const filter = document.querySelector('.item-filter');
 const price = document.querySelector('.price');
-const count = document.querySelector('.item-quant');
-const addButton = document.querySelector('.add');
-const subtractButton = document.querySelector('.subtract');
 const imgContent = document.querySelector('.img-content');
 const imgDiv = document.querySelector('.img');
-const img = document.querySelector('#main-image');
 const descriptionContainer = document.querySelector('.input-comment');
 const seallerName = document.querySelector('.sealler-name');
 
@@ -25,6 +23,8 @@ const formattedPrice = numericPrice.toLocaleString('pt-BR', {
     style: 'currency',
     currency: 'BRL' 
 });
+
+// ----------------------------------------- descrição
 
 // Criar o editor Quill e definir o conteúdo como somente leitura
 const quill = new Quill(descriptionContainer, {
@@ -47,82 +47,143 @@ itemName.innerText = data.name;
 filter.innerText = data.category;
 price.innerText = formattedPrice;
 
+// ----------------------------------------- botões
 
-// Função para criar uma estrela
-function createStar(value, isActive) {
-    const star = document.createElement('span');
-    star.classList.add('star');
-    star.innerHTML = '&#9733;';
+// Selecionar o elemento input e os botões de incremento e decremento
+const countInput = document.querySelector('.item-quant');
+const addButton = document.querySelector('.add');
+const subtractButton = document.querySelector('.subtract');
 
-    if (isActive) {
-        star.classList.add('active');
+// Definir o valor padrão e o valor máximo
+countInput.value = 0;
+countInput.max = 9999;
+
+let incrementInterval;
+let decrementInterval;
+
+const incrementCount = () => {
+    const currentValue = parseInt(countInput.value);
+    if (currentValue < parseInt(data.amount)) {
+        countInput.value = currentValue + 1;
     }
+};
 
-    star.dataset.value = value;
+const decrementCount = () => {
+    const currentValue = parseInt(countInput.value);
+    if (currentValue > 0) {
+        countInput.value = currentValue - 1;
+    }
+};
 
-    return star;
+// Adicionar manipuladores de eventos para os botões de incremento e decremento
+addButton.addEventListener('mousedown', () => {
+    incrementInterval = setInterval(incrementCount, 100);
+});
+
+subtractButton.addEventListener('mousedown', () => {
+    decrementInterval = setInterval(decrementCount, 100);
+});
+
+// Adicionar manipuladores de eventos de "parar" ao soltar ou sair do elemento
+const stopInterval = () => {
+    clearInterval(incrementInterval);
+    clearInterval(decrementInterval);
+};
+
+addButton.addEventListener('mouseup', stopInterval);
+subtractButton.addEventListener('mouseup', stopInterval);
+
+addButton.addEventListener('mouseleave', stopInterval);
+subtractButton.addEventListener('mouseleave', stopInterval);
+
+addButton.addEventListener('touchstart', () => {
+    incrementInterval = setInterval(incrementCount, 100);
+});
+
+subtractButton.addEventListener('touchstart', () => {
+    decrementInterval = setInterval(decrementCount, 100);
+});
+
+addButton.addEventListener('touchend', stopInterval);
+subtractButton.addEventListener('touchend', stopInterval);
+
+
+// ----------------------------------------- imagem
+
+// Função para criar uma imagem e adicioná-la ao elemento especificado
+function createAndAppendImage(element, src) {
+    const img = document.createElement('img');
+    img.src = src ? 'https://via.placeholder.com/150x150?text=Produto' : '';
+    
+    const imgReview = document.createElement('li');
+    imgReview.className = 'img-review';
+
+    imgReview.appendChild(img);
+    
+    element.appendChild(imgReview);
 }
 
-// Função para adicionar um novo comentário/opinião
-function addComment(comment) {
-    const feedbackList = document.querySelector('.feedback-user');
+// Criar as imagens dentro da lista ul.img-content
+createAndAppendImage(imgContent, data.img); // A primeira imagem de data.img
 
-    const li = document.createElement('li');
-    li.innerHTML = `
-        <div class="user-profile">
-            <img src="${comment.userImage}" alt="User Image">
-            <span>${comment.userName}</span>
-        </div>
-        <div class="user-comment">
-            <div class="star-rating"></div>
-            <textarea class="comment-text" cols="80" rows="3" placeholder="Deixe um comentário"></textarea>
-            <button class="submit-comment">Enviar</button>
-        </div>
-    `;
+// Adicionar evento de clique nas imagens para exibi-las no div.img
+imgContent.addEventListener('click', event => {
+    if (event.target.tagName === 'IMG') {
+        imgDiv.innerHTML = ''; // Limpar o div.img
+        const clickedImage = document.createElement('img');
+        clickedImage.src = event.target.src ? 'https://via.placeholder.com/800x600?text=Produto' : '';
 
-    const starRating = li.querySelector('.star-rating');
-    for (let i = 1; i <= 5; i++) {
-        const isActive = i <= comment.rating;
-        const star = createStar(i, isActive);
-        starRating.appendChild(star);
+        imgDiv.appendChild(clickedImage);
     }
+});
 
-    feedbackList.appendChild(li);
-}
+// ----------------------------------------- carrinho de compra
+const buyButton = document.querySelector('.buttom-buy');
+const list = new tool();
 
-// Event listener para clicar nas estrelas de classificação
-document.addEventListener('click', event => {
-    if (event.target.classList.contains('star')) {
-        const stars = event.target.parentNode.querySelectorAll('.star');
-        const clickedValue = parseInt(event.target.dataset.value);
+const itemQuantityAvailable = data.amount;
 
-        stars.forEach(star => {
-            const value = parseInt(star.dataset.value);
-            star.classList.toggle('active', value <= clickedValue);
+function checkCountValue() {
+    if (itemQuantityAvailable <= 0) {
+        buyButton.disabled = true;
+        buyButton.style.border = "3px solid #77b02a";
+        buyButton.style.color = "#77b02a";
+        buyButton.innerText = 'Sem estoque';
+        buyButton.addEventListener('mouseover', () => {
+            buyButton.style.color = "#181818";
+            buyButton.style.background = "#3c6608";
+            buyButton.style.border = "3px solid #3c6608";
+        });
+
+        buyButton.addEventListener('mouseout', () => {
+            buyButton.style.border = "3px solid #77b02a";
+            buyButton.style.color = "#77b02a";
+            buyButton.style.background = "transparent";
         });
     }
-});
+}
 
-// Event listener para enviar o comentário
-document.addEventListener('click', event => {
-    if (event.target.classList.contains('submit-comment')) {
-        const commentText = event.target.previousElementSibling;
-        const stars = event.target.previousElementSibling.previousElementSibling.querySelectorAll('.star.active');
+if (itemQuantityAvailable > 0 && countInput != 0) {
+    buyButton.addEventListener('click', () => {
+        const itemName = data.name;
+        const itemImageSrc = data.img ? 'https://via.placeholder.com/800x600?text=Produto' : '';
+        const itemId = data.id_product;
 
-        const userName = username ; // Obter o nome de usuário do usuário logado
-        // const userImage = 'https://source.unsplash.com/random/1200x720/?anime'; // Obter a imagem do usuário logado
-        const rating = stars.length;
-
-        const comment = {
-            userName,
-            // userImage,
-            rating,
-            commentText: commentText.value
+        const item = {
+            name: itemName,
+            price: numericPrice,
+            image: itemImageSrc,
+            id: itemId,
         };
 
-        addComment(comment);
+        const itemJSON = JSON.stringify(item);
 
-        // Limpar o campo de comentário
-        commentText.value = '';
-    }
-});
+        const itemKey = `item_${itemName}_${itemId}`;
+
+        localStorage.setItem(itemKey, itemJSON);
+
+        list.addItemToCart(itemName, numericPrice, itemImageSrc, countInput.value, itemId);
+    });
+}
+
+checkCountValue();

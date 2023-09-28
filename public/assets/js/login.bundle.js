@@ -33,6 +33,7 @@ var User = /*#__PURE__*/function () {
     _classCallCheck(this, User);
     this.username = username;
     this.password = password;
+    this.baseUrl = window.location.origin;
   }
   _createClass(User, [{
     key: "userData",
@@ -50,7 +51,7 @@ var User = /*#__PURE__*/function () {
                 user_name: username
               };
               _context.next = 6;
-              return fetch('http://localhost:3000/E-gamers/src/php/getUserData.php', {
+              return fetch("".concat(this.baseUrl, "/E-gamers/src/php/getUserData.php"), {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json'
@@ -78,7 +79,7 @@ var User = /*#__PURE__*/function () {
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[2, 15]]);
+        }, _callee, this, [[2, 15]]);
       }));
       function userData() {
         return _userData.apply(this, arguments);
@@ -90,7 +91,7 @@ var User = /*#__PURE__*/function () {
     value: function login() {
       var _this = this;
       try {
-        return fetch('http://localhost:3000/E-gamers/src/php/usuarios.php').then(function (response) {
+        return fetch("".concat(this.baseUrl, "/E-gamers/src/php/usuarios.php")).then(function (response) {
           return response.json();
         }).then(function (data) {
           var result = [];
@@ -124,9 +125,12 @@ var User = /*#__PURE__*/function () {
                 sessionStorage.setItem('username', index.login);
                 sessionStorage.setItem('status', true);
                 valid = true;
-              } else {
-                (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_0__["default"])(_this2.username, "Usuário ou senha errados");
-                (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_0__["default"])(_this2.password, "Usuário ou senha errados");
+              }
+              if (index.login != _this2.username.value.toLowerCase()) {
+                (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_0__["default"])(_this2.username, "Usuário inválido ou errado");
+              }
+              if (index.senha != _this2.password.value.toLowerCase()) {
+                (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_0__["default"])(_this2.password, "Senha inválida ou errada");
               }
             }
           } catch (err) {
@@ -161,9 +165,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DB_users__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DB/users */ "./src/modules/DB/users.js");
 /* harmony import */ var _ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ferramentas/tools */ "./src/modules/ferramentas/tools.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
@@ -181,7 +182,7 @@ var Login = /*#__PURE__*/function () {
     this.loginForm = loginForm;
     this.username = username;
     this.password = password;
-    this.user = new _DB_users__WEBPACK_IMPORTED_MODULE_0__["default"](this.username, this.password);
+    this.user = new _DB_users__WEBPACK_IMPORTED_MODULE_0__["default"](this.username, this.password, this.loginForm);
     document.addEventListener("DOMContentLoaded", function () {
       _this.handleSubmit(); // Chamada ao método handleSubmit após o carregamento do DOM
     });
@@ -190,24 +191,13 @@ var Login = /*#__PURE__*/function () {
     key: "handleSubmit",
     value: function handleSubmit() {
       var _this2 = this;
+      var baseUrl = window.location.origin;
       if (!this.loginForm || !this.username || !this.password) {
         console.error("Elementos do DOM não foram encontrados.");
         return;
       }
       this.loginForm.addEventListener("submit", function (element) {
         element.preventDefault();
-        var _iterator = _createForOfIteratorHelper(_this2.loginForm.querySelectorAll(".text-error")),
-          _step;
-        try {
-          for (_iterator.s(); !(_step = _iterator.n()).done;) {
-            var errorText = _step.value;
-            errorText.remove();
-          }
-        } catch (err) {
-          _iterator.e(err);
-        } finally {
-          _iterator.f();
-        }
         if (_this2.username.value === "") {
           (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__["default"])(_this2.username, "Campo usuário está vazio");
           return;
@@ -218,7 +208,7 @@ var Login = /*#__PURE__*/function () {
         }
         _this2.user.login().then(function (logado) {
           if (logado) {
-            window.location.href = "http://localhost:3000/E-gamers/public/html";
+            window.location.href = "".concat(baseUrl, "/E-gamers/public/html");
             return;
           }
         })["catch"](function (error) {
@@ -242,14 +232,208 @@ var Login = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ criaErro)
+/* harmony export */   "default": () => (/* binding */ tools)
 /* harmony export */ });
-function criaErro(input, mensagem) {
-  var div = document.createElement('div');
-  div.innerText = mensagem;
-  div.classList.add('text-error');
-  input.insertAdjacentElement('afterend', div);
-}
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var tools = /*#__PURE__*/function () {
+  function tools() {
+    _classCallCheck(this, tools);
+  }
+  _createClass(tools, [{
+    key: "addItemToCart",
+    value: function addItemToCart(itemName, itemPrice, itemImageSrc) {
+      var _this = this;
+      var quantity = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+      var itemIdentification = arguments.length > 4 ? arguments[4] : undefined;
+      // Selecione a lista de compra
+      var cartItems = document.getElementById('cart-items');
+
+      // Verifique se o item já está no carrinho
+      var existingCartItem = this.findCartItem(itemName);
+      if (existingCartItem) {
+        var quantityElement = existingCartItem.querySelector('.input-quantity');
+        var currentQuantity = parseInt(quantityElement.value);
+        quantityElement.value = currentQuantity + 1;
+      } else {
+        // Se o item não estiver no carrinho, crie um novo item
+        var cartItem = document.createElement('li');
+        cartItem.className = 'cart-item';
+
+        // Crie a imagem do item
+        var itemImage = document.createElement('img');
+        itemImage.src = itemImageSrc;
+        itemImage.alt = 'Item';
+
+        // Crie as informações do item
+        var itemInfo = document.createElement('div');
+        itemInfo.className = 'item-info';
+        var itemNameElement = document.createElement('h3');
+        itemNameElement.innerText = itemName;
+        var itemPriceElement = document.createElement('p');
+        itemPriceElement.innerText = "Pre\xE7o: R$ ".concat(itemPrice.toFixed(2)); // Formate o preço para 2 casas decimais
+
+        // Crie o elemento de quantidade
+        var itemQuantityElement = document.createElement('input');
+        itemQuantityElement.setAttribute('class', 'input-quantity');
+        itemQuantityElement.value = quantity;
+
+        // Crie os botões de aumento e diminuição
+        var increaseButton = document.createElement('button');
+        increaseButton.innerText = '+';
+        increaseButton.className = 'quantity-control increase';
+        var decreaseButton = document.createElement('button');
+        decreaseButton.innerText = '-';
+        decreaseButton.className = 'quantity-control decrease';
+
+        // Crie o botão de remoção
+        var itemRemoveButton = document.createElement('button');
+        itemRemoveButton.className = 'item-remove';
+        itemRemoveButton.innerHTML = '<i class="fa-solid fa-x"></i>';
+
+        // Defina o atributo data-item com o itemIdentification (nome ou ID)
+        cartItem.dataset.item = itemIdentification;
+
+        // Adicione um evento de clique para remover o item
+        itemRemoveButton.addEventListener('click', function () {
+          _this.removeCartItem(cartItem);
+        });
+
+        // Adicione os botões de quantidade ao item da lista
+        itemInfo.appendChild(itemNameElement);
+        itemInfo.appendChild(itemPriceElement);
+        itemInfo.appendChild(itemQuantityElement);
+        itemInfo.appendChild(decreaseButton); // Botão de diminuição
+        itemInfo.appendChild(increaseButton); // Botão de aumento
+        cartItem.appendChild(itemImage);
+        cartItem.appendChild(itemInfo);
+        cartItem.appendChild(itemRemoveButton);
+
+        // Adicione o item à lista de compra
+        cartItems.appendChild(cartItem);
+      }
+
+      // Atualize o total do carrinho
+      this.updateCartTotal();
+    }
+  }, {
+    key: "findCartItem",
+    value: function findCartItem(itemIdentification) {
+      // Selecione todos os itens no carrinho
+      var cartItems = document.querySelectorAll('.cart-item');
+
+      // Percorra os itens para encontrar o item com base no itemIdentification (nome ou ID)
+      var _iterator = _createForOfIteratorHelper(cartItems),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var cartItem = _step.value;
+          var itemNameElement = cartItem.querySelector('h3');
+          var itemID = cartItem.dataset.itemId; // Adicione um atributo "data-item-id" aos elementos do carrinho com o ID do item
+
+          if (itemNameElement.innerText === itemIdentification || itemID === itemIdentification) {
+            return {
+              cartItem: cartItem,
+              quantityElement: cartItem.querySelector('.item-info p.quantity') // Elemento que exibe a quantidade
+            };
+          }
+        }
+
+        // Se não encontrar o item, retorne null
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      return null;
+    }
+  }, {
+    key: "updateCartTotal",
+    value: function updateCartTotal() {
+      // Implemente a lógica para calcular e atualizar o total do carrinho
+      // Percorra todos os itens no carrinho e some seus preços
+      var cartItems = document.querySelectorAll('.cart-item');
+      var total = 0;
+      cartItems.forEach(function (cartItem) {
+        var priceElement = cartItem.querySelector('.item-info p');
+        var itemPrice = parseFloat(priceElement.innerText.replace('Preço: R$ ', ''));
+        total += itemPrice;
+      });
+
+      // Atualize o elemento de exibição do total
+      var cartTotalElement = document.getElementById('cart-total');
+      cartTotalElement.innerText = "R$ ".concat(total.toFixed(2));
+    }
+  }, {
+    key: "saveCartToLocalStorage",
+    value: function saveCartToLocalStorage() {
+      var cartItems = document.querySelectorAll('.cart-item');
+      var cartData = [];
+      cartItems.forEach(function (cartItem) {
+        var itemNameElement = cartItem.querySelector('h3');
+        var itemPriceElement = cartItem.querySelector('.item-info p');
+        var itemQuantityElement = cartItem.querySelector('.item-quantity input');
+        var itemName = itemNameElement.innerText;
+        var itemPrice = parseFloat(itemPriceElement.innerText.replace('Preço: R$ ', ''));
+        var itemQuantity = parseInt(itemQuantityElement.value);
+        cartData.push({
+          name: itemName,
+          price: itemPrice,
+          quantity: itemQuantity
+        });
+      });
+      localStorage.setItem('cartData', JSON.stringify(cartData));
+    }
+  }, {
+    key: "removeCartItem",
+    value: function removeCartItem(cartItem) {
+      // Encontre o elemento pai do item do carrinho para removê-lo
+      var cartItems = document.getElementById('cart-items');
+      cartItems.removeChild(cartItem);
+
+      // Depois de remover o item, salve o carrinho atualizado no localStorage
+      this.saveCartToLocalStorage();
+    }
+  }, {
+    key: "loadCartFromLocalStorage",
+    value: function loadCartFromLocalStorage() {
+      var _this2 = this;
+      var cartData = localStorage.getItem('cartData');
+      if (cartData) {
+        var parsedData = JSON.parse(cartData);
+        parsedData.forEach(function (item) {
+          _this2.addItemToCart(item.name, item.price, item.quantity);
+        });
+      }
+    }
+  }, {
+    key: "criaErro",
+    value: function criaErro(input, mensagem) {
+      // Verifique se já existe uma mensagem de erro para este campo
+      var erroExistente = input.nextElementSibling;
+
+      // Se não houver uma mensagem de erro, crie uma
+      if (!erroExistente || !erroExistente.classList.contains('text-error')) {
+        var div = document.createElement('div');
+        div.innerText = mensagem;
+        div.classList.add('text-error');
+        input.insertAdjacentElement('afterend', div);
+      } else {
+        // Se já houver uma mensagem de erro, atualize seu texto
+        erroExistente.innerText = mensagem;
+      }
+    }
+  }]);
+  return tools;
+}();
+
 
 /***/ }),
 
@@ -1123,11 +1307,12 @@ __webpack_require__.r(__webpack_exports__);
 var formulario = document.querySelector('#formLogin');
 var login = document.querySelector("#usuario-input");
 var senha = document.querySelector("#senha-input");
+var baseUrl = window.location.origin;
 var logar = new _modules_ferramentas_logar__WEBPACK_IMPORTED_MODULE_2__["default"](formulario, login, senha);
 document.addEventListener('click', function (element) {
   var urlAtual = window.location;
-  if (element.target.classList.contains('logo') && urlAtual != "http://localhost:3000/E-gamers/public/html/") {
-    window.location.href = "http://localhost:3000/E-gamers/public/html";
+  if (element.target.classList.contains('logo') && urlAtual !== "".concat(baseUrl, "/E-gamers/public/html/")) {
+    window.location.href = "".concat(baseUrl, "/E-gamers/public/html");
   }
 });
 })();

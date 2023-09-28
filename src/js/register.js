@@ -7,12 +7,13 @@ import erro from "../modules/ferramentas/tools";
 const registerForm = document.querySelector("#formRegister");
 const formValidation = new ValidarFormulario("#formRegister");
 const userInput = document.querySelector(".user");
+const baseUrl = window.location.origin;
 
 //redirect
 document.addEventListener('click', element => {
   const urlAtual = window.location;
-  if(element.target.classList.contains('logo') && urlAtual != "http://localhost:3000/E-gamers/public/html/") {
-      window.location.href = "http://localhost:3000/E-gamers/public/html";
+  if(element.target.classList.contains('logo') && urlAtual !== `${baseUrl}/E-gamers/public/html/`) {
+      window.location.href = `${baseUrl}/E-gamers/public/html`;
   }
 });
 
@@ -48,7 +49,7 @@ registerForm.addEventListener("submit", async (event) => {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/E-gamers/src/php/register.php",
+        `${baseUrl}/E-gamers/src/php/register.php`,
         requestOptions
       );
 
@@ -59,7 +60,7 @@ registerForm.addEventListener("submit", async (event) => {
       }
 
       const data = await response.json();
-      window.location.href = 'http://localhost:3000/E-gamers/public/html/login.html';
+      window.location.href = `${baseUrl}/E-gamers/public/html/login.html`;
       console.log(data);
 
       // Verificar se o erro é de usuário duplicado

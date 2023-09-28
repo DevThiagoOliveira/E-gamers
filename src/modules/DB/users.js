@@ -4,6 +4,7 @@ export default class User {
   constructor(username = '', password = '') {
     this.username = username;
     this.password = password;
+    this.baseUrl = window.location.origin;
   }
 
   async userData() {
@@ -17,7 +18,7 @@ export default class User {
         user_name: username
       };
       
-      const response = await fetch('http://localhost:3000/E-gamers/src/php/getUserData.php', {
+      const response = await fetch(`${this.baseUrl}/E-gamers/src/php/getUserData.php`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -40,7 +41,8 @@ export default class User {
 
   login() {
     try {
-      return fetch('http://localhost:3000/E-gamers/src/php/usuarios.php')
+
+      return fetch(`${this.baseUrl}/E-gamers/src/php/usuarios.php`)
         .then(response => response.json())
         .then(data => {
           const result = [];
@@ -75,9 +77,14 @@ export default class User {
             sessionStorage.setItem('username', index.login);
             sessionStorage.setItem('status', true);
             valid = true;
-          } else {
-            erro(this.username, "Usuário ou senha errados");
-            erro(this.password, "Usuário ou senha errados");
+          }
+
+          if(index.login != this.username.value.toLowerCase()) {
+            erro(this.username, "Usuário inválido ou errado");
+          }
+
+          if(index.senha != this.password.value.toLowerCase()) {
+            erro(this.password, "Senha inválida ou errada");
           }
         }
       });

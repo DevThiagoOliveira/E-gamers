@@ -7,11 +7,12 @@ import User from "../modules/DB/users";
 import Quill from "quill";
 
 if (sessionStorage.getItem("status") != "true") {
-  window.location.href = "http://localhost:3000/E-gamers/public/html/index.html";
+  window.location.href =
+  `${baseUrl}/E-gamers/public/html/index.html`;
 }
 
-// ----------------------------------------------------- Const
-const userId = parseInt(sessionStorage.getItem('id_usuario'));
+// ----------------------------------------------------- Const and var
+const userId = parseInt(sessionStorage.getItem("id_usuario"));
 const username = sessionStorage.getItem("username");
 
 const productForm = document.querySelector("#addProduct");
@@ -21,14 +22,17 @@ const label = document.querySelector(".page-label");
 const buttonAdd = document.querySelector(".button-add");
 const inputFile = document.querySelector(".picture__input");
 const pictureImage = document.querySelector(".picture__image");
-const secondGrid = document.querySelector('.second-grid');
-const accountConfig = document.querySelector('.account-config');
-const itens = document.querySelector('.itens');
+const secondGrid = document.querySelector(".second-grid");
+const accountConfig = document.querySelector(".account-config");
+const itens = document.querySelector(".itens");
+const baseUrl = window.location.origin;
 
-const inputNickname = document.querySelector('.nickname');
-const inputPhone = document.querySelector('.telefone');
-const inputCpf = document.querySelector('.cpf');
-const inputEmail = document.querySelector('.email');
+const inputNickname = document.querySelector(".nickname");
+const inputPhone = document.querySelector(".telefone");
+const inputCpf = document.querySelector(".cpf");
+const inputEmail = document.querySelector(".email");
+
+let isEditMode = false;
 
 // ----------------------------------------------------- object
 const products = new Product(userId);
@@ -52,7 +56,6 @@ inputFile.addEventListener("change", (element) => {
   const file = inputTarget.files[0];
 
   if (file) {
-
     reader.addEventListener("load", (element) => {
       const readerTarget = element.target;
       const img = document.createElement("img");
@@ -88,16 +91,23 @@ document.addEventListener("click", (element) => {
     localStorage.setItem("lastView", "buy");
     label.innerText = "Minhas Compras";
     buttonAdd.style.display = "none";
-    
+
     showMyPurchases(); // Exibir produtos comprados pelo usuário
   }
 
-  if (event.target.classList.contains("button-add")) {
-    openAddPopup(); // Nova função para abrir o popup de adição
+  if (element.target.classList.contains("button-add") && !isEditMode) {
+    openAddPopup();
   }
 
   if (element.target.classList.contains("close-popup")) {
     closePopup();
+    isEditMode = false;
+    const saveButton = document.querySelector(".popup .edit-product");
+    const popupTitle = document.querySelector(".popup h2.layout-h2");
+
+    saveButton.style.display = "none"; // Defina o estilo do botão para "block"
+
+    popupTitle.innerText = `Adicionar Produto`;
   }
 
   if (element.target.classList.contains("add-product")) {
@@ -107,14 +117,13 @@ document.addEventListener("click", (element) => {
   if (element.target.classList.contains("config")) {
     secondGrid.style.display = "none";
     accountConfig.style.display = "flex";
-    
   }
 
   if (element.target.classList.contains("exit")) {
     const exit = false;
     sessionStorage.setItem("status", exit);
     window.location.href =
-      "http://localhost:3000/E-gamers/public/html/index.html";
+    `${baseUrl}/E-gamers/public/html/index.html`;
   }
 });
 
@@ -136,36 +145,41 @@ window.addEventListener("load", () => {
 
 function clearPopupFields() {
   const productNameInput = document.querySelector('.popup input[name="name"]');
-  const productPriceInput = document.querySelector('.popup input[name="price"]');
-  const productCategoryInput = document.querySelector('.popup input[name="category"]');
-  const productPortableToggleInput = document.querySelector('.popup .switch-label .switch #toggle-input');
-  const productDescriptionInput = document.querySelector('.popup #editor .ql-editor');
-  const productAmoutInput = document.querySelector('.popup input[name="amount"]');
+  const productPriceInput = document.querySelector(
+    '.popup input[name="price"]'
+  );
+  const productCategoryInput = document.querySelector(
+    '.popup input[name="category"]'
+  );
+  const productPortableToggleInput = document.querySelector(
+    ".popup .switch-label .switch #toggle-input"
+  );
+  const productDescriptionInput = document.querySelector(
+    ".popup #editor .ql-editor"
+  );
+  const productAmoutInput = document.querySelector(
+    '.popup input[name="amount"]'
+  );
 
-  productNameInput.value = '';
-  productPriceInput.value = '';
-  productCategoryInput.value = '';
+  productNameInput.value = "";
+  productPriceInput.value = "";
+  productCategoryInput.value = "";
   productPortableToggleInput.checked = false;
-  productDescriptionInput.innerHTML = '';
-  productAmoutInput.value = '';
+  productDescriptionInput.innerHTML = "";
+  productAmoutInput.value = "";
 }
 
 // Abrir Popup
 function openAddPopup() {
-  const popupTitle = document.querySelector(".popup h2.layout-h2");
   const saveButton = document.querySelector(".popup .add-product");
-  saveButton.style.display = "block"; // Defina o estilo do botão para "flex"
-  saveButton.innerText = "Adicionar"; // Altere o texto do botão para "Adicionar Produto"
+  saveButton.style.display = "block";
+
+  const editButton = document.querySelector(".popup .edit-product");
+  editButton.style.display = "none";
 
   // Limpe os campos do popup
   clearPopupFields();
 
-  popupTitle.innerText = "Adicionar Novo Produto";
-  openPopup();
-}
-
-
-function openPopup() {
   const pop = (document.querySelector("#popup").style.display = "block");
 }
 
@@ -174,10 +188,10 @@ function closePopup() {
   const popup = document.querySelector("#popup");
   popup.style.display = "none";
 
-  const inputFields = productForm.querySelectorAll('input, textarea');
-    
-  inputFields.forEach(input => {
-      input.value = '';
+  const inputFields = productForm.querySelectorAll("input, textarea");
+
+  inputFields.forEach((input) => {
+    input.value = "";
   });
 }
 
@@ -186,84 +200,78 @@ function closePopup() {
 const quillOptions = {
   modules: {
     toolbar: [
-      [{ 'font': [] }],
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+      [{ font: [] }],
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ size: ["small", false, "large", "huge"] }], // custom dropdown
 
-      ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
-      ['blockquote', 'code-block'],
-    
-      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-      [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-      [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
-      [{ 'direction': 'rtl' }],                         // text direction
-    
-      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-      [{ 'align': [] }],
-    
-      ['clean']                                         // remove formatting button
-    ]
+      ["bold", "italic", "underline", "strike"], // toggled buttons
+      ["blockquote", "code-block"],
+
+      [{ header: 1 }, { header: 2 }], // custom button values
+      [{ list: "ordered" }, { list: "bullet" }],
+      [{ script: "sub" }, { script: "super" }], // superscript/subscript
+      [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+      [{ direction: "rtl" }], // text direction
+
+      [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+      [{ align: [] }],
+
+      ["clean"], // remove formatting button
+    ],
   },
-  placeholder: 'Descrição', 
-  theme: 'snow'
+  placeholder: "Descrição",
+  theme: "snow",
 };
 
-const quill = new Quill('#editor', quillOptions);
+const quill = new Quill("#editor", quillOptions);
 
 // ----------------------------------------------------- Lógica para adicionar o produto
 
-const toggleInput = document.getElementById('toggle-input');
-const sendData = document.getElementById('send-data'); // Adicione um id ao botão que envia os dados
+const toggleInput = document.getElementById("toggle-input");
+const sendData = document.getElementById("send-data"); // Adicione um id ao botão que envia os dados
 
 let freteGratis = false;
 
-toggleInput.addEventListener('change', () => {
+toggleInput.addEventListener("change", () => {
   freteGratis = !freteGratis;
 });
 
 async function addProduct() {
+  const formData = new FormData(productForm);
+  const jsonData = {};
+  const description = quill.root.innerHTML; // Obtém o conteúdo do editor Quill
 
-    const formData = new FormData(productForm);
-    const jsonData = {};
-    const description = quill.root.innerHTML; // Obtém o conteúdo do editor Quill
+  for (const [name, value] of formData.entries()) {
+    jsonData[name] = value;
+  }
 
-    for (const [name, value] of formData.entries()) {
-      jsonData[name] = value;
-    }
+  jsonData["seller_id"] = userId;
+  jsonData["seller_name"] = username;
+  jsonData["description"] = description;
+  jsonData["frete_gratis"] = freteGratis ? 1 : 0;
+  
+  // Verificar se o dado do formData é uma imagem
+  if (formData.get("image") instanceof File) {
+    // Salvar a imagem no cache do navegador
+    const fileReader = new FileReader();
 
-    jsonData['seller_id'] = userId;
-    jsonData['seller_name'] = username;
-    jsonData['description'] = description;
-    jsonData['frete_gratis'] = freteGratis ? 1 : 0;
-      
+    fileReader.onload = function (event) {
+      const base64Image = event.target.result;
+      jsonData["image"] = base64Image;
+      const send = sendDataToPHP(jsonData);
+    };
 
-    // Verificar se o dado do formData é uma imagem
-    if (formData.get("image") instanceof File) {
-      
-      // Salvar a imagem no cache do navegador
-      const fileReader = new FileReader();
-
-      console.log(jsonData);
-      
-      fileReader.onload = function (event) {
-        const base64Image = event.target.result;
-        jsonData["image"] = base64Image;
-        const send = sendDataToPHP(jsonData);
-      };
-      
-      fileReader.readAsDataURL(formData.get("image"));  
-      
-    } else {
-      sendDataToPHP(jsonData); // Se não for uma imagem, enviar os dados normalmente
-      
-    }
-};
+    fileReader.readAsDataURL(formData.get("image"));
+  } else {
+    sendDataToPHP(jsonData); // Se não for uma imagem, enviar os dados normalmente
+  }
+}
 
 async function sendDataToPHP(jsonData) {
   try {
     // Enviando o objeto JSON para o arquivo PHP usando fetch
-    const response = await fetch("http://localhost:3000/E-gamers/src/php/enviarProduto.php",
+    const response = await fetch(
+      `${baseUrl}/E-gamers/src/php/enviarProduto.php`,
       {
         method: "POST",
         body: JSON.stringify(jsonData),
@@ -282,11 +290,10 @@ async function sendDataToPHP(jsonData) {
     const data = await response.json();
     console.log(data);
 
-    if(data.message.includes("Produto adicionado com sucesso")) {
-      closePopup();
-      updateProductList(); // Atualizar a lista de produtos
-    }
-
+    // if(data.message.includes("Produto adicionado com sucesso")) {
+    //   closePopup();
+    //   updateProductList(); // Atualizar a lista de produtos
+    // }
   } catch (error) {
     console.error(error);
   }
@@ -294,67 +301,74 @@ async function sendDataToPHP(jsonData) {
 
 // ----------------------------------------------------- Get Produtos
 async function createProductList(responseData) {
-  const itemList = document.querySelector('.itens ul');
-  itemList.innerHTML = '';
+  const itemList = document.querySelector(".itens ul");
+  itemList.innerHTML = "";
 
   for (const [id, dado] of Object.entries(responseData.products)) {
-      const productId = parseInt(id) + 1;
-      const item = new layoutItem(dado.nome_produto, dado.imagem);
-      const liElement = item.createLi();
+    const productId = parseInt(id) + 1;
+    const item = new layoutItem(dado.nome_produto, dado.imagem);
+    const liElement = item.createLi();
 
-      liElement.setAttribute('data-id', dado.id_product);
+    liElement.setAttribute("data-id", dado.id_product);
 
-      itemList.appendChild(liElement);
+    itemList.appendChild(liElement);
   }
 }
 
 async function showMyProducts() {
   try {
-      clearProductList();
-      const responseData = await products.product('http://localhost:3000/E-gamers/src/php/getProduct.php');
-      createProductList(responseData);
+    clearProductList();
+    const responseData = await products.product(
+      `${baseUrl}/E-gamers/src/php/getProduct.php`
+    );
+    createProductList(responseData);
   } catch (err) {
-      console.error(err);
+    console.error(err);
   }
 }
 
 async function showMyPurchases() {
   try {
-      clearProductList();
-      const responseData = await products.product('http://localhost:3000/E-gamers/src/php/getPurchasedProduct.php');
-      createProductList(responseData);
+    clearProductList();
+    const responseData = await products.product(
+      `${baseUrl}/E-gamers/src/php/getPurchasedProduct.php`
+    );
+    createProductList(responseData);
   } catch (err) {
-      console.error(err);
+    console.error(err);
   }
 }
 
 async function updateProductList() {
   try {
-      const responseData = await products.product('http://localhost:3000/E-gamers/src/php/getProduct.php');
-      createProductList(responseData);
+    const responseData = await products.product(
+      `${baseUrl}/E-gamers/src/php/getProduct.php`
+    );
+    createProductList(responseData);
   } catch (err) {
-      console.error(err);
+    console.error(err);
   }
 }
 
 // Função auxiliar para limpar a lista de produtos
 function clearProductList() {
-  const productList = document.querySelector('ul');
-  productList.innerHTML = '';
+  const productList = document.querySelector("ul");
+  productList.innerHTML = "";
 }
 
 // ----------------------------------------------------- Edit
 
-document.addEventListener('click', event => {
-  if (event.target.classList.contains('fa-gear')) {
-    const productId = event.target.closest('li').getAttribute('data-id');
-    
+document.addEventListener("click", (event) => {
+  if (event.target.classList.contains("fa-gear")) {
+    const productId = event.target.closest("li").getAttribute("data-id");
+    isEditMode = true;
+    const pop = (document.querySelector("#popup").style.display = "block");
     openEditPopup(productId);
   }
 
-  if (event.target.classList.contains('fa-trash')) {
-    const productId = event.target.closest('li').getAttribute('data-id');
-    
+  if (event.target.classList.contains("fa-trash")) {
+    const productId = event.target.closest("li").getAttribute("data-id");
+
     deleteProduct(productId);
   }
 });
@@ -363,7 +377,6 @@ document.addEventListener('click', event => {
 function openEditPopup(productId) {
   const popupTitle = document.querySelector(".popup h2.layout-h2");
   const saveButton = document.querySelector(".popup .edit-product");
-  saveButton.innerText = "Salvar Alteração"; // Mantenha o texto do botão como "Salvar Alteração"
   saveButton.style.display = "block"; // Defina o estilo do botão para "block"
   saveButton.setAttribute("data-product-id", productId); // Defina o atributo data-product-id
 
@@ -371,13 +384,25 @@ function openEditPopup(productId) {
   getProductDetails(productId)
     .then((productDetails) => {
       // Preencha os campos do popup com os detalhes do produto
-      const productNameInput = document.querySelector('.popup input[name="name"]');
-      const productPriceInput = document.querySelector('.popup input[name="price"]');
-      const productCategoryInput = document.querySelector('.popup input[name="category"]');
-      const productPortableToggleInput = document.querySelector('.popup .switch-label .switch #toggle-input');
-      const productDescriptionInput = document.querySelector('.popup #editor .ql-editor');
-      const productAmoutInput = document.querySelector('.popup input[name="amount"]');
-      
+      const productNameInput = document.querySelector(
+        '.popup input[name="name"]'
+      );
+      const productPriceInput = document.querySelector(
+        '.popup input[name="price"]'
+      );
+      const productCategoryInput = document.querySelector(
+        '.popup input[name="category"]'
+      );
+      const productPortableToggleInput = document.querySelector(
+        ".popup .switch-label .switch #toggle-input"
+      );
+      const productDescriptionInput = document.querySelector(
+        ".popup #editor .ql-editor"
+      );
+      const productAmoutInput = document.querySelector(
+        '.popup input[name="amount"]'
+      );
+
       popupTitle.innerText = `Editar Produto - ${productDetails.product.nome_produto}`;
       productNameInput.value = productDetails.product.nome_produto;
       productCategoryInput.value = productDetails.product.categoria;
@@ -385,20 +410,32 @@ function openEditPopup(productId) {
       productAmoutInput.value = parseInt(productDetails.product.quantidade);
       productDescriptionInput.innerHTML = productDetails.product.descricao;
 
-      productPortableToggleInput.checked = productDetails.product.frete === '1';
+      productPortableToggleInput.checked = productDetails.product.frete === "1";
 
-      saveButton.addEventListener('click', async (event) => {
+      saveButton.addEventListener("click", async (event) => {
         event.preventDefault();
-        
+
         // Obter os campos do popup
-        const productId = saveButton.getAttribute('data-product-id');
-        const productNameInput = document.querySelector('.popup input[name="name"]');
-        const productPriceInput = document.querySelector('.popup input[name="price"]');
-        const productCategoryInput = document.querySelector('.popup input[name="category"]');
-        const productAmoutInput = document.querySelector('.popup input[name="amount"]');
-        const productPortableToggleInput = document.querySelector('.popup .switch-label .switch #toggle-input');
-        const productDescriptionInput = document.querySelector('.popup #editor .ql-editor');
-        
+        const productId = saveButton.getAttribute("data-product-id");
+        const productNameInput = document.querySelector(
+          '.popup input[name="name"]'
+        );
+        const productPriceInput = document.querySelector(
+          '.popup input[name="price"]'
+        );
+        const productCategoryInput = document.querySelector(
+          '.popup input[name="category"]'
+        );
+        const productAmoutInput = document.querySelector(
+          '.popup input[name="amount"]'
+        );
+        const productPortableToggleInput = document.querySelector(
+          ".popup .switch-label .switch #toggle-input"
+        );
+        const productDescriptionInput = document.querySelector(
+          ".popup #editor .ql-editor"
+        );
+
         const updatedProduct = {
           id_product: productId, // Adicione o ID do produto aqui
           name: productNameInput.value,
@@ -406,25 +443,26 @@ function openEditPopup(productId) {
           price: productPriceInput.value,
           amount: productAmoutInput.value,
           portage: productPortableToggleInput.checked ? 1 : 0,
-          description: productDescriptionInput.innerHTML
+          description: productDescriptionInput.innerHTML,
         };
-      
+
         try {
           // Lógica para enviar os detalhes atualizados do produto para o servidor
           const response = await updateProductDetails(updatedProduct);
-      
+
           if (response.ok) {
             closePopup(); // Feche o popup após a atualização
             updateProductList(); // Atualize a lista de produtos
+            isEditMode = false;
+            saveButton.style.display = "none";
+            popupTitle.innerText = `Adicionar Produto`;
           } else {
-            console.error('Erro ao atualizar o produto');
+            console.error("Erro ao atualizar o produto");
           }
         } catch (error) {
           console.error(error);
         }
       });
-
-      openPopup(); // Exiba o popup de edição
     })
     .catch((err) => {
       console.log(err);
@@ -434,12 +472,14 @@ function openEditPopup(productId) {
 // Função para buscar os detalhes do produto por ID no servidor
 async function getProductDetails(productId) {
   try {
-    const response = await fetch(`http://localhost:3000/E-gamers/src/php/getProductDetail.php?id_product=${productId}`);
+    const response = await fetch(
+      `${baseUrl}/E-gamers/src/php/getProductDetail.php?id_product=${productId}`
+    );
     if (response.ok) {
       const productDetails = await response.json();
       return productDetails;
     } else {
-      throw new Error('Erro ao obter detalhes do produto');
+      throw new Error("Erro ao obter detalhes do produto");
     }
   } catch (error) {
     throw error;
@@ -449,13 +489,16 @@ async function getProductDetails(productId) {
 // Função para enviar os detalhes atualizados do produto para o servidor
 async function updateProductDetails(updatedProduct) {
   try {
-    const response = await fetch('http://localhost:3000/E-gamers/src/php/putProduct.php', {
-      method: 'PUT', // Use o método HTTP PUT para atualização
-      body: JSON.stringify(updatedProduct),
-      headers: {
-        'Content-Type': 'application/json'
+    const response = await fetch(
+      `${baseUrl}/E-gamers/src/php/putProduct.php`,
+      {
+        method: "PUT",
+        body: JSON.stringify(updatedProduct),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
     return response;
   } catch (error) {
     throw error;
@@ -465,9 +508,12 @@ async function updateProductDetails(updatedProduct) {
 // Função para deletar um produto
 async function deleteProduct(productId) {
   try {
-    const response = await fetch(`http://localhost:3000/E-gamers/src/php/deleteProduct.php?id_product=${productId}`, {
-      method: "DELETE"
-    });
+    const response = await fetch(
+      `${baseUrl}/E-gamers/src/php/deleteProduct.php?id_product=${productId}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     if (response.ok) {
       // Atualize a lista de produtos após a exclusão
@@ -480,43 +526,44 @@ async function deleteProduct(productId) {
   }
 }
 
+// ----------------------------------------------------- Barra de pesquisa
+const consultBar = document.querySelector(".consult-bar");
 
-// ----------------------------------------------------- Barra de pesquisa 
-const consultBar = document.querySelector('.consult-bar');
-
-consultBar.addEventListener('input', () => {
-    const searchTerm = consultBar.value.toLowerCase();
-    filterItems(searchTerm);
+consultBar.addEventListener("input", () => {
+  const searchTerm = consultBar.value.toLowerCase();
+  filterItems(searchTerm);
 });
 
 function filterItems(searchTerm) {
-  const itemList = document.querySelector('.itens ul');
-  const items = itemList.querySelectorAll('.layout-item');
+  const itemList = document.querySelector(".itens ul");
+  const items = itemList.querySelectorAll(".layout-item");
 
-  items.forEach(item => {
-      const itemName = item.querySelector('.product-label').innerText.toLowerCase();
-      if (itemName.includes(searchTerm)) {
-          item.style.display = 'flex';
-      } else {
-          item.style.display = 'none';
-      }
+  items.forEach((item) => {
+    const itemName = item
+      .querySelector(".product-label")
+      .innerText.toLowerCase();
+    if (itemName.includes(searchTerm)) {
+      item.style.display = "flex";
+    } else {
+      item.style.display = "none";
+    }
   });
 }
 
-consultBar.addEventListener('input', () => {
+consultBar.addEventListener("input", () => {
   const searchTerm = consultBar.value.toLowerCase();
-  if (searchTerm === '') {
-      showAllItems();
+  if (searchTerm === "") {
+    showAllItems();
   } else {
-      filterItems(searchTerm);
+    filterItems(searchTerm);
   }
 });
 
 function showAllItems() {
-  const itemList = document.querySelector('.itens ul');
-  const items = itemList.querySelectorAll('.layout-item');
-  items.forEach(item => {
-      item.style.display = 'flex';
+  const itemList = document.querySelector(".itens ul");
+  const items = itemList.querySelectorAll(".layout-item");
+  items.forEach((item) => {
+    item.style.display = "flex";
   });
 }
 
@@ -526,36 +573,38 @@ function showAllItems() {
 function maskCpf(cpf) {
   const visibleDigits = cpf.substring(0, cpf.length - 2);
   const lastDigits = cpf.slice(-2);
-  const maskedDigits = '*'.repeat(3); // Total de dígitos visíveis
+  const maskedDigits = "*".repeat(3); // Total de dígitos visíveis
 
   return `${maskedDigits}.${maskedDigits}.${maskedDigits}-${lastDigits}`;
 }
 
 // Função para formatar o email
 function formatEmail(email) {
-  const atIndex = email.indexOf('@');
-  const maskedEmail = email.split('').map((char, index) => {
+  const atIndex = email.indexOf("@");
+  const maskedEmail = email.split("").map((char, index) => {
     if (index >= 3 && index < atIndex) {
-      return '*';
+      return "*";
     } else {
       return char;
     }
   });
-  return maskedEmail.join('');
+  return maskedEmail.join("");
 }
-
 
 function maskPhoneNumber(phoneNumber) {
   // Remove todos os caracteres não numéricos do número de telefone
-  const numericPhone = phoneNumber.replace(/\D/g, '');
+  const numericPhone = phoneNumber.replace(/\D/g, "");
 
   if (numericPhone.length === 11) {
     // Para números com DDD, aplica a máscara (##) #####-####
-    const maskedPhone = numericPhone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    const maskedPhone = numericPhone.replace(
+      /(\d{2})(\d{5})(\d{4})/,
+      "($1) $2-$3"
+    );
     return maskedPhone;
   } else {
     // Para outros números, retorna (00) 00000-0000
-    return '(00) 00000-0000';
+    return "(00) 00000-0000";
   }
 }
 
@@ -565,23 +614,20 @@ try {
   const userResponseData = userObject.userData();
 
   userResponseData
-  .then(response => {
-    
-    const userData = response.user[0];
-    
-    perfilName.innerText = userData.nome_usuario;
-    
-    // Preencher campos de entrada com os dados obtidos
-    inputNickname.value = userData.nome_usuario;
-    inputPhone.value = maskPhoneNumber(userData.telefone);
-    inputCpf.value = maskCpf(userData.cpf);
-    inputEmail.value = formatEmail(userData.email);
+    .then((response) => {
+      const userData = response.user[0];
 
-  })
-  .catch(error => {
-      console.error('Erro ao obter os dados do usuário:', error);
+      perfilName.innerText = userData.nome_usuario;
+
+      // Preencher campos de entrada com os dados obtidos
+      inputNickname.value = userData.nome_usuario;
+      inputPhone.value = maskPhoneNumber(userData.telefone);
+      inputCpf.value = maskCpf(userData.cpf);
+      inputEmail.value = formatEmail(userData.email);
+    })
+    .catch((error) => {
+      console.error("Erro ao obter os dados do usuário:", error);
     });
-
 } catch (error) {
-  console.error('Erro ao processar os dados:', error);
+  console.error("Erro ao processar os dados:", error);
 }

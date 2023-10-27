@@ -211,10 +211,14 @@ var navBarConfigs = /*#__PURE__*/function () {
       list.saveCartToLocalStorage();
       cartItems.forEach(function (cartItem) {
         var itemId = cartItem.dataset.item; // Obtenha o itemIdentification do atributo data-item
+
         removeProduct.addEventListener('click', function () {
           // Remova o item clicado
           list.removeCartItem(itemId);
         });
+        console.log(cartItem);
+        var cartItensName = localStorage.getItem("cartItens");
+        list.addItemToCart(itemName, numericPrice, itemImageSrc, countInput.value, id);
       });
     }
   }]);
@@ -253,6 +257,7 @@ var tools = /*#__PURE__*/function () {
       var _this = this;
       var quantity = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
       var itemIdentification = arguments.length > 4 ? arguments[4] : undefined;
+      var cartItemName = arguments.length > 5 ? arguments[5] : undefined;
       // Selecione a lista de compra
       var cartItems = document.getElementById('cart-items');
 
@@ -373,21 +378,15 @@ var tools = /*#__PURE__*/function () {
     }
   }, {
     key: "saveCartToLocalStorage",
-    value: function saveCartToLocalStorage() {
+    value: function saveCartToLocalStorage(name, price, image, count, maxCount, id) {
       var cartItems = document.querySelectorAll('.cart-item');
       var cartData = [];
-      cartItems.forEach(function (cartItem) {
-        var itemNameElement = cartItem.querySelector('h3');
-        var itemPriceElement = cartItem.querySelector('.item-info p');
-        var itemQuantityElement = cartItem.querySelector('.item-quantity input');
-        var itemName = itemNameElement.innerText;
-        var itemPrice = parseFloat(itemPriceElement.innerText.replace('Preço: R$ ', ''));
-        var itemQuantity = parseInt(itemQuantityElement.value);
-        cartData.push({
-          name: itemName,
-          price: itemPrice,
-          quantity: itemQuantity
-        });
+      cartData.push({
+        name: name,
+        price: price,
+        image: image,
+        count: count,
+        maxCount: maxCount
       });
       localStorage.setItem('cartData', JSON.stringify(cartData));
     }

@@ -120,12 +120,19 @@ export default class navBarConfigs {
 
         cartItems.forEach(cartItem => {
             const itemId = cartItem.dataset.item; // Obtenha o itemIdentification do atributo data-item
+            
             removeProduct.addEventListener('click', () => {
                 // Remova o item clicado
                 list.removeCartItem(itemId);
             });
+            
+            console.log(cartItem);
+            
+            const cartItensName = localStorage.getItem("cartItens")
+
+            list.addItemToCart(itemName, numericPrice, itemImageSrc, countInput.value, id);
         });
 
     }
-
+    
 }

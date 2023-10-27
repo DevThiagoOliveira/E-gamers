@@ -115,6 +115,7 @@ var User = /*#__PURE__*/function () {
       var valid = false;
       try {
         usuarios.forEach(function (element) {
+          var ferramentas = new _ferramentas_tools__WEBPACK_IMPORTED_MODULE_0__["default"]();
           var _iterator = _createForOfIteratorHelper(element),
             _step;
           try {
@@ -127,10 +128,10 @@ var User = /*#__PURE__*/function () {
                 valid = true;
               }
               if (index.login != _this2.username.value.toLowerCase()) {
-                (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_0__["default"])(_this2.username, "Usuário inválido ou errado");
+                ferramentas.criaErro(_this2.username, "Usuário inválido ou errado");
               }
               if (index.senha != _this2.password.value.toLowerCase()) {
-                (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_0__["default"])(_this2.password, "Senha inválida ou errada");
+                ferramentas.criaErro(_this2.password, "Senha inválida ou errada");
               }
             }
           } catch (err) {
@@ -196,14 +197,15 @@ var Login = /*#__PURE__*/function () {
         console.error("Elementos do DOM não foram encontrados.");
         return;
       }
+      var ferramentas = new _ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__["default"]();
       this.loginForm.addEventListener("submit", function (element) {
         element.preventDefault();
         if (_this2.username.value === "") {
-          (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__["default"])(_this2.username, "Campo usuário está vazio");
+          ferramentas.criaErro(_this2.username, "Campo usuário está vazio");
           return;
         }
         if (_this2.password.value === "") {
-          (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__["default"])(_this2.password, "Campo senha está vazio");
+          ferramentas.criaErro(_this2.password, "Campo senha está vazio");
           return;
         }
         _this2.user.login().then(function (logado) {
@@ -253,6 +255,7 @@ var tools = /*#__PURE__*/function () {
       var _this = this;
       var quantity = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
       var itemIdentification = arguments.length > 4 ? arguments[4] : undefined;
+      var cartItemName = arguments.length > 5 ? arguments[5] : undefined;
       // Selecione a lista de compra
       var cartItems = document.getElementById('cart-items');
 
@@ -373,21 +376,15 @@ var tools = /*#__PURE__*/function () {
     }
   }, {
     key: "saveCartToLocalStorage",
-    value: function saveCartToLocalStorage() {
+    value: function saveCartToLocalStorage(name, price, image, count, maxCount, id) {
       var cartItems = document.querySelectorAll('.cart-item');
       var cartData = [];
-      cartItems.forEach(function (cartItem) {
-        var itemNameElement = cartItem.querySelector('h3');
-        var itemPriceElement = cartItem.querySelector('.item-info p');
-        var itemQuantityElement = cartItem.querySelector('.item-quantity input');
-        var itemName = itemNameElement.innerText;
-        var itemPrice = parseFloat(itemPriceElement.innerText.replace('Preço: R$ ', ''));
-        var itemQuantity = parseInt(itemQuantityElement.value);
-        cartData.push({
-          name: itemName,
-          price: itemPrice,
-          quantity: itemQuantity
-        });
+      cartData.push({
+        name: name,
+        price: price,
+        image: image,
+        count: count,
+        maxCount: maxCount
       });
       localStorage.setItem('cartData', JSON.stringify(cartData));
     }

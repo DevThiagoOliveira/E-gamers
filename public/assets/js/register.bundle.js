@@ -31,6 +31,7 @@ var tools = /*#__PURE__*/function () {
       var _this = this;
       var quantity = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
       var itemIdentification = arguments.length > 4 ? arguments[4] : undefined;
+      var cartItemName = arguments.length > 5 ? arguments[5] : undefined;
       // Selecione a lista de compra
       var cartItems = document.getElementById('cart-items');
 
@@ -151,21 +152,15 @@ var tools = /*#__PURE__*/function () {
     }
   }, {
     key: "saveCartToLocalStorage",
-    value: function saveCartToLocalStorage() {
+    value: function saveCartToLocalStorage(name, price, image, count, maxCount, id) {
       var cartItems = document.querySelectorAll('.cart-item');
       var cartData = [];
-      cartItems.forEach(function (cartItem) {
-        var itemNameElement = cartItem.querySelector('h3');
-        var itemPriceElement = cartItem.querySelector('.item-info p');
-        var itemQuantityElement = cartItem.querySelector('.item-quantity input');
-        var itemName = itemNameElement.innerText;
-        var itemPrice = parseFloat(itemPriceElement.innerText.replace('Preço: R$ ', ''));
-        var itemQuantity = parseInt(itemQuantityElement.value);
-        cartData.push({
-          name: itemName,
-          price: itemPrice,
-          quantity: itemQuantity
-        });
+      cartData.push({
+        name: name,
+        price: price,
+        image: image,
+        count: count,
+        maxCount: maxCount
       });
       localStorage.setItem('cartData', JSON.stringify(cartData));
     }
@@ -332,6 +327,7 @@ var ValidarFormulario = /*#__PURE__*/function () {
     key: "camposValidos",
     value: function camposValidos() {
       var valid = true; // usar uma flag para falar se o campo vai ser valido ou não, assumo como true se der erro coloco ele como false
+      var ferramentas = new _ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__["default"]();
       var _iterator = _createForOfIteratorHelper(this.form.querySelectorAll('.text-error')),
         _step;
       try {
@@ -351,7 +347,7 @@ var ValidarFormulario = /*#__PURE__*/function () {
           var input = _step2.value;
           var label = input.previousElementSibling.innerText;
           if (!input.value) {
-            (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__["default"])(input, "Campo \"".concat(label, "\" n\xE3o pode estar em branco"));
+            ferramentas.criaErro(input, "Campo \"".concat(label, "\" n\xE3o pode estar em branco"));
             valid = false;
           }
           if (input.classList.contains('cpf')) {
@@ -372,15 +368,16 @@ var ValidarFormulario = /*#__PURE__*/function () {
     key: "senhasValidas",
     value: function senhasValidas() {
       var valid = true;
+      var ferramentas = new _ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__["default"]();
       var senha = this.form.querySelector('.password');
       var repetirSenha = this.form.querySelector('.repet-password');
       if (senha.value.length < 6 || senha.value.length > 12) {
-        (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__["default"])(senha, 'A senha deverá ter entre 6 a 12 caracteres');
+        ferramentas.criaErro(senha, 'A senha deverá ter entre 6 a 12 caracteres');
         valid = false;
       }
       if (senha.value !== repetirSenha.value) {
-        (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__["default"])(senha, 'As senhas precisam ser iguais');
-        (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__["default"])(repetirSenha, 'As senhas precisam ser iguais');
+        ferramentas.criaErro(senha, 'As senhas precisam ser iguais');
+        ferramentas.criaErro(repetirSenha, 'As senhas precisam ser iguais');
         valid = false;
       }
       return valid;
@@ -389,8 +386,9 @@ var ValidarFormulario = /*#__PURE__*/function () {
     key: "validaCPF",
     value: function validaCPF(inputCPF) {
       var cpf = new _cpfValidatorClasse__WEBPACK_IMPORTED_MODULE_0__.CPF(inputCPF.value);
+      var ferramentas = new _ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__["default"]();
       if (!cpf.validator()) {
-        (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__["default"])(inputCPF, 'CPF Inválido');
+        ferramentas.criaErro(inputCPF, 'CPF Inválido');
         return false;
       }
       return true;
@@ -399,14 +397,15 @@ var ValidarFormulario = /*#__PURE__*/function () {
     key: "validaUsuario",
     value: function validaUsuario(inputUsuario) {
       var usuario = inputUsuario.value;
+      var ferramentas = new _ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__["default"]();
       if (usuario.length > 12 || usuario.length < 3) {
-        (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__["default"])(inputUsuario, 'O usuário deverá ter entre 3 a 12 caracteres');
+        ferramentas.criaErro(inputUsuario, 'O usuário deverá ter entre 3 a 12 caracteres');
         return false;
       }
       ;
       if (!usuario.match(/^[a-zA-Z0-9]+$/g)) {
         // /^[a-zA-Z0-9]$/g) faz com que ele pegue tudo que eu informo dentro do [] o + ele faz repetidas vezes invez de 1
-        (0,_ferramentas_tools__WEBPACK_IMPORTED_MODULE_1__["default"])(inputUsuario, 'Nome do usuário deverá conter somente letras e/ou números ');
+        ferramentas.criaErro(inputUsuario, 'Nome do usuário deverá conter somente letras e/ou números ');
         return false;
       }
       return true;

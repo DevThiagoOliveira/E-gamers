@@ -70,6 +70,8 @@ export default class User {
     let valid = false;
     try {
       usuarios.forEach(element => {
+
+        const ferramentas = new erro();
         
         for (const index of element) {
           if ((index.login === this.username.value.toLowerCase()) && (index.senha === this.password.value.toLowerCase())) {
@@ -80,11 +82,11 @@ export default class User {
           }
 
           if(index.login != this.username.value.toLowerCase()) {
-            erro(this.username, "Usuário inválido ou errado");
+            ferramentas.criaErro(this.username, "Usuário inválido ou errado");
           }
 
           if(index.senha != this.password.value.toLowerCase()) {
-            erro(this.password, "Senha inválida ou errada");
+            ferramentas.criaErro(this.password, "Senha inválida ou errada");
           }
         }
       });

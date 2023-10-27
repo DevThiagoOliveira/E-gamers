@@ -1,7 +1,7 @@
 
 export default class tools {
 
-  addItemToCart(itemName, itemPrice, itemImageSrc, quantity = 0, itemIdentification) {
+  addItemToCart(itemName, itemPrice, itemImageSrc, quantity = 0, itemIdentification, cartItemName) {
     // Selecione a lista de compra
     const cartItems = document.getElementById('cart-items');
 
@@ -117,24 +117,17 @@ export default class tools {
       cartTotalElement.innerText = `R$ ${total.toFixed(2)}`;
   }
 
-  saveCartToLocalStorage() {
+  saveCartToLocalStorage(name, price, image, count, maxCount, id) {
     const cartItems = document.querySelectorAll('.cart-item');
 
     const cartData = [];
-    cartItems.forEach(cartItem => {
-      const itemNameElement = cartItem.querySelector('h3');
-      const itemPriceElement = cartItem.querySelector('.item-info p');
-      const itemQuantityElement = cartItem.querySelector('.item-quantity input');
 
-      const itemName = itemNameElement.innerText;
-      const itemPrice = parseFloat(itemPriceElement.innerText.replace('Preço: R$ ', ''));
-      const itemQuantity = parseInt(itemQuantityElement.value);
-
-      cartData.push({
-        name: itemName,
-        price: itemPrice,
-        quantity: itemQuantity,
-      });
+    cartData.push({
+      name: name,
+      price: price,
+      image: image,
+      count: count,
+      maxCount: maxCount,
     });
 
     localStorage.setItem('cartData', JSON.stringify(cartData));

@@ -21,16 +21,18 @@ export default class Login {
       return;
     }
 
+    const ferramentas = new erro();
+
     this.loginForm.addEventListener("submit", (element) => {
       element.preventDefault();
       
       if (this.username.value === "") {
-        erro(this.username, "Campo usuário está vazio");
+        ferramentas.criaErro(this.username, "Campo usuário está vazio");
         return;
       }
 
       if (this.password.value === "") {
-        erro(this.password, "Campo senha está vazio");
+        ferramentas.criaErro(this.password, "Campo senha está vazio");
         return;
       }
 

@@ -32,7 +32,7 @@ export default class tools {
         itemNameElement.innerText = itemName;
 
         const itemPriceElement = document.createElement('p');
-        itemPriceElement.innerText = `Preço: R$ ${itemPrice.toFixed(2)}`; // Formate o preço para 2 casas decimais
+        itemPriceElement.innerText = `Preço: R$ ${itemPrice}`;
 
         // Crie o elemento de quantidade
         const itemQuantityElement = document.createElement('input');

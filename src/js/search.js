@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 if (itemData) {
                     sessionStorage.setItem("clickedItem", JSON.stringify(itemData));
-                    window.location.href = `${baseUrl}/E-gamers/public/html/item.html?item=${encodeURIComponent(itemName)}`;
+                    window.location.href = `${baseUrl}/E-gamers/item.html?item=${encodeURIComponent(itemName)}`;
                 }
             });
         });

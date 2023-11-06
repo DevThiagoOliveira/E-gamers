@@ -48,7 +48,7 @@ module.exports = {
     new BrowserSyncPlugin({
       host: 'localhost',
       port: 3000,
-      files: ['./public/html/*.html', './public/assets/css/*.style.css', './src/php/*.php'],
+      files: ['./public/assets/html/*.html', './public/assets/css/*.style.css'],
       proxy: 'http://localhost/E-gamers/'
     })
   ],

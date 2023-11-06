@@ -210,7 +210,7 @@ var Login = /*#__PURE__*/function () {
         }
         _this2.user.login().then(function (logado) {
           if (logado) {
-            window.location.href = "".concat(baseUrl, "/E-gamers/public/html");
+            window.location.href = "".concat(baseUrl, "/E-gamers/");
             return;
           }
         })["catch"](function (error) {
@@ -281,7 +281,7 @@ var tools = /*#__PURE__*/function () {
         var itemNameElement = document.createElement('h3');
         itemNameElement.innerText = itemName;
         var itemPriceElement = document.createElement('p');
-        itemPriceElement.innerText = "Pre\xE7o: R$ ".concat(itemPrice.toFixed(2)); // Formate o preço para 2 casas decimais
+        itemPriceElement.innerText = "Pre\xE7o: R$ ".concat(itemPrice);
 
         // Crie o elemento de quantidade
         var itemQuantityElement = document.createElement('input');
@@ -1308,8 +1308,8 @@ var baseUrl = window.location.origin;
 var logar = new _modules_ferramentas_logar__WEBPACK_IMPORTED_MODULE_2__["default"](formulario, login, senha);
 document.addEventListener('click', function (element) {
   var urlAtual = window.location;
-  if (element.target.classList.contains('logo') && urlAtual !== "".concat(baseUrl, "/E-gamers/public/html/")) {
-    window.location.href = "".concat(baseUrl, "/E-gamers/public/html");
+  if (element.target.classList.contains('logo') && urlAtual !== "".concat(baseUrl, "/E-gamers/")) {
+    window.location.href = "".concat(baseUrl, "/E-gamers/");
   }
 });
 })();

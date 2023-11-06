@@ -40,7 +40,7 @@ export default class Login {
         .login()
         .then((logado) => {
             if (logado) {
-                window.location.href = `${baseUrl}/E-gamers/public/html`;
+                window.location.href = `${baseUrl}/E-gamers/`;
                 return;
             }
         })

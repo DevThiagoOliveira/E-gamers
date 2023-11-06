@@ -14,8 +14,8 @@ export default class navBarConfigs {
         const urlAtual = window.location.href
         
         document.addEventListener('click', element => {
-            if(element.target.classList.contains('logo') && urlAtual != `${baseUrl}/E-gamers/public/html/`) {
-                window.location.href = `${baseUrl}/E-gamers/public/html`;
+            if(element.target.classList.contains('logo') && urlAtual != `${baseUrl}/E-gamers/`) {
+                window.location.href = `${baseUrl}/E-gamers/`;
             }
 
         });
@@ -31,7 +31,7 @@ export default class navBarConfigs {
             document.addEventListener('click', function(event) {
                 const clickedElement = event.target;
                 
-                if (clickedElement.classList.contains('profile-icon') || clickedElement.classList.contains('initials') && urlAtual != `${baseUrl}/E-gamers/public/html/config.html`) {
+                if (clickedElement.classList.contains('profile-icon') || clickedElement.classList.contains('initials') && urlAtual != `${baseUrl}/E-gamers/config.html`) {
                     const navContentAncestor = clickedElement.closest('.nav-content');
     
                     if (navContentAncestor) {
@@ -45,14 +45,14 @@ export default class navBarConfigs {
 
                     // Evento de clique para o ícone de configuração (cog)
                     cogIcon.addEventListener('click', () => {
-                        window.location.href = `${baseUrl}/E-gamers/public/html/config.html`;
+                        window.location.href = `${baseUrl}/E-gamers/config.html`;
                     });
 
                     // Evento de clique para o ícone de sair (sign-out)
                     signOutIcon.addEventListener('click', () => {
                         const exit = false;
                         sessionStorage.setItem("status", exit);
-                        window.location.href = `${baseUrl}/E-gamers/public/html/index.html`;
+                        window.location.href = `${baseUrl}/E-gamers/`;
                     });
 
                 } else {
@@ -74,14 +74,14 @@ export default class navBarConfigs {
         loginButton.textContent = 'Entrar';
         loginButton.setAttribute('class', 'login');
         loginButton.addEventListener('click', () => {
-            window.location.href = `${baseUrl}/E-gamers/public/html/login.html`;
+            window.location.href = `${baseUrl}/E-gamers/login.html`;
         });
 
         const registerButton = document.createElement('button');
         registerButton.textContent = 'Registrar';
         registerButton.setAttribute('class', 'register');
         registerButton.addEventListener('click', () => {
-            window.location.href = `${baseUrl}/E-gamers/public/html/register.html`;
+            window.location.href = `${baseUrl}/E-gamers/register.html`;
         });
 
         userDiv.appendChild(loginButton);

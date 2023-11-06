@@ -8,7 +8,7 @@ import Quill from "quill";
 
 if (sessionStorage.getItem("status") != "true") {
   window.location.href =
-  `${baseUrl}/E-gamers/public/html/index.html`;
+  `${baseUrl}/E-gamers/`;
 }
 
 // ----------------------------------------------------- Const and var
@@ -123,7 +123,7 @@ document.addEventListener("click", (element) => {
     const exit = false;
     sessionStorage.setItem("status", exit);
     window.location.href =
-    `${baseUrl}/E-gamers/public/html/index.html`;
+    `${baseUrl}/E-gamers/`;
   }
 });
 

@@ -605,7 +605,7 @@ document.addEventListener("DOMContentLoaded", /*#__PURE__*/_asyncToGenerator( /*
             });
             if (itemData) {
               sessionStorage.setItem("clickedItem", JSON.stringify(itemData));
-              window.location.href = "".concat(baseUrl, "/E-gamers/public/html/item.html?item=").concat(encodeURIComponent(itemName));
+              window.location.href = "".concat(baseUrl, "/E-gamers/item.html?item=").concat(encodeURIComponent(itemName));
             }
           });
         });

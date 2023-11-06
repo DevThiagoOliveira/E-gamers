@@ -11,7 +11,7 @@ const logar = new Login(formulario, login, senha);
 
 document.addEventListener('click', element => {
     const urlAtual = window.location;
-    if(element.target.classList.contains('logo') && urlAtual !== `${baseUrl}/E-gamers/public/html/`) {
-        window.location.href = `${baseUrl}/E-gamers/public/html`;
+    if(element.target.classList.contains('logo') && urlAtual !== `${baseUrl}/E-gamers/`) {
+        window.location.href = `${baseUrl}/E-gamers/`;
     }
 });

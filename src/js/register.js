@@ -12,8 +12,8 @@ const baseUrl = window.location.origin;
 //redirect
 document.addEventListener('click', element => {
   const urlAtual = window.location;
-  if(element.target.classList.contains('logo') && urlAtual !== `${baseUrl}/E-gamers/public/html/`) {
-      window.location.href = `${baseUrl}/E-gamers/public/html`;
+  if(element.target.classList.contains('logo') && urlAtual !== `${baseUrl}/E-gamers/`) {
+      window.location.href = `${baseUrl}/E-gamers/`;
   }
 });
 
@@ -60,7 +60,7 @@ registerForm.addEventListener("submit", async (event) => {
       }
 
       const data = await response.json();
-      window.location.href = `${baseUrl}/E-gamers/public/html/login.html`;
+      window.location.href = `${baseUrl}/E-gamers/login.html`;
       console.log(data);
 
       // Verificar se o erro é de usuário duplicado

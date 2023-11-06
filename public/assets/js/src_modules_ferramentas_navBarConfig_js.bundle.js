@@ -121,8 +121,8 @@ var navBarConfigs = /*#__PURE__*/function () {
       var baseUrl = window.location.origin;
       var urlAtual = window.location.href;
       document.addEventListener('click', function (element) {
-        if (element.target.classList.contains('logo') && urlAtual != "".concat(baseUrl, "/E-gamers/public/html/")) {
-          window.location.href = "".concat(baseUrl, "/E-gamers/public/html");
+        if (element.target.classList.contains('logo') && urlAtual != "".concat(baseUrl, "/E-gamers/")) {
+          window.location.href = "".concat(baseUrl, "/E-gamers/");
         }
       });
       if (this.status === 'true') {
@@ -132,7 +132,7 @@ var navBarConfigs = /*#__PURE__*/function () {
         icone.colorChange(perfil.profile);
         document.addEventListener('click', function (event) {
           var clickedElement = event.target;
-          if (clickedElement.classList.contains('profile-icon') || clickedElement.classList.contains('initials') && urlAtual != "".concat(baseUrl, "/E-gamers/public/html/config.html")) {
+          if (clickedElement.classList.contains('profile-icon') || clickedElement.classList.contains('initials') && urlAtual != "".concat(baseUrl, "/E-gamers/config.html")) {
             var navContentAncestor = clickedElement.closest('.nav-content');
             if (navContentAncestor) {
               var dropdownMenu = navContentAncestor.querySelector('.dropdown-menu');
@@ -145,14 +145,14 @@ var navBarConfigs = /*#__PURE__*/function () {
 
             // Evento de clique para o ícone de configuração (cog)
             cogIcon.addEventListener('click', function () {
-              window.location.href = "".concat(baseUrl, "/E-gamers/public/html/config.html");
+              window.location.href = "".concat(baseUrl, "/E-gamers/config.html");
             });
 
             // Evento de clique para o ícone de sair (sign-out)
             signOutIcon.addEventListener('click', function () {
               var exit = false;
               sessionStorage.setItem("status", exit);
-              window.location.href = "".concat(baseUrl, "/E-gamers/public/html/index.html");
+              window.location.href = "".concat(baseUrl, "/E-gamers/");
             });
           } else {
             // Se clicar fora do menu, feche-o
@@ -172,13 +172,13 @@ var navBarConfigs = /*#__PURE__*/function () {
       loginButton.textContent = 'Entrar';
       loginButton.setAttribute('class', 'login');
       loginButton.addEventListener('click', function () {
-        window.location.href = "".concat(baseUrl, "/E-gamers/public/html/login.html");
+        window.location.href = "".concat(baseUrl, "/E-gamers/login.html");
       });
       var registerButton = document.createElement('button');
       registerButton.textContent = 'Registrar';
       registerButton.setAttribute('class', 'register');
       registerButton.addEventListener('click', function () {
-        window.location.href = "".concat(baseUrl, "/E-gamers/public/html/register.html");
+        window.location.href = "".concat(baseUrl, "/E-gamers/register.html");
       });
       userDiv.appendChild(loginButton);
       userDiv.appendChild(registerButton);
@@ -283,7 +283,7 @@ var tools = /*#__PURE__*/function () {
         var itemNameElement = document.createElement('h3');
         itemNameElement.innerText = itemName;
         var itemPriceElement = document.createElement('p');
-        itemPriceElement.innerText = "Pre\xE7o: R$ ".concat(itemPrice.toFixed(2)); // Formate o preço para 2 casas decimais
+        itemPriceElement.innerText = "Pre\xE7o: R$ ".concat(itemPrice);
 
         // Crie o elemento de quantidade
         var itemQuantityElement = document.createElement('input');

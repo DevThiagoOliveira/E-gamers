@@ -123,8 +123,8 @@ var navBarConfigs = /*#__PURE__*/function () {
       var baseUrl = window.location.origin;
       var urlAtual = window.location.href;
       document.addEventListener('click', function (element) {
-        if (element.target.classList.contains('logo') && urlAtual != "".concat(baseUrl, "/E-gamers/public/html/")) {
-          window.location.href = "".concat(baseUrl, "/E-gamers/public/html");
+        if (element.target.classList.contains('logo') && urlAtual != "".concat(baseUrl, "/E-gamers/")) {
+          window.location.href = "".concat(baseUrl, "/E-gamers/");
         }
       });
       if (this.status === 'true') {
@@ -134,7 +134,7 @@ var navBarConfigs = /*#__PURE__*/function () {
         icone.colorChange(perfil.profile);
         document.addEventListener('click', function (event) {
           var clickedElement = event.target;
-          if (clickedElement.classList.contains('profile-icon') || clickedElement.classList.contains('initials') && urlAtual != "".concat(baseUrl, "/E-gamers/public/html/config.html")) {
+          if (clickedElement.classList.contains('profile-icon') || clickedElement.classList.contains('initials') && urlAtual != "".concat(baseUrl, "/E-gamers/config.html")) {
             var navContentAncestor = clickedElement.closest('.nav-content');
             if (navContentAncestor) {
               var dropdownMenu = navContentAncestor.querySelector('.dropdown-menu');
@@ -147,14 +147,14 @@ var navBarConfigs = /*#__PURE__*/function () {
 
             // Evento de clique para o ícone de configuração (cog)
             cogIcon.addEventListener('click', function () {
-              window.location.href = "".concat(baseUrl, "/E-gamers/public/html/config.html");
+              window.location.href = "".concat(baseUrl, "/E-gamers/config.html");
             });
 
             // Evento de clique para o ícone de sair (sign-out)
             signOutIcon.addEventListener('click', function () {
               var exit = false;
               sessionStorage.setItem("status", exit);
-              window.location.href = "".concat(baseUrl, "/E-gamers/public/html/index.html");
+              window.location.href = "".concat(baseUrl, "/E-gamers/");
             });
           } else {
             // Se clicar fora do menu, feche-o
@@ -174,13 +174,13 @@ var navBarConfigs = /*#__PURE__*/function () {
       loginButton.textContent = 'Entrar';
       loginButton.setAttribute('class', 'login');
       loginButton.addEventListener('click', function () {
-        window.location.href = "".concat(baseUrl, "/E-gamers/public/html/login.html");
+        window.location.href = "".concat(baseUrl, "/E-gamers/login.html");
       });
       var registerButton = document.createElement('button');
       registerButton.textContent = 'Registrar';
       registerButton.setAttribute('class', 'register');
       registerButton.addEventListener('click', function () {
-        window.location.href = "".concat(baseUrl, "/E-gamers/public/html/register.html");
+        window.location.href = "".concat(baseUrl, "/E-gamers/register.html");
       });
       userDiv.appendChild(loginButton);
       userDiv.appendChild(registerButton);
@@ -213,10 +213,14 @@ var navBarConfigs = /*#__PURE__*/function () {
       list.saveCartToLocalStorage();
       cartItems.forEach(function (cartItem) {
         var itemId = cartItem.dataset.item; // Obtenha o itemIdentification do atributo data-item
+
         removeProduct.addEventListener('click', function () {
           // Remova o item clicado
           list.removeCartItem(itemId);
         });
+        console.log(cartItem);
+        var cartItensName = localStorage.getItem("cartItens");
+        list.addItemToCart(itemName, numericPrice, itemImageSrc, countInput.value, id);
       });
     }
   }]);
@@ -305,6 +309,7 @@ var tools = /*#__PURE__*/function () {
       var _this = this;
       var quantity = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
       var itemIdentification = arguments.length > 4 ? arguments[4] : undefined;
+      var cartItemName = arguments.length > 5 ? arguments[5] : undefined;
       // Selecione a lista de compra
       var cartItems = document.getElementById('cart-items');
 
@@ -330,7 +335,7 @@ var tools = /*#__PURE__*/function () {
         var itemNameElement = document.createElement('h3');
         itemNameElement.innerText = itemName;
         var itemPriceElement = document.createElement('p');
-        itemPriceElement.innerText = "Pre\xE7o: R$ ".concat(itemPrice.toFixed(2)); // Formate o preço para 2 casas decimais
+        itemPriceElement.innerText = "Pre\xE7o: R$ ".concat(itemPrice);
 
         // Crie o elemento de quantidade
         var itemQuantityElement = document.createElement('input');
@@ -425,21 +430,15 @@ var tools = /*#__PURE__*/function () {
     }
   }, {
     key: "saveCartToLocalStorage",
-    value: function saveCartToLocalStorage() {
+    value: function saveCartToLocalStorage(name, price, image, count, maxCount, id) {
       var cartItems = document.querySelectorAll('.cart-item');
       var cartData = [];
-      cartItems.forEach(function (cartItem) {
-        var itemNameElement = cartItem.querySelector('h3');
-        var itemPriceElement = cartItem.querySelector('.item-info p');
-        var itemQuantityElement = cartItem.querySelector('.item-quantity input');
-        var itemName = itemNameElement.innerText;
-        var itemPrice = parseFloat(itemPriceElement.innerText.replace('Preço: R$ ', ''));
-        var itemQuantity = parseInt(itemQuantityElement.value);
-        cartData.push({
-          name: itemName,
-          price: itemPrice,
-          quantity: itemQuantity
-        });
+      cartData.push({
+        name: name,
+        price: price,
+        image: image,
+        count: count,
+        maxCount: maxCount
       });
       localStorage.setItem('cartData', JSON.stringify(cartData));
     }
@@ -12474,6 +12473,7 @@ imgContent.addEventListener('click', function (event) {
 });
 
 // ----------------------------------------- carrinho de compra
+
 var buyButton = document.querySelector('.buttom-buy');
 var list = new _modules_ferramentas_tools__WEBPACK_IMPORTED_MODULE_3__["default"]();
 var itemQuantityAvailable = data.amount;
@@ -12504,6 +12504,8 @@ if (itemQuantityAvailable > 0 && countInput != 0) {
       name: itemName,
       price: numericPrice,
       image: itemImageSrc,
+      count: countInput.value,
+      maxCount: data.amount,
       id: itemId
     };
     var itemJSON = JSON.stringify(item);

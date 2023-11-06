@@ -57,7 +57,7 @@ var tools = /*#__PURE__*/function () {
         var itemNameElement = document.createElement('h3');
         itemNameElement.innerText = itemName;
         var itemPriceElement = document.createElement('p');
-        itemPriceElement.innerText = "Pre\xE7o: R$ ".concat(itemPrice.toFixed(2)); // Formate o preço para 2 casas decimais
+        itemPriceElement.innerText = "Pre\xE7o: R$ ".concat(itemPrice);
 
         // Crie o elemento de quantidade
         var itemQuantityElement = document.createElement('input');
@@ -1306,8 +1306,8 @@ var baseUrl = window.location.origin;
 //redirect
 document.addEventListener('click', function (element) {
   var urlAtual = window.location;
-  if (element.target.classList.contains('logo') && urlAtual !== "".concat(baseUrl, "/E-gamers/public/html/")) {
-    window.location.href = "".concat(baseUrl, "/E-gamers/public/html");
+  if (element.target.classList.contains('logo') && urlAtual !== "".concat(baseUrl, "/E-gamers/")) {
+    window.location.href = "".concat(baseUrl, "/E-gamers/");
   }
 });
 
@@ -1365,7 +1365,7 @@ registerForm.addEventListener("submit", /*#__PURE__*/function () {
           return response.json();
         case 22:
           data = _context.sent;
-          window.location.href = "".concat(baseUrl, "/E-gamers/public/html/login.html");
+          window.location.href = "".concat(baseUrl, "/E-gamers/login.html");
           console.log(data);
 
           // Verificar se o erro é de usuário duplicado

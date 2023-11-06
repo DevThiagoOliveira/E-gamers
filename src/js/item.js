@@ -138,6 +138,7 @@ imgContent.addEventListener('click', event => {
 });
 
 // ----------------------------------------- carrinho de compra
+
 const buyButton = document.querySelector('.buttom-buy');
 const list = new tool();
 
@@ -173,6 +174,8 @@ if (itemQuantityAvailable > 0 && countInput != 0) {
             name: itemName,
             price: numericPrice,
             image: itemImageSrc,
+            count: countInput.value,
+            maxCount: data.amount,
             id: itemId,
         };
 

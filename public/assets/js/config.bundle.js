@@ -528,7 +528,7 @@ var tools = /*#__PURE__*/function () {
         var itemNameElement = document.createElement('h3');
         itemNameElement.innerText = itemName;
         var itemPriceElement = document.createElement('p');
-        itemPriceElement.innerText = "Pre\xE7o: R$ ".concat(itemPrice.toFixed(2)); // Formate o preço para 2 casas decimais
+        itemPriceElement.innerText = "Pre\xE7o: R$ ".concat(itemPrice);
 
         // Crie o elemento de quantidade
         var itemQuantityElement = document.createElement('input');
@@ -12565,7 +12565,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 if (sessionStorage.getItem("status") != "true") {
-  window.location.href = "".concat(baseUrl, "/E-gamers/public/html/index.html");
+  window.location.href = "".concat(baseUrl, "/E-gamers/");
 }
 
 // ----------------------------------------------------- Const and var
@@ -12661,7 +12661,7 @@ document.addEventListener("click", function (element) {
   if (element.target.classList.contains("exit")) {
     var exit = false;
     sessionStorage.setItem("status", exit);
-    window.location.href = "".concat(baseUrl, "/E-gamers/public/html/index.html");
+    window.location.href = "".concat(baseUrl, "/E-gamers/");
   }
 });
 window.addEventListener("load", function () {

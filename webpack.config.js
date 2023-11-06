@@ -45,12 +45,6 @@ module.exports = {
     new miniCssWebpackPlugin({
       filename: "../css/[name].style.css",
     }),
-    new BrowserSyncPlugin({
-      host: 'localhost',
-      port: 3000,
-      files: ['./public/assets/html/*.html', './public/assets/css/*.style.css'],
-      proxy: 'http://localhost/E-gamers/'
-    })
   ],
   devtool: "source-map", // ele informa aonde no seu arquivo aconteceu o erro, se você não colocar ele vai apontar o erro no arquivo bundle exemplo tenho 35 arquivo deu um erro em um deles chamado pessoa, ele vai apontar o erro no bundle linha 6981, então vai ter que fazer conta para saber qual dos seus aarquivo que ocorreu o erro
 };
